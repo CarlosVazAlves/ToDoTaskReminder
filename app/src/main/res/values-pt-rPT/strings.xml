@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ToDo Lembrete de Tarefas</string>
+    <string name="check_tasks">Consultar tarefas</string>
+    <string name="create_new_task">Criar nova tarefa</string>
+    <string name="edit_task">Editar tarefa</string>
+    <string name="delete_tasks">Apagar tarefas</string>
+    <string name="settings">Definições</string>
+    <string name="exit">Sair</string>
+    <string name="back">Voltar</string>
+    <string name="name">Nome:</string>
+    <string name="description">Descrição:</string>
+    <string name="location">Local:</string>
+    <string name="where">Aonde</string>
+    <string name="distance_remind">Relembrar quando estiver a menos de %d km</string>
+    <string name="date_remind">Relembrar na seguinte data:</string>
+    <string name="remind_by_location">Recordar por local</string>
+    <string name="remind_by_date">Recordar por data</string>
+    <string name="cancel">Cancelar</string>
+    <string name="next">Avançar</string>
+    <string name="input_name">Introduzir nome</string>
+    <string name="input_description">Introduzir descrição</string>
+    <string name="date">Data</string>
+    <string name="time">Hora</string>
+    <string name="distance_remind_when">Relembrar-me quando a distância for igual ou inferior a:</string>
+    <string name="mark_as_complete">Marcar como concluído</string>
+    <string name="km">km</string>
+    <string name="create">Criar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Apagar</string>
+    <string name="check_location">Ver local</string>
+    <string name="delete_location">Apagar local</string>
+    <string name="create_new_location">Criar novo local</string>
+    <string name="minutes">Minutos</string>
+    <string name="check_location_timer">Consultar a localização a cada:</string>
+</resources>

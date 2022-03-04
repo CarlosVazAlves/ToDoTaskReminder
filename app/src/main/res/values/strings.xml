@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">ToDo Task Reminder</string>
+    <string name="check_tasks">Check Tasks</string>
+    <string name="create_new_task">Create New Task</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="delete_tasks">Delete Tasks</string>
+    <string name="settings">Settings</string>
+    <string name="exit">Exit</string>
+    <string name="back">Back</string>
+    <string name="name">Name:</string>
+    <string name="description">Description:</string>
+    <string name="location">Location:</string>
+    <string name="where">Where</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="distance_remind">Remind when less than %d km far</string>
+    <string name="date_remind">Remind in the following date:</string>
+    <string name="remind_by_location">Remind By Location</string>
+    <string name="remind_by_date">Remind By Date</string>
+    <string name="cancel">Cancel</string>
+    <string name="next">Next</string>
+    <string name="input_name">Input Name</string>
+    <string name="input_description">Input Description</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="distance_remind_when">Remind me when the distance is equal or smaller than:</string>
+    <string name="mark_as_complete">Mark As Complete</string>
+    <string name="km">km</string>
+    <string name="create">Create</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="check_location">Check Location</string>
+    <string name="delete_location">Delete Location</string>
+    <string name="create_new_location">Create New Location</string>
+    <string name="minutes">Minutes</string>
+    <string name="check_location_timer">Check Location Every:</string>
+</resources>

@@ -12,12 +12,12 @@ interface OnLocationDao {
     @Update
     fun updateOnLocation(onLocation: OnLocationEntity): Int
 
-    @Query("DELETE FROM OnLocation WHERE nameTask = :taskName")
+    @Query("DELETE FROM OnLocation WHERE taskName = :taskName")
     fun deleteOnLocationByTaskName(taskName: String)
 
-    @Query("SELECT * FROM OnLocation WHERE nameTask = :taskName")
+    @Query("SELECT * FROM OnLocation WHERE taskName = :taskName")
     fun getOnLocationsByTaskName(taskName: String) : List<OnLocationEntity>
 
-    @Query("SELECT * FROM OnLocation WHERE nameTask = :taskName AND distance <= :distance")
+    @Query("SELECT * FROM OnLocation WHERE taskName = :taskName AND distance <= :distance")
     fun getOnLocationsByTaskNameAndDistance(taskName: String, distance: Double) : List<OnLocationEntity>
 }

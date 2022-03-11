@@ -6,10 +6,12 @@ import carlos.alves.todotaskreminder.database.dao.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
+import java.sql.Date
+import java.sql.Time
 
 
 @Database(entities = [TaskEntity::class, DateTimeEntity::class, LocationEntity::class, OnLocationEntity::class, SettingsEntity::class], version = 1)
-//@TypeConverters(Converters::class)
+@TypeConverters(Converters::class)
 abstract class ToDoTaskReminderDatabase : RoomDatabase() {
     abstract fun taskDatabaseDao() : TaskDao
     abstract fun dateTimeDatabaseDao() : DateTimeDao
@@ -18,16 +20,27 @@ abstract class ToDoTaskReminderDatabase : RoomDatabase() {
     abstract fun settingsDatabaseDao() : SettingsDao
 }
 
-/*
 class Converters {
     @TypeConverter
-    fun toListPoints(pointJSON: String): List<Point> {
-        val listType: Type = object : TypeToken<List<Point?>?>() {}.type
-        return Gson().fromJson(pointJSON, listType)
+    fun toDate(dateJSON: String): Date {
+        val objectType: Type = object : TypeToken<Date?>() {}.type
+        return Gson().fromJson(dateJSON, objectType)
     }
 
     @TypeConverter
-    fun fromListPoints(draw: List<Point>): String {
-        return Gson().toJson(draw)
+    fun fromDate(date: Date): String {
+        return Gson().toJson(date)
     }
-}*/
+
+
+    @TypeConverter
+    fun toTime(timeJSON: String): Time {
+        val objectType: Type = object : TypeToken<Date?>() {}.type
+        return Gson().fromJson(timeJSON, objectType)
+    }
+
+    @TypeConverter
+    fun fromTime(time: Time): String {
+        return Gson().toJson(time)
+    }
+}

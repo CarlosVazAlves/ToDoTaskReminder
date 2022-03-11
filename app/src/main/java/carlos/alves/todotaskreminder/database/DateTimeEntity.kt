@@ -9,8 +9,8 @@ import java.sql.Time
 
 @Entity(tableName = "DateTime", foreignKeys = [ForeignKey(entity = TaskEntity::class,
     parentColumns = arrayOf("name"),
-    childColumns = arrayOf("nameTask"),
+    childColumns = arrayOf("taskName"),
     onDelete = ForeignKey.CASCADE,
     onUpdate = ForeignKey.CASCADE)]
 )
-data class DateTimeEntity(@PrimaryKey val nameTask: String, var date: Date, var time: Time)
+data class DateTimeEntity(@PrimaryKey val taskName: String, var date: Date, var time: Time)

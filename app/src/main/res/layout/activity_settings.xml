@@ -33,10 +33,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/location" />
+                android:text="@string/location_2dots" />
 
             <Spinner
-                android:id="@+id/settings_locations_spinner"
+                android:id="@+id/settings_locations_Spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -49,8 +49,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:text="@string/check_location" />
+
+        <Button
+            android:id="@+id/settings_edit_location_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/edit_location" />
 
         <Button
             android:id="@+id/settings_delete_location_button"
@@ -64,8 +71,9 @@
             android:id="@+id/settings_create_new_location_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="64dp"
             android:text="@string/create_new_location" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -84,7 +92,7 @@
             android:id="@+id/settings_trigger_timer_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/check_location_timer" />
+            android:text="@string/check_location_timer_2dots" />
 
         <LinearLayout
             android:id="@+id/settings_timer_Layout"
@@ -112,7 +120,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/settings_cancel_button"
+        android:id="@+id/settings_back_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

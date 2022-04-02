@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/location_edit_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings.LocationEditActivity">
+
+    <LinearLayout
+        android:id="@+id/location_edit_name_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/location_edit_name_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lines="1"
+            android:text="@string/name_2dots" />
+
+        <EditText
+            android:id="@+id/location_edit_name_EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:hint="@string/input_name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/location_edit_address_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_edit_name_Layout">
+
+        <TextView
+            android:id="@+id/location_edit_address_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/address_2dots" />
+
+        <EditText
+            android:id="@+id/location_edit_address_EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:hint="@string/address_loaded_from_maps" />
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/location_edit_group_Switch"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:text="@string/belongs_to_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_edit_address_Layout"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <RadioGroup
+        android:id="@+id/location_edit_group_RadioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_edit_group_Switch">
+
+        <RadioButton
+            android:id="@+id/location_edit_existing_group_RadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+            android:background="?android:selectableItemBackground"
+            android:layoutDirection="rtl"
+            android:layout_gravity="start"
+            android:textAlignment="textStart"
+            android:text="@string/belongs_existing_group" />
+
+        <RadioButton
+            android:id="@+id/location_edit_new_group_RadioButton"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+            android:background="?android:selectableItemBackground"
+            android:layoutDirection="rtl"
+            android:layout_gravity="start"
+            android:textAlignment="textStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/belongs_new_group" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/location_edit_new_group_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_edit_group_RadioGroup">
+
+        <TextView
+            android:id="@+id/location_edit_new_group_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/group_2dots" />
+
+        <EditText
+            android:id="@+id/location_edit_new_group_EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/input_group" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/location_edit_existing_group_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_edit_group_RadioGroup">
+
+        <TextView
+            android:id="@+id/location_edit_existing_group_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/group_2dots" />
+
+        <Spinner
+            android:id="@+id/location_edit_existing_group_Spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="48dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/location_edit_map_Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/pick_location_on_maps"
+        app:layout_constraintBottom_toTopOf="@+id/location_edit_buttons_Layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/location_edit_buttons_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/location_edit_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="16dp"
+            android:text="@string/back" />
+
+        <Button
+            android:id="@+id/location_edit_edit_create_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="@string/edit" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

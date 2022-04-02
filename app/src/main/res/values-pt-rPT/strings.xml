@@ -8,12 +8,12 @@
     <string name="settings">Definições</string>
     <string name="exit">Sair</string>
     <string name="back">Voltar</string>
-    <string name="name">Nome:</string>
-    <string name="description">Descrição:</string>
-    <string name="location">Local:</string>
+    <string name="name_2dots">Nome:</string>
+    <string name="description_2dots">Descrição:</string>
+    <string name="location_2dots">Local:</string>
     <string name="where">Aonde</string>
     <string name="distance_remind">Relembrar quando estiver a menos de %d km</string>
-    <string name="date_remind">Relembrar na seguinte data:</string>
+    <string name="date_remind_2dots">Relembrar na seguinte data:</string>
     <string name="remind_by_location">Recordar por local</string>
     <string name="remind_by_date">Recordar por data</string>
     <string name="cancel">Cancelar</string>
@@ -22,7 +22,7 @@
     <string name="input_description">Introduzir descrição</string>
     <string name="date">Data</string>
     <string name="time">Hora</string>
-    <string name="distance_remind_when">Relembrar-me quando a distância for igual ou inferior a:</string>
+    <string name="distance_remind_when_2dots">Relembrar-me quando a distância for igual ou inferior a:</string>
     <string name="mark_as_complete">Marcar como concluído</string>
     <string name="km">km</string>
     <string name="create">Criar</string>
@@ -32,5 +32,17 @@
     <string name="delete_location">Apagar local</string>
     <string name="create_new_location">Criar novo local</string>
     <string name="minutes">Minutos</string>
-    <string name="check_location_timer">Consultar a localização a cada:</string>
+    <string name="check_location_timer_2dots">Consultar a localização a cada:</string>
+    <string name="address_2dots">Morada:</string>
+    <string name="group_2dots">Grupo:</string>
+    <string name="title_activity_maps">Mapas</string>
+    <string name="see_on_maps">Ver no Maps</string>
+    <string name="belongs_to_group">Pertence a um grupo</string>
+    <string name="belongs_existing_group">Pertence a um grupo já existente</string>
+    <string name="belongs_new_group">Pertence a um novo grupo</string>
+    <string name="address_loaded_from_maps">Morada carregada do Maps</string>
+    <string name="input_group">"Introduzir grupo aqui "</string>
+    <string name="pick_location_on_maps">Escolher localização no Maps</string>
+    <string name="edit_location">Editar local</string>
+    <string name="save_and_return">Salvar e voltar</string>
 </resources>

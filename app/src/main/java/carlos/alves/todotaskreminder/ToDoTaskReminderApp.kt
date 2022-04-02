@@ -9,15 +9,29 @@ import androidx.annotation.RequiresApi
 import androidx.room.Room
 import carlos.alves.todotaskreminder.repository.*
 
-object ToDoTaskReminderApp : Application() {
+class ToDoTaskReminderApp : Application() {
 
-    private const val TASKS_CHANNEL_ID = "toDoTaskReminder.channel"
+    init {
+        instance = this
+    }
 
-    private val database by lazy {
-        Room.databaseBuilder(applicationContext, ToDoTaskReminderDatabase::class.java, "toDoTaskReminder_db")
+    companion object {
+        lateinit var instance: ToDoTaskReminderApp
+            private set
+    }
+
+    val database by lazy { Room.databaseBuilder(
+            applicationContext,
+            ToDoTaskReminderDatabase::class.java,
+            "toDoTaskReminder_db"
+        )
             .fallbackToDestructiveMigration()
             .build()
     }
+
+    private val TASKS_CHANNEL_ID = "toDoTaskReminder.channel"
+
+
 
     val taskRepository by lazy {
         TaskRepository(database)
@@ -42,10 +56,15 @@ object ToDoTaskReminderApp : Application() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun setupNotificationChannel() {
 
-        val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (notificationManager.getNotificationChannel(TASKS_CHANNEL_ID) == null) {
-            val notificationChannel = NotificationChannel(TASKS_CHANNEL_ID, "ToDo Task Reminder Channel", NotificationManager.IMPORTANCE_DEFAULT)
+            val notificationChannel = NotificationChannel(
+                TASKS_CHANNEL_ID,
+                "ToDo Task Reminder Channel",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
             notificationChannel.enableLights(true)
             notificationChannel.enableVibration(true)
             notificationManager.createNotificationChannel(notificationChannel)

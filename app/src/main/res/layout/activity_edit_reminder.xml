@@ -23,7 +23,7 @@
             android:id="@+id/edit_reminder_location_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/distance_remind_when" />
+            android:text="@string/distance_remind_when_2dots" />
 
         <LinearLayout
             android:id="@+id/edit_reminder_distance_Layout"
@@ -66,7 +66,7 @@
             android:id="@+id/edit_reminder_date_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/date_remind" />
+            android:text="@string/date_remind_2dots" />
 
         <LinearLayout
             android:id="@+id/edit_reminder_date_format_Layout"

@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="carlos.alves.todotaskreminder" >
+    package="carlos.alves.todotaskreminder">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".ToDoTaskReminderApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ToDoTaskReminder" >
+        android:theme="@style/Theme.ToDoTaskReminder">
+        <activity
+            android:name=".settings.LocationEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.LocationDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".editTasks.EditTasksListActivity"
             android:exported="false" />
@@ -21,11 +34,11 @@
 
              Once you have your API key (it starts with "AIza"), define a new property in your
              project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+             "YOUR_API_KEY" string in this file with .
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDd0VS5py6pou_rLst6WXStbkDk50qA_C8" />
+            android:value="${MAPS_API_KEY}" />
 
         <activity
             android:name=".settings.MapsActivity"
@@ -60,7 +73,7 @@
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

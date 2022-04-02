@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:lines="1"
-            android:text="@string/name" />
+            android:text="@string/name_2dots" />
 
         <TextView
             android:id="@+id/task_details_name_EditText"
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/description" />
+            android:text="@string/description_2dots" />
 
         <TextView
             android:id="@+id/task_details_description_EditText"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/location" />
+            android:text="@string/location_2dots" />
 
         <TextView
             android:id="@+id/task_details_location_EditText"
@@ -116,7 +116,7 @@
             android:id="@+id/task_details_date_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/date_remind" />
+            android:text="@string/date_remind_2dots" />
 
         <LinearLayout
             android:id="@+id/task_details_date_format_Layout"

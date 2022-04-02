@@ -12,12 +12,15 @@
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_edit_reminder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_edit_task.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_edit_tasks_list.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_location_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_location_edit.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_main_menu.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_maps.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_maps.xml" value="0.25" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_set_reminder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_settings.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_splash.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_task_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/menu/current_place_menu.xml" value="0.35260416666666666" />
       </map>
     </option>
   </component>

@@ -12,12 +12,18 @@ interface TaskDao {
     @Update
     fun updateTask(task: TaskEntity): Int
 
+    @Query("DELETE FROM Task WHERE id = :id")
+    fun deleteTaskById(id: Int)
+
     @Query("DELETE FROM Task WHERE name = :name")
     fun deleteTaskByName(name: String)
+
+    @Query("SELECT * FROM Task WHERE id = :id")
+    fun getTaskById(id: Int) : TaskEntity
 
     @Query("SELECT * FROM Task WHERE name = :name")
     fun getTaskByName(name: String) : TaskEntity
 
     @Query("SELECT name FROM Task")
-    fun getAllTaskNames() : List<String>
+    fun getAllTasksNames() : List<String>
 }

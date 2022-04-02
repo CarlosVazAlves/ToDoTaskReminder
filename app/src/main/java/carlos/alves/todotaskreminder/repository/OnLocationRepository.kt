@@ -7,20 +7,15 @@ import java.util.concurrent.Executors
 class OnLocationRepository(database: ToDoTaskReminderDatabase) {
 
     private val executor = Executors.newSingleThreadExecutor()
-
     private val onLocationDatabaseDao = database.onLocationDatabaseDao()
 
-    fun insertOnLocation(onLocation: OnLocationEntity) {
-        executor.submit { onLocationDatabaseDao.insertOnLocation(onLocation) }
-    }
-
-    fun deleteOnLocation(taskName: String) {
-        executor.submit { onLocationDatabaseDao.deleteOnLocationByTaskName(taskName) }
-    }
+    fun insertOnLocation(onLocation: OnLocationEntity) { executor.submit { onLocationDatabaseDao.insertOnLocation(onLocation) } }
 
     fun updateOnLocation(onLocation: OnLocationEntity): Int = executor.submit { onLocationDatabaseDao.updateOnLocation(onLocation) }.get() as Int
 
-    fun getOnLocations(taskName: String): List<OnLocationEntity> = executor.submit(Callable { onLocationDatabaseDao.getOnLocationsByTaskName(taskName) }).get()
+    fun deleteOnLocation(taskId: Int) { executor.submit { onLocationDatabaseDao.deleteOnLocationByTaskId(taskId) } }
 
-    fun getOnLocations(taskName: String, distance: Double): List<OnLocationEntity> = executor.submit(Callable { onLocationDatabaseDao.getOnLocationsByTaskNameAndDistance(taskName, distance) }).get()
+    fun getOnLocations(taskId: Int): List<OnLocationEntity> = executor.submit(Callable { onLocationDatabaseDao.getOnLocationsByTaskId(taskId) }).get()
+
+    fun getOnLocations(taskId: Int, distance: Double): List<OnLocationEntity> = executor.submit(Callable { onLocationDatabaseDao.getOnLocationsByTaskIdAndDistance(taskId, distance) }).get()
 }

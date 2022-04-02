@@ -7,20 +7,17 @@ import java.util.concurrent.Executors
 class TaskRepository(database: ToDoTaskReminderDatabase) {
 
     private val executor = Executors.newSingleThreadExecutor()
-
     private val taskDatabaseDao = database.taskDatabaseDao()
 
-    fun insertNewTask(task: TaskEntity) {
-        executor.submit { taskDatabaseDao.insertTask(task) }
-    }
-
-    fun deleteTask(taskName: String) {
-        executor.submit { taskDatabaseDao.deleteTaskByName(taskName) }
-    }
+    fun insertNewTask(task: TaskEntity) { executor.submit { taskDatabaseDao.insertTask(task) } }
 
     fun updateTask(task: TaskEntity): Int = executor.submit { taskDatabaseDao.updateTask(task) }.get() as Int
 
+    fun deleteTask(taskName: String) { executor.submit { taskDatabaseDao.deleteTaskByName(taskName) } }
+
+    fun getTask(taskId: Int): TaskEntity = executor.submit(Callable { taskDatabaseDao.getTaskById(taskId) }).get()
+
     fun getTask(taskName: String): TaskEntity = executor.submit(Callable { taskDatabaseDao.getTaskByName(taskName) }).get()
 
-    fun getAllTaskNames(): List<String> = executor.submit(Callable { taskDatabaseDao.getAllTaskNames() }).get()
+    fun getAllTaskNames(): List<String> = executor.submit(Callable { taskDatabaseDao.getAllTasksNames() }).get()
 }

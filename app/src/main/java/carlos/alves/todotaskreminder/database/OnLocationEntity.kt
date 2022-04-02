@@ -2,20 +2,18 @@ package carlos.alves.todotaskreminder.database
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+
 
 @Entity(tableName = "OnLocation",
-    primaryKeys = ["taskName", "locationName"],
+    primaryKeys = ["taskId", "locationId"],
     foreignKeys = [
         ForeignKey(entity = TaskEntity::class,
-            parentColumns = arrayOf("name"),
-            childColumns = arrayOf("taskName"),
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE),
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("taskId"),
+            onDelete = ForeignKey.RESTRICT),
         ForeignKey(entity = LocationEntity::class,
-            parentColumns = arrayOf("name"),
-            childColumns = arrayOf("locationName"),
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE)]
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("locationId"),
+            onDelete = ForeignKey.RESTRICT)]
 )
-data class OnLocationEntity(var taskName: String, var locationName: String, var distance: Double)
+data class OnLocationEntity(var taskId: Int, var locationId: Int, var distance: Double)

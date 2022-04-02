@@ -12,9 +12,9 @@ interface DateTimeDao {
     @Update
     fun updateDateTime(dateTime: DateTimeEntity): Int
 
-    @Query("DELETE FROM DateTime WHERE taskName = :taskName")
-    fun deleteDateTimeByTaskName(taskName: String)
+    @Query("DELETE FROM DateTime WHERE taskId = :taskId")
+    fun deleteDateTimeByTaskId(taskId: Int)
 
-    @Query("SELECT * FROM DateTime WHERE taskName = :taskName")
-    fun getDateTimeByTaskName(taskName: String) : DateTimeEntity
+    @Query("SELECT * FROM DateTime WHERE taskId = :taskId")
+    fun getDateTimeByTaskId(taskId: Int) : DateTimeEntity
 }

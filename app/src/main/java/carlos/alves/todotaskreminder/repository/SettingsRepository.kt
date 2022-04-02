@@ -7,12 +7,9 @@ import java.util.concurrent.Executors
 class SettingsRepository(database: ToDoTaskReminderDatabase) {
 
     private val executor = Executors.newSingleThreadExecutor()
-
     private val settingsDatabaseDao = database.settingsDatabaseDao()
 
-    fun insertSetting(setting: SettingsEntity) {
-        executor.submit { settingsDatabaseDao.insertSetting(setting) }
-    }
+    fun insertSetting(setting: SettingsEntity) { executor.submit { settingsDatabaseDao.insertSetting(setting) } }
 
     fun updateSetting(setting: SettingsEntity): Int = executor.submit { settingsDatabaseDao.updateSetting(setting) }.get() as Int
 

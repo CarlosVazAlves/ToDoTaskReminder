@@ -45,4 +45,13 @@
     <string name="pick_location_on_maps">Escolher localização no Maps</string>
     <string name="edit_location">Editar local</string>
     <string name="save_and_return">Salvar e voltar</string>
+    <string name="data_missing">Faltam dados!</string>
+    <string name="name_missing">Falta o nome</string>
+    <string name="address_missing">Falta a morada</string>
+    <string name="coordinates_missing">Faltam as coordenadas</string>
+    <string name="group_missing">Falta o grupo</string>
+    <string name="unknown_error">Ocorreu um erro desconhecido</string>
+    <string name="no_location_selected">Nenhuma localização selecionada</string>
+    <string name="belongs_to_no_group">Não pertence a nenhum grupo</string>
+    <string name="name_already_exists">Nome já existe</string>
 </resources>

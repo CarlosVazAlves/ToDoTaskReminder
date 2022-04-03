@@ -44,4 +44,13 @@
     <string name="pick_location_on_maps">Pick location on Maps</string>
     <string name="edit_location">Edit location</string>
     <string name="save_and_return">Save and return</string>
+    <string name="data_missing">Data missing!</string>
+    <string name="name_missing">Name is missing</string>
+    <string name="address_missing">Address is missing</string>
+    <string name="coordinates_missing">Coordinates are missing</string>
+    <string name="group_missing">Group is missing</string>
+    <string name="unknown_error">An unknown error occurred</string>
+    <string name="no_location_selected">No location selected</string>
+    <string name="belongs_to_no_group">Does not belong to any group</string>
+    <string name="name_already_exists">Name already exists</string>
 </resources>

@@ -23,14 +23,14 @@
             android:id="@+id/location_details_name_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="1"
+            android:layout_weight="0"
             android:text="@string/name_2dots" />
 
         <TextView
             android:id="@+id/location_details_name_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -51,14 +51,15 @@
             android:id="@+id/location_details_address_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:text="@string/address_2dots" />
 
         <TextView
             android:id="@+id/location_details_address_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_marginStart="8dp"
+            android:layout_weight="4" />
     </LinearLayout>
 
     <LinearLayout
@@ -77,13 +78,14 @@
             android:id="@+id/location_details_group_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:text="@string/group_2dots" />
 
         <TextView
             android:id="@+id/location_details_group_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_weight="1" />
 
     </LinearLayout>

@@ -23,8 +23,7 @@
             android:id="@+id/location_edit_name_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="1"
+            android:layout_weight="0"
             android:text="@string/name_2dots" />
 
         <EditText
@@ -33,7 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="start"
-            android:hint="@string/input_name" />
+            android:layout_marginStart="4dp"
+            android:hint="@string/input_name"
+            android:minHeight="48dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -53,7 +54,7 @@
             android:id="@+id/location_edit_address_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:text="@string/address_2dots" />
 
         <EditText
@@ -62,13 +63,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="start"
-            android:hint="@string/address_loaded_from_maps" />
+            android:layout_marginStart="4dp"
+            android:hint="@string/address_loaded_from_maps"
+            android:minHeight="48dp" />
     </LinearLayout>
 
     <Switch
         android:id="@+id/location_edit_group_Switch"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
@@ -94,25 +97,25 @@
             android:id="@+id/location_edit_existing_group_RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="?android:selectableItemBackground"
             android:button="@null"
             android:drawableRight="?android:attr/listChoiceIndicatorSingle"
-            android:background="?android:selectableItemBackground"
             android:layoutDirection="rtl"
-            android:layout_gravity="start"
-            android:textAlignment="textStart"
-            android:text="@string/belongs_existing_group" />
+            android:text="@string/belongs_existing_group"
+            android:textAlignment="textStart" />
 
         <RadioButton
             android:id="@+id/location_edit_new_group_RadioButton"
-            android:button="@null"
-            android:drawableRight="?android:attr/listChoiceIndicatorSingle"
-            android:background="?android:selectableItemBackground"
-            android:layoutDirection="rtl"
-            android:layout_gravity="start"
-            android:textAlignment="textStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/belongs_new_group" />
+            android:layout_gravity="start"
+            android:background="?android:selectableItemBackground"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+            android:layoutDirection="rtl"
+            android:text="@string/belongs_new_group"
+            android:textAlignment="textStart" />
     </RadioGroup>
 
     <LinearLayout
@@ -131,7 +134,7 @@
             android:id="@+id/location_edit_new_group_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:text="@string/group_2dots" />
 
         <EditText
@@ -139,7 +142,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/input_group" />
+            android:hint="@string/input_group"
+            android:layout_marginStart="4dp"
+            android:minHeight="48dp" />
 
     </LinearLayout>
 
@@ -159,7 +164,7 @@
             android:id="@+id/location_edit_existing_group_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:text="@string/group_2dots" />
 
         <Spinner
@@ -167,6 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginStart="4dp"
             android:minHeight="48dp" />
 
     </LinearLayout>

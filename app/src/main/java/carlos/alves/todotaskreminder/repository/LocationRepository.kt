@@ -26,4 +26,6 @@ class LocationRepository(database: ToDoTaskReminderDatabase) {
     fun getGroups(): ArrayList<String?> = ArrayList(executor.submit(Callable { locationDatabaseDao.getGroups() }).get())
 
     fun getLocationsNames(): ArrayList<String> = ArrayList(executor.submit(Callable { locationDatabaseDao.getLocationsNames() }).get())
+
+    fun locationNameExists(locationName: String): Boolean = executor.submit(Callable { locationDatabaseDao.locationNameExists(locationName) }).get() //mudar a query para COUNT
 }

@@ -10,7 +10,7 @@ interface OnLocationDao {
     fun insertOnLocation(onLocation: OnLocationEntity)
 
     @Update
-    fun updateOnLocation(onLocation: OnLocationEntity): Int
+    fun updateOnLocation(onLocation: OnLocationEntity)
 
     @Query("DELETE FROM OnLocation WHERE taskId = :taskId")
     fun deleteOnLocationByTaskId(taskId: Int)

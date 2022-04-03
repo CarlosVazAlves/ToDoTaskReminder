@@ -11,7 +11,7 @@ class DateTimeRepository(database: ToDoTaskReminderDatabase) {
 
     fun insertDateTime(dateTime: DateTimeEntity) { executor.submit { dateTimeDatabaseDao.insertDateTime(dateTime) } }
 
-    fun updateDateTime(dateTime: DateTimeEntity): Int = executor.submit { dateTimeDatabaseDao.updateDateTime(dateTime) }.get() as Int
+    fun updateDateTime(dateTime: DateTimeEntity) { executor.submit { dateTimeDatabaseDao.updateDateTime(dateTime) } }
 
     fun deleteDateTime(taskId: Int) { executor.submit { dateTimeDatabaseDao.deleteDateTimeByTaskId(taskId) } }
 

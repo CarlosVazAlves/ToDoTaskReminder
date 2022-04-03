@@ -10,7 +10,7 @@ interface SettingsDao {
     fun insertSetting(settings: SettingsEntity)
 
     @Update
-    fun updateSetting(settings: SettingsEntity): Int
+    fun updateSetting(settings: SettingsEntity)
 
     @Query("SELECT value FROM Settings WHERE `key` = :key")
     fun getSetting(key: String) : String

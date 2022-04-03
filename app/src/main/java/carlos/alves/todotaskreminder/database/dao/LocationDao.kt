@@ -10,7 +10,7 @@ interface LocationDao {
     fun insertLocation(location: LocationEntity)
 
     @Update
-    fun updateLocation(location: LocationEntity): Int
+    fun updateLocation(location: LocationEntity)
 
     @Query("DELETE FROM Location WHERE id = :locationId")
     fun deleteLocationById(locationId: Int)

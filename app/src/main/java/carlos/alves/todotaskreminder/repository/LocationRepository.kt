@@ -11,7 +11,7 @@ class LocationRepository(database: ToDoTaskReminderDatabase) {
 
     fun insertLocation(location: LocationEntity) { executor.submit { locationDatabaseDao.insertLocation(location) } }
 
-    fun updateLocation(location: LocationEntity): Int = executor.submit { locationDatabaseDao.updateLocation(location) }.get() as Int
+    fun updateLocation(location: LocationEntity) { executor.submit { locationDatabaseDao.updateLocation(location) } }
 
     fun deleteLocation(locationId: Int) { executor.submit { locationDatabaseDao.deleteLocationById(locationId) } }
 
@@ -23,7 +23,7 @@ class LocationRepository(database: ToDoTaskReminderDatabase) {
 
     fun getLocationsByGroup(group: String): List<LocationEntity> = executor.submit(Callable { locationDatabaseDao.getLocationsByGroup(group) }).get()
 
-    fun getGroups(): List<String> = executor.submit(Callable { locationDatabaseDao.getGroups() }).get()
+    fun getGroups(): ArrayList<String?> = ArrayList(executor.submit(Callable { locationDatabaseDao.getGroups() }).get())
 
-    fun getLocationsNames(): List<String> = executor.submit(Callable { locationDatabaseDao.getLocationsNames() }).get()
+    fun getLocationsNames(): ArrayList<String> = ArrayList(executor.submit(Callable { locationDatabaseDao.getLocationsNames() }).get())
 }

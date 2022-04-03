@@ -10,7 +10,7 @@ interface TaskDao {
     fun insertTask(task: TaskEntity)
 
     @Update
-    fun updateTask(task: TaskEntity): Int
+    fun updateTask(task: TaskEntity)
 
     @Query("DELETE FROM Task WHERE id = :id")
     fun deleteTaskById(id: Int)

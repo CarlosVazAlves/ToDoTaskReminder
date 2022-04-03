@@ -11,9 +11,9 @@ class SettingsRepository(database: ToDoTaskReminderDatabase) {
 
     fun insertSetting(setting: SettingsEntity) { executor.submit { settingsDatabaseDao.insertSetting(setting) } }
 
-    fun updateSetting(setting: SettingsEntity): Int = executor.submit { settingsDatabaseDao.updateSetting(setting) }.get() as Int
+    fun updateSetting(setting: SettingsEntity) { executor.submit { settingsDatabaseDao.updateSetting(setting) } }
 
     fun getSetting(key: String): String = executor.submit(Callable { settingsDatabaseDao.getSetting(key) }).get()
 
-    fun getAllSettings(): List<SettingsEntity> = executor.submit(Callable { settingsDatabaseDao.getAllSettings() }).get()
+    fun getAllSettings(): ArrayList<SettingsEntity> = ArrayList(executor.submit(Callable { settingsDatabaseDao.getAllSettings() }).get())
 }

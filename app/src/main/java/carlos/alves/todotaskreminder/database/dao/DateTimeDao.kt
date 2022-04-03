@@ -10,7 +10,7 @@ interface DateTimeDao {
     fun insertDateTime(dateTime: DateTimeEntity)
 
     @Update
-    fun updateDateTime(dateTime: DateTimeEntity): Int
+    fun updateDateTime(dateTime: DateTimeEntity)
 
     @Query("DELETE FROM DateTime WHERE taskId = :taskId")
     fun deleteDateTimeByTaskId(taskId: Int)

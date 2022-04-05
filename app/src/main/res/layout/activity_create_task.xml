@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/create_tasks_constraint"
+    android:id="@+id/create_task_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".createTasks.CreateTaskActivity">
 
     <LinearLayout
-        android:id="@+id/create_tasks_name_Layout"
+        android:id="@+id/create_task_name_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/create_tasks_name_TextView"
+            android:id="@+id/create_task_name_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -28,7 +28,7 @@
             android:text="@string/name_2dots" />
 
         <EditText
-            android:id="@+id/create_tasks_name_EditText"
+            android:id="@+id/create_task_name_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -36,7 +36,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/create_tasks_description_Layout"
+        android:id="@+id/create_task_description_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -46,17 +46,17 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_tasks_name_Layout">
+        app:layout_constraintTop_toBottomOf="@+id/create_task_name_Layout">
 
         <TextView
-            android:id="@+id/create_tasks_description_TextView"
+            android:id="@+id/create_task_description_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/description_2dots" />
 
         <EditText
-            android:id="@+id/create_tasks_description_EditText"
+            android:id="@+id/create_task_description_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -64,7 +64,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/create_tasks_location_Layout"
+        android:id="@+id/create_task_location_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -73,17 +73,17 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_tasks_description_Layout">
+        app:layout_constraintTop_toBottomOf="@+id/create_task_description_Layout">
 
         <TextView
-            android:id="@+id/create_tasks_location_TextView"
+            android:id="@+id/create_task_location_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/location_2dots" />
 
         <Spinner
-            android:id="@+id/create_tasks_locations_spinner"
+            android:id="@+id/create_task_locations_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -92,7 +92,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/create_tasks_reminder_Layout"
+        android:id="@+id/create_task_reminder_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -101,10 +101,10 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_tasks_location_Layout">
+        app:layout_constraintTop_toBottomOf="@+id/create_task_location_Layout">
 
         <CheckBox
-            android:id="@+id/create_tasks_date_reminder_CheckBox"
+            android:id="@+id/create_task_date_reminder_CheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -113,7 +113,7 @@
             android:text="@string/remind_by_location" />
 
         <CheckBox
-            android:id="@+id/create_tasks_location_reminder_CheckBox"
+            android:id="@+id/create_task_location_reminder_CheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -124,7 +124,94 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/create_tasks_buttons_Layout"
+        android:id="@+id/create_task_reminder_location_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_task_reminder_Layout">
+
+        <TextView
+            android:id="@+id/create_task_reminder_location_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/distance_remind_when_2dots" />
+
+        <LinearLayout
+            android:id="@+id/create_task_reminder_distance_Layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/create_task_reminder_distance_editTextNumberDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="5"
+                android:hint="5"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/create_task_reminder_distance_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/km" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/create_task_reminder_date_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_task_reminder_location_Layout">
+
+        <TextView
+            android:id="@+id/create_task_reminder_date_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date_remind_2dots" />
+
+        <LinearLayout
+            android:id="@+id/create_task_reminder_date_format_Layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/create_task_reminder_date_EditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="date"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/create_task_reminder_time_EditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="time"
+                android:minHeight="48dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/create_task_reminder_buttons_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -136,20 +223,20 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/create_tasks_cancel_button"
+            android:id="@+id/create_task_reminder_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="16dp"
-            android:text="@string/cancel" />
+            android:text="@string/back" />
 
         <Button
-            android:id="@+id/create_tasks_next_button"
+            android:id="@+id/create_task_reminder_create_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="16dp"
-            android:text="@string/next" />
+            android:text="@string/create" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

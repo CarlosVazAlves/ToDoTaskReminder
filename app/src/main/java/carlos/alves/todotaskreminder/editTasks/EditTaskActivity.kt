@@ -13,10 +13,10 @@ class EditTaskActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.editTaskCancelButton.setOnClickListener { finish() }
+        binding.editTaskBackButton.setOnClickListener { finish() }
 
-        binding.editTaskNextButton.setOnClickListener {
-            startActivity(Intent(this, EditReminderActivity::class.java))
+        binding.editTaskEditButton.setOnClickListener {
+            finish()
         }
     }
 }

@@ -13,10 +13,10 @@ class CreateTaskActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.createTasksCancelButton.setOnClickListener { finish() }
+        binding.createTaskReminderBackButton.setOnClickListener { finish() }
 
-        binding.createTasksNextButton.setOnClickListener {
-            startActivity(Intent(this, CreateReminderActivity::class.java))
+        binding.createTaskReminderCreateButton.setOnClickListener {
+            finish()
         }
     }
 }

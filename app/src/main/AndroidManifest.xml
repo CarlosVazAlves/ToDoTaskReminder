@@ -51,13 +51,7 @@
             android:name=".deleteTasks.DeleteTasksListActivity"
             android:exported="false" />
         <activity
-            android:name=".editTasks.EditReminderActivity"
-            android:exported="false" />
-        <activity
             android:name=".editTasks.EditTaskActivity"
-            android:exported="false" />
-        <activity
-            android:name=".createTasks.CreateReminderActivity"
             android:exported="false" />
         <activity
             android:name=".createTasks.CreateTaskActivity"

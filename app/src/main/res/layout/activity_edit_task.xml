@@ -122,6 +122,108 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/edit_task_reminder_location_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_task_reminder_Layout">
+
+        <TextView
+            android:id="@+id/edit_task_reminder_location_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/distance_remind_when_2dots" />
+
+        <LinearLayout
+            android:id="@+id/edit_task_reminder_distance_Layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_task_reminder_distance_editTextNumberDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="5"
+                android:hint="5"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/edit_task_reminder_distance_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/km" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_task_reminder_date_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_task_reminder_location_Layout">
+
+        <TextView
+            android:id="@+id/edit_task_reminder_date_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date_remind_2dots" />
+
+        <LinearLayout
+            android:id="@+id/edit_task_reminder_date_format_Layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_task_reminder_date_EditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="date"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/edit_task_reminder_time_EditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="time"
+                android:minHeight="48dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/edit_task_set_completed_CheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+        android:text="@string/mark_as_complete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_task_reminder_date_Layout" />
+
+    <LinearLayout
         android:id="@+id/edit_task_buttons_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -134,20 +236,20 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/edit_task_cancel_button"
+            android:id="@+id/edit_task_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="16dp"
-            android:text="@string/cancel" />
+            android:text="@string/back" />
 
         <Button
-            android:id="@+id/edit_task_next_button"
+            android:id="@+id/edit_task_edit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="16dp"
-            android:text="@string/next" />
+            android:text="@string/edit" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

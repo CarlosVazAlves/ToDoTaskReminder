@@ -23,7 +23,7 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="distance_remind_when_2dots">Remind me when the distance is equal or smaller than:</string>
-    <string name="mark_as_complete">Mark As Complete</string>
+    <string name="mark_as_complete">Mark as complete</string>
     <string name="km">km</string>
     <string name="create">Create</string>
     <string name="edit">Edit</string>

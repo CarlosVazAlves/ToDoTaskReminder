@@ -36,6 +36,6 @@ interface LocationDao {
     @Query("SELECT `id` FROM Location WHERE name = :locationName")
     fun getLocationIdByName(locationName: String) : Int
 
-    @Query("SELECT EXISTS(SELECT * FROM Location WHERE name = :locationName)") //mudar a query para COUNT
+    @Query("SELECT EXISTS(SELECT * FROM Location WHERE name = :locationName)")
     fun locationNameExists(locationName: String) : Boolean
 }

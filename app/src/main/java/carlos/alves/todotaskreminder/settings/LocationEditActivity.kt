@@ -124,7 +124,7 @@ class LocationEditActivity : AppCompatActivity() {
             return false
         }
 
-        if (isNewLocation && viewModel.locationNameExists()) {
+        if (viewModel.locationNameExists(isNewLocation)) {
             showAlertDialog(LocationConstants.NAME_ALREADY_EXISTS)
             return false
         }
@@ -142,7 +142,7 @@ class LocationEditActivity : AppCompatActivity() {
         if (!binding.locationEditGroupSwitch.isChecked) {
             viewModel.newGroupName = null
         } else {
-            if (saveCurrentSpinnerSelection() || isNewGroupFieldEmpty()) {
+            if (impossibleToSaveGroup()) {
                 showAlertDialog(LocationConstants.GROUP)
                 return false
             }
@@ -151,12 +151,22 @@ class LocationEditActivity : AppCompatActivity() {
         return true
     }
 
+    private fun impossibleToSaveGroup(): Boolean {
+        if (saveCurrentSpinnerSelectionOk()) {
+            return false
+        }
+        if (!isNewGroupFieldEmpty()) {
+            return false
+        }
+        return true
+    }
+
     private fun isNewGroupFieldEmpty(): Boolean {
         val group = binding.locationEditNewGroupEditText.text?.toString()
         return group.isNullOrBlank()
     }
 
-    private fun saveCurrentSpinnerSelection(): Boolean {
+    private fun saveCurrentSpinnerSelectionOk(): Boolean {
         if(binding.locationEditExistingGroupLayout.isVisible) {
             val spinnerSelectedItem = binding.locationEditExistingGroupSpinner.selectedItem
             if (spinnerSelectedItem != null) {
@@ -182,7 +192,7 @@ class LocationEditActivity : AppCompatActivity() {
 
     private fun showAlertDialog(fieldMissing: LocationConstants) {
         AlertDialog.Builder(this)
-            .setTitle(R.string.data_missing)
+            .setTitle(R.string.data_error)
             .setMessage(getErrorMessage(fieldMissing))
             .show()
     }

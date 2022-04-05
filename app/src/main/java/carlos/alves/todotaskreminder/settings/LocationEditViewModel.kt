@@ -27,8 +27,11 @@ class LocationEditViewModel : ViewModel() {
         }
     }
 
-    fun locationNameExists(): Boolean {
-        return locationRepository.locationNameExists(newLocation.name!!) //mudar a query para COUNT
+    fun locationNameExists(isNewLocation: Boolean): Boolean {
+        if (!isNewLocation && newLocation.name == existingLocation.name) {
+            return false
+        }
+        return locationRepository.locationNameExists(newLocation.name!!)
     }
 
     fun populateExistingLocationFromDb(locationId: Int) {

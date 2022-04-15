@@ -24,6 +24,9 @@ interface TaskDao {
     @Query("SELECT * FROM Task WHERE name = :name")
     fun getTaskByName(name: String) : TaskEntity
 
+    @Query("SELECT id FROM Task WHERE name = :name")
+    fun getTaskIdByName(name: String) : Int
+
     @Query("SELECT name FROM Task")
     fun getAllTasksNames() : List<String>
 }

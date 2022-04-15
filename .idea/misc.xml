@@ -7,6 +7,8 @@
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_check_tasks_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_create_reminder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_create_task.xml" value="0.34148550724637683" />
+        <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_create_task_locations.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_create_task_locations_list.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_delete_tasks.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_delete_tasks_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_edit_reminder.xml" value="0.36666666666666664" />
@@ -20,7 +22,10 @@
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_settings.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_splash.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/activity_task_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/recycler_view_row_layout.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/layout/row_layout.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Carlos Alves/AndroidStudioProjects/ToDoTaskReminder/app/src/main/res/menu/current_place_menu.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/Carlos Alves/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.18541666666666667" />
       </map>
     </option>
   </component>

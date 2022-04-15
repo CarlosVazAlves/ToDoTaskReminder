@@ -128,7 +128,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_edit_group_RadioGroup">
+        app:layout_constraintTop_toBottomOf="@+id/location_edit_existing_group_Layout">
 
         <TextView
             android:id="@+id/location_edit_new_group_TextView"
@@ -141,9 +141,9 @@
             android:id="@+id/location_edit_new_group_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
             android:hint="@string/input_group"
-            android:layout_marginStart="4dp"
             android:minHeight="48dp" />
 
     </LinearLayout>
@@ -171,8 +171,8 @@
             android:id="@+id/location_edit_existing_group_Spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="4dp"
+            android:layout_weight="1"
             android:minHeight="48dp" />
 
     </LinearLayout>

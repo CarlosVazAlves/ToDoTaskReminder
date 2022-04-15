@@ -30,6 +30,9 @@ interface LocationDao {
     @Query("SELECT DISTINCT `group` FROM Location")
     fun getGroups(): List<String>
 
+    @Query("SELECT * FROM Location")
+    fun getLocations(): List<LocationEntity>
+
     @Query("SELECT `name` FROM Location")
     fun getLocationsNames(): List<String>
 

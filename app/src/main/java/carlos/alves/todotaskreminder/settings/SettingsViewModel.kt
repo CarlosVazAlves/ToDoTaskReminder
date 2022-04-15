@@ -5,12 +5,12 @@ import carlos.alves.todotaskreminder.ToDoTaskReminderApp
 
 class SettingsViewModel : ViewModel() {
 
-    private lateinit var locations: ArrayList<String>
+    private lateinit var locationsNames: ArrayList<String>
     private val locationRepository = ToDoTaskReminderApp.instance.locationRepository
 
-    fun getLocations(): List<String> {
-        locations = locationRepository.getLocationsNames()
-        return locations
+    fun getLocationsNames(): List<String> {
+        locationsNames = locationRepository.getLocationsNames()
+        return locationsNames
     }
 
     fun getLocationId(locationName: String): Int {

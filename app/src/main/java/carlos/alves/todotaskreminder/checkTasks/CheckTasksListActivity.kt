@@ -1,10 +1,10 @@
 package carlos.alves.todotaskreminder.checkTasks
 
-import android.app.Activity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import carlos.alves.todotaskreminder.databinding.ActivityCheckTasksListBinding
 
-class CheckTasksListActivity : Activity() {
+class CheckTasksListActivity : AppCompatActivity() {
 
     private val binding: ActivityCheckTasksListBinding by lazy { ActivityCheckTasksListBinding.inflate(layoutInflater) }
 

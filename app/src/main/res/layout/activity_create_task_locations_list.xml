@@ -2,32 +2,33 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/check_tasks_list_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".checkTasks.CheckTasksListActivity">
+    android:id="@+id/create_task_locations_list_constraint"
+    tools:context=".createTasks.CreateTaskLocationsListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/check_tasks_list_RecyclerView"
+        android:id="@+id/create_task_locations_list_RecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/check_tasks_list_back_Button"
+        app:layout_constraintBottom_toTopOf="@+id/create_task_locations_list_save_and_return_Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/check_tasks_list_back_Button"
+        android:id="@+id/create_task_locations_list_save_and_return_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="@string/back"
+        android:text="@string/save_and_return"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

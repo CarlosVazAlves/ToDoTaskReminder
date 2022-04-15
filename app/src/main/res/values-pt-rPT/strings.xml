@@ -54,4 +54,11 @@
     <string name="belongs_to_no_group">Não pertence a nenhum grupo</string>
     <string name="name_already_exists">Nome já existe</string>
     <string name="data_error">Erro nos dados</string>
+    <string name="choose_locations">Escolher localizações</string>
+    <string name="description_missing">Falta a descrição</string>
+    <string name="date_missing">Falta a data / hora</string>
+    <string name="invalid_distance">Distância inválida</string>
+    <string name="without_group">Sem grupo</string>
+    <string name="no_location_chosen">Nenhuma localização escolhida!</string>
+    <string name="task_already_exists">Já existe uma tarefa com esse nome</string>
 </resources>

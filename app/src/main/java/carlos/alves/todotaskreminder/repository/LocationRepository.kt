@@ -25,6 +25,8 @@ class LocationRepository(database: ToDoTaskReminderDatabase) {
 
     fun getGroups(): ArrayList<String?> = ArrayList(executor.submit(Callable { locationDatabaseDao.getGroups() }).get())
 
+    fun getLocations(): ArrayList<LocationEntity> = ArrayList(executor.submit(Callable { locationDatabaseDao.getLocations() }).get())
+
     fun getLocationsNames(): ArrayList<String> = ArrayList(executor.submit(Callable { locationDatabaseDao.getLocationsNames() }).get())
 
     fun locationNameExists(locationName: String): Boolean = executor.submit(Callable { locationDatabaseDao.locationNameExists(locationName) }).get()

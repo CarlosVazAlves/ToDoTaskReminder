@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoTaskReminder">
         <activity
+            android:name=".createTasks.CreateTaskLocationsListActivity"
+            android:exported="false" />
+        <activity
             android:name=".settings.LocationEditActivity"
             android:exported="false" />
         <activity

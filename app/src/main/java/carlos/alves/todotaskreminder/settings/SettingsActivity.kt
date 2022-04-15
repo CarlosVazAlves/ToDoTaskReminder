@@ -74,8 +74,8 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun loadLocations() {
-        val locations = viewModel.getLocations()
-        val locationsAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locations)
+        val locationsNames = viewModel.getLocationsNames()
+        val locationsAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locationsNames)
         locationsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.settingsLocationsSpinner.adapter = locationsAdapter
     }

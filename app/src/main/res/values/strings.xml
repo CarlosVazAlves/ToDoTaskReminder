@@ -12,7 +12,7 @@
     <string name="location_2dots">Location:</string>
     <string name="where">Where</string>
     <string name="title_activity_maps">Maps</string>
-    <string name="distance_remind">Remind when less than %d km far</string>
+    <string name="distance_remind">Remind when less than %1$.2f km far</string>
     <string name="date_remind_2dots">Remind in the following date:</string>
     <string name="remind_by_location">Remind By Location</string>
     <string name="remind_by_date">Remind By Date</string>

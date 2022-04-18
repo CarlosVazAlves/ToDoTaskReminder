@@ -3,9 +3,6 @@ package carlos.alves.todotaskreminder.repository
 import androidx.room.*
 import carlos.alves.todotaskreminder.database.*
 import carlos.alves.todotaskreminder.database.dao.*
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.lang.reflect.Type
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -22,25 +19,25 @@ abstract class ToDoTaskReminderDatabase : RoomDatabase() {
 
 class Converters {
     @TypeConverter
-    fun toDate(dateJSON: String): LocalDate {
-        val objectType: Type = object : TypeToken<LocalDate?>() {}.type
-        return Gson().fromJson(dateJSON, objectType)
+    fun toDate(dateString: String): LocalDate {
+        val dateElements = dateString.split("-")
+        return LocalDate.of(dateElements[0].toInt(), dateElements[1].toInt(), dateElements[2].toInt())
     }
 
     @TypeConverter
     fun fromDate(date: LocalDate): String {
-        return Gson().toJson(date)
+        return date.toString()
     }
 
 
     @TypeConverter
-    fun toTime(timeJSON: String): LocalTime {
-        val objectType: Type = object : TypeToken<LocalTime?>() {}.type
-        return Gson().fromJson(timeJSON, objectType)
+    fun toTime(timeString: String): LocalTime {
+        val timeElements = timeString.split(":")
+        return LocalTime.of(timeElements[0].toInt(), timeElements[1].toInt())
     }
 
     @TypeConverter
     fun fromTime(time: LocalTime): String {
-        return Gson().toJson(time)
+        return time.toString()
     }
 }

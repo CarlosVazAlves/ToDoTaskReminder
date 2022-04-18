@@ -23,7 +23,7 @@
             android:id="@+id/task_details_name_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:lines="1"
             android:text="@string/name_2dots" />
 
@@ -31,6 +31,7 @@
             android:id="@+id/task_details_name_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -51,13 +52,14 @@
             android:id="@+id/task_details_description_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:text="@string/description_2dots" />
 
         <TextView
             android:id="@+id/task_details_description_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -77,13 +79,14 @@
             android:id="@+id/task_details_location_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:text="@string/location_2dots" />
 
         <TextView
             android:id="@+id/task_details_location_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1" />
 
     </LinearLayout>
@@ -128,8 +131,8 @@
                 android:id="@+id/task_details_date_EditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
+                android:layout_weight="0"
+                android:ems="5"
                 android:hint="@string/date"
                 android:inputType="date"
                 android:minHeight="48dp" />
@@ -138,8 +141,8 @@
                 android:id="@+id/task_details_time_EditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
+                android:layout_weight="0"
+                android:ems="3"
                 android:hint="@string/time"
                 android:inputType="time"
                 android:minHeight="48dp" />

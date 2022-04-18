@@ -12,7 +12,7 @@
     <string name="description_2dots">Descrição:</string>
     <string name="location_2dots">Local:</string>
     <string name="where">Aonde</string>
-    <string name="distance_remind">Relembrar quando estiver a menos de %d km</string>
+    <string name="distance_remind">Relembrar quando estiver a menos de %1$.2f km</string>
     <string name="date_remind_2dots">Relembrar na seguinte data:</string>
     <string name="remind_by_location">Recordar por local</string>
     <string name="remind_by_date">Recordar por data</string>

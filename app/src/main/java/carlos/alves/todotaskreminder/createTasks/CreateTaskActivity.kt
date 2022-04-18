@@ -78,7 +78,10 @@ class CreateTaskActivity : AppCompatActivity() {
         }
 
         binding.createTaskReminderDistanceEditTextNumberDecimal.doAfterTextChanged {
-            viewModel.distanceReminder = it?.toString()?.toDouble()!! //se null, estoura
+            val numberString = it?.toString()
+            if (!numberString.isNullOrBlank()) {
+                viewModel.distanceReminder = numberString.toDouble()
+            }
         }
 
         binding.createTaskReminderDateEditText.setOnClickListener {

@@ -13,6 +13,8 @@ class TaskRepository(database: ToDoTaskReminderDatabase) {
 
     fun updateTask(task: TaskEntity) { executor.submit { taskDatabaseDao.updateTask(task) } }
 
+    fun deleteTask(taskId: Int) { executor.submit { taskDatabaseDao.deleteTaskById(taskId) } }
+
     fun deleteTask(taskName: String) { executor.submit { taskDatabaseDao.deleteTaskByName(taskName) } }
 
     fun getTask(taskId: Int): TaskEntity = executor.submit(Callable { taskDatabaseDao.getTaskById(taskId) }).get()

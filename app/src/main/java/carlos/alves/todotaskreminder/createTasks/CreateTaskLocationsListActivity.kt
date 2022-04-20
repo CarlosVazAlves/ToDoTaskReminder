@@ -40,7 +40,7 @@ class CreateTaskLocationsListActivity : AppCompatActivity() {
             if (selectedLocations.isEmpty()) {
                 AlertDialog.Builder(this)
                     .setTitle(R.string.data_error)
-                    .setMessage(resources.getString(R.string.no_location_chosen))
+                    .setMessage(R.string.no_location_selected)
                     .show()
             } else {
                 val returnData = Intent()

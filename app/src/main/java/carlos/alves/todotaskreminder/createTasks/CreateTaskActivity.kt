@@ -113,39 +113,39 @@ class CreateTaskActivity : AppCompatActivity() {
     }
 
     private fun checkMissingDataOk(): Boolean {
-        if (viewModel.name == null) {
-            showMissingDataAlertDialog(resources.getString(R.string.name_missing))
+        if (viewModel.name.isNullOrBlank()) {
+            showMissingDataAlertDialog(R.string.name_missing)
             return false
         }
         if (viewModel.checkIfTaskNameAlreadyExists()) {
-            showMissingDataAlertDialog(resources.getString(R.string.task_already_exists))
+            showMissingDataAlertDialog(R.string.task_already_exists)
             return false
         }
-        if (viewModel.description == null) {
-            showMissingDataAlertDialog(resources.getString(R.string.description_missing))
+        if (viewModel.description.isNullOrBlank()) {
+            showMissingDataAlertDialog(R.string.description_missing)
             return false
         }
         if (viewModel.remindByDate && (viewModel.dateReminder == null || viewModel.timeReminder == null)) {
-            showMissingDataAlertDialog(resources.getString(R.string.date_missing))
+            showMissingDataAlertDialog(R.string.date_missing)
             return false
         }
         if (viewModel.remindByLocation) {
             if (viewModel.locationsIds.isNullOrEmpty()) {
-                showMissingDataAlertDialog(resources.getString(R.string.no_location_selected))
+                showMissingDataAlertDialog(R.string.no_location_selected)
                 return false
             }
             if (viewModel.distanceReminder < 1) {
-                showMissingDataAlertDialog(resources.getString(R.string.invalid_distance))
+                showMissingDataAlertDialog(R.string.invalid_distance)
                 return false
             }
         }
         return true
     }
 
-    private fun showMissingDataAlertDialog(message: String) {
+    private fun showMissingDataAlertDialog(messageId: Int) {
         AlertDialog.Builder(this)
             .setTitle(R.string.data_error)
-            .setMessage(message)
+            .setMessage(messageId)
             .show()
     }
 

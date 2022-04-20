@@ -119,7 +119,7 @@ class LocationEditActivity : AppCompatActivity() {
     }
 
     private fun checkValidLocationData(): Boolean {
-        if (viewModel.newLocation.name == null) {
+        if (viewModel.newLocation.name.isNullOrBlank()) {
             showAlertDialog(LocationConstants.NAME)
             return false
         }
@@ -129,7 +129,7 @@ class LocationEditActivity : AppCompatActivity() {
             return false
         }
 
-        if (viewModel.newLocation.address == null) {
+        if (viewModel.newLocation.address.isNullOrBlank()) {
             showAlertDialog(LocationConstants.ADDRESS)
             return false
         }
@@ -197,15 +197,15 @@ class LocationEditActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun getErrorMessage(fieldMissing: LocationConstants): String {
+    private fun getErrorMessage(fieldMissing: LocationConstants): Int {
         return when(fieldMissing) {
-            LocationConstants.NAME -> resources.getString(R.string.name_missing)
-            LocationConstants.ADDRESS -> resources.getString(R.string.address_missing)
-            LocationConstants.COORDINATES -> resources.getString(R.string.coordinates_missing)
-            LocationConstants.GROUP -> resources.getString(R.string.group_missing)
-            LocationConstants.NAME_ALREADY_EXISTS -> resources.getString(R.string.name_already_exists)
+            LocationConstants.NAME -> R.string.name_missing
+            LocationConstants.ADDRESS -> R.string.address_missing
+            LocationConstants.COORDINATES -> R.string.coordinates_missing
+            LocationConstants.GROUP -> R.string.group_missing
+            LocationConstants.NAME_ALREADY_EXISTS -> R.string.name_already_exists
             else -> {
-                resources.getString(R.string.unknown_error)
+                R.string.unknown_error
             }
         }
     }

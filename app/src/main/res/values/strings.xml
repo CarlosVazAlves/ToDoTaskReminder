@@ -58,6 +58,10 @@
     <string name="date_missing">Date / Time missing</string>
     <string name="invalid_distance">Invalid distance</string>
     <string name="without_group">Without group</string>
-    <string name="no_location_chosen">No location chosen!</string>
     <string name="task_already_exists">Already exists a task with that name</string>
+    <string name="no_task_selected">No task selected</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="are_you_sure_want_delete">Are you sure you want to delete?</string>
 </resources>

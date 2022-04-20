@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 
 
-class CheckTasksAdapter(private val tasksNamesListToShow: ArrayList<String>) : RecyclerView.Adapter<CheckTasksAdapter.ItemViewHolder>() {
+class CheckTasksAdapter(private val tasksNamesList: ArrayList<String>) : RecyclerView.Adapter<CheckTasksAdapter.ItemViewHolder>() {
 
     private var chosenTask: MutableLiveData<String> = MutableLiveData()
 
@@ -22,7 +22,7 @@ class CheckTasksAdapter(private val tasksNamesListToShow: ArrayList<String>) : R
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val currentTaskName = tasksNamesListToShow[position]
+        val currentTaskName = tasksNamesList[position]
         holder.task.text = currentTaskName
 
         holder.task.setOnClickListener {
@@ -30,7 +30,7 @@ class CheckTasksAdapter(private val tasksNamesListToShow: ArrayList<String>) : R
         }
     }
 
-    override fun getItemCount(): Int = tasksNamesListToShow.size
+    override fun getItemCount(): Int = tasksNamesList.size
 
     fun getChosenTask(): MutableLiveData<String> = chosenTask
 }

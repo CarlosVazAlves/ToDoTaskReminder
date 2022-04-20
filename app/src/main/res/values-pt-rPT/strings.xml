@@ -59,6 +59,10 @@
     <string name="date_missing">Falta a data / hora</string>
     <string name="invalid_distance">Distância inválida</string>
     <string name="without_group">Sem grupo</string>
-    <string name="no_location_chosen">Nenhuma localização escolhida!</string>
     <string name="task_already_exists">Já existe uma tarefa com esse nome</string>
+    <string name="no_task_selected">Nenhuma tarefa selecionada</string>
+    <string name="confirmation">Confirmação</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="are_you_sure_want_delete">Tens a certeza que queres apagar?</string>
 </resources>

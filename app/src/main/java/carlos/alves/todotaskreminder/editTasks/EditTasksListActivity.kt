@@ -1,10 +1,10 @@
 package carlos.alves.todotaskreminder.editTasks
 
-import android.app.Activity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import carlos.alves.todotaskreminder.databinding.ActivityEditTasksListBinding
 
-class EditTasksListActivity : Activity() {
+class EditTasksListActivity : AppCompatActivity() {
 
     private val binding: ActivityEditTasksListBinding by lazy { ActivityEditTasksListBinding.inflate(layoutInflater) }
 

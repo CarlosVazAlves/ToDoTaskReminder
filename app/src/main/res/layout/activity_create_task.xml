@@ -196,7 +196,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/create_task_reminder_buttons_Layout"
+        android:id="@+id/create_task_buttons_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -208,7 +208,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/create_task_reminder_back_button"
+            android:id="@+id/create_task_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -216,7 +216,7 @@
             android:text="@string/back" />
 
         <Button
-            android:id="@+id/create_task_reminder_create_button"
+            android:id="@+id/create_task_create_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

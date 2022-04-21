@@ -21,7 +21,7 @@ class DeleteTasksListViewModel : ViewModel()  {
     fun deleteTask(taskName: String) {
         val taskId = taskRepository.getTaskId(taskName)
         dateTimeRepository.deleteDateTime(taskId)
-        onLocationRepository.deleteOnLocation(taskId)
+        onLocationRepository.deleteOnLocationsByTaskId(taskId)
         taskRepository.deleteTask(taskId)
     }
 }

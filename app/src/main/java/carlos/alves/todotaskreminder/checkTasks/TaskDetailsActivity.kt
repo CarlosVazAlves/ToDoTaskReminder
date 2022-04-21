@@ -28,6 +28,7 @@ class TaskDetailsActivity : AppCompatActivity() {
 
         binding.taskDetailsNameEditText.text = chosenTask.name
         binding.taskDetailsDescriptionEditText.text = chosenTask.description
+        binding.taskDetailsStatusEditText.text = if (chosenTask.completed) resources.getString(R.string.complete) else resources.getString(R.string.incomplete)
 
         if (chosenTask.remindByLocation) {
             binding.taskDetailsLocationLayout.isVisible = true

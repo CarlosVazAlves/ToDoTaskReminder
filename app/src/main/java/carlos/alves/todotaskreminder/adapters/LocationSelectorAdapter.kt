@@ -7,7 +7,7 @@ import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import carlos.alves.todotaskreminder.R
 
-class AddLocationsAdapter(private val locationsNamesList: ArrayList<LocationAdapterObject>) : RecyclerView.Adapter<AddLocationsAdapter.ItemViewHolder>() {
+class LocationSelectorAdapter(private val locationsNamesList: ArrayList<LocationAdapterObject>) : RecyclerView.Adapter<LocationSelectorAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) { //https://developer.android.com/guide/topics/ui/layout/recyclerview
         val checkBox: CheckBox = itemView.findViewById(R.id.row_Checkbox)

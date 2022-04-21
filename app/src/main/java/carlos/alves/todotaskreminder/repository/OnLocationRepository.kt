@@ -13,7 +13,9 @@ class OnLocationRepository(database: ToDoTaskReminderDatabase) {
 
     fun updateOnLocation(onLocation: OnLocationEntity) { executor.submit { onLocationDatabaseDao.updateOnLocation(onLocation) } }
 
-    fun deleteOnLocation(taskId: Int) { executor.submit { onLocationDatabaseDao.deleteOnLocationByTaskId(taskId) } }
+    fun deleteOnLocationsByTaskId(taskId: Int) { executor.submit { onLocationDatabaseDao.deleteOnLocationsByTaskId(taskId) } }
+
+    fun deleteOnLocationsByLocationId(locationId: Int) { executor.submit { onLocationDatabaseDao.deleteOnLocationsByLocationId(locationId) } }
 
     fun getOnLocations(taskId: Int): ArrayList<OnLocationEntity> = ArrayList(executor.submit(Callable { onLocationDatabaseDao.getOnLocationsByTaskId(taskId) }).get())
 

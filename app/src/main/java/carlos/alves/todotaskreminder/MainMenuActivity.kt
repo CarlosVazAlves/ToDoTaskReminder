@@ -7,7 +7,7 @@ import carlos.alves.todotaskreminder.checkTasks.CheckTasksListActivity
 import carlos.alves.todotaskreminder.createTasks.CreateTaskActivity
 import carlos.alves.todotaskreminder.databinding.ActivityMainMenuBinding
 import carlos.alves.todotaskreminder.deleteTasks.DeleteTasksListActivity
-import carlos.alves.todotaskreminder.editTasks.EditTaskActivity
+import carlos.alves.todotaskreminder.editTasks.EditTasksListActivity
 import carlos.alves.todotaskreminder.settings.SettingsActivity
 
 class MainMenuActivity : AppCompatActivity() {
@@ -27,8 +27,7 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         binding.mainMenuEditTaskButton.setOnClickListener {
-            //startActivity(Intent(this, EditTasksListActivity::class.java))
-            startActivity(Intent(this, EditTaskActivity::class.java))
+            startActivity(Intent(this, EditTasksListActivity::class.java))
         }
 
         binding.mainMenuDeleteTasksButton.setOnClickListener {

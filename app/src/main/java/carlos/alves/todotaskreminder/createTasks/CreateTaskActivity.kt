@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.adapters.AdapterConstants
 import carlos.alves.todotaskreminder.databinding.ActivityCreateTaskBinding
+import carlos.alves.todotaskreminder.locationSelection.LocationSelectionListActivity
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -36,9 +37,9 @@ class CreateTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.createTaskReminderBackButton.setOnClickListener { finish() }
+        binding.createTaskBackButton.setOnClickListener { finish() }
 
-        binding.createTaskReminderCreateButton.setOnClickListener {
+        binding.createTaskCreateButton.setOnClickListener {
             if (!checkMissingDataOk()) return@setOnClickListener
             viewModel.createTask()
             finish()
@@ -53,8 +54,8 @@ class CreateTaskActivity : AppCompatActivity() {
         binding.createTaskReminderDateLayout.isVisible = viewModel.remindByDate
 
         binding.createTaskChooseLocationsButton.setOnClickListener {
-            val locationsListActivityIntent = Intent(this, CreateTaskLocationsListActivity::class.java)
-            locationsListActivityIntent.putExtra(AdapterConstants.ALREADY_CHECKED_LOCATIONS.description, viewModel.locationsIds.toIntArray())
+            val locationsListActivityIntent = Intent(this, LocationSelectionListActivity::class.java)
+            locationsListActivityIntent.putExtra(AdapterConstants.ALREADY_CHECKED_LOCATIONS.description, viewModel.locationsId.toIntArray())
             getContent.launch(locationsListActivityIntent)
         }
 
@@ -108,7 +109,7 @@ class CreateTaskActivity : AppCompatActivity() {
 
     private fun storeNewLocationsIds(newLocationsIds: IntArray) {
         for (locationId: Int in newLocationsIds) {
-            viewModel.locationsIds.add(locationId)
+            viewModel.locationsId.add(locationId)
         }
     }
 
@@ -130,7 +131,7 @@ class CreateTaskActivity : AppCompatActivity() {
             return false
         }
         if (viewModel.remindByLocation) {
-            if (viewModel.locationsIds.isNullOrEmpty()) {
+            if (viewModel.locationsId.isNullOrEmpty()) {
                 showMissingDataAlertDialog(R.string.no_location_selected)
                 return false
             }

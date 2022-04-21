@@ -1,4 +1,4 @@
-package carlos.alves.todotaskreminder.createTasks
+package carlos.alves.todotaskreminder.locationSelection
 
 import androidx.lifecycle.ViewModel
 import carlos.alves.todotaskreminder.ToDoTaskReminderApp
@@ -7,7 +7,7 @@ import carlos.alves.todotaskreminder.adapters.LocationAdapterObject
 import carlos.alves.todotaskreminder.adapters.LocationObject
 import carlos.alves.todotaskreminder.database.LocationEntity
 
-class CreateTaskLocationsListViewModel : ViewModel() {
+class LocationSelectionListViewModel : ViewModel() {
 
     private lateinit var noGroupStringResource: String
     private lateinit var locations: ArrayList<LocationEntity>

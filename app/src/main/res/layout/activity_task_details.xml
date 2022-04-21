@@ -88,7 +88,33 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/task_details_status_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_details_location_Layout">
+
+        <TextView
+            android:id="@+id/task_details_status_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/task_status_2dots" />
+
+        <TextView
+            android:id="@+id/task_details_status_EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <TextView
@@ -101,7 +127,7 @@
         android:text="@string/distance_remind"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_location_Layout" />
+        app:layout_constraintTop_toBottomOf="@+id/task_details_status_Layout" />
 
     <LinearLayout
         android:id="@+id/task_details_date_Layout"

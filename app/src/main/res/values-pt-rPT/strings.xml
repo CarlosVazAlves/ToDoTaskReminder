@@ -65,4 +65,7 @@
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="are_you_sure_want_delete">Tens a certeza que queres apagar?</string>
+    <string name="task_status_2dots">Estado da tarefa:</string>
+    <string name="complete">Concluída</string>
+    <string name="incomplete">Não concluída</string>
 </resources>

@@ -17,7 +17,7 @@ class CreateTaskViewModel : ViewModel() {
     var distanceReminder: Double = 0.0
     var dateReminder: LocalDate? = null
     var timeReminder: LocalTime? = null
-    val locationsIds = mutableListOf<Int>()
+    val locationsId = mutableListOf<Int>()
 
     private val taskRepository = ToDoTaskReminderApp.instance.taskRepository
     private val dateTimeRepository = ToDoTaskReminderApp.instance.dateTimeRepository
@@ -32,8 +32,8 @@ class CreateTaskViewModel : ViewModel() {
             description!!,
             false,
             remindByLocation,
-            remindByDate
-        ))
+            remindByDate)
+        )
 
         val taskId = taskRepository.getTaskId(name!!)
 
@@ -41,17 +41,17 @@ class CreateTaskViewModel : ViewModel() {
             dateTimeRepository.insertDateTime(DateTimeEntity(
                 taskId,
                 dateReminder!!,
-                timeReminder!!
-            ))
+                timeReminder!!)
+            )
         }
 
         if (remindByLocation) {
-            locationsIds.forEach {
+            locationsId.forEach {
                 onLocationRepository.insertOnLocation(OnLocationEntity(
                     taskId,
                     it,
-                    distanceReminder
-                ))
+                    distanceReminder)
+                )
             }
         }
     }

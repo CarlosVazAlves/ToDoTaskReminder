@@ -64,4 +64,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="are_you_sure_want_delete">Are you sure you want to delete?</string>
+    <string name="task_status_2dots">Task status:</string>
+    <string name="complete">Complete</string>
+    <string name="incomplete">Incomplete</string>
 </resources>

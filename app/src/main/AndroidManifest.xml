@@ -7,15 +7,23 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 
     <application
         android:name=".ToDoTaskReminderApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/task_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/task_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoTaskReminder">
+
+        <receiver
+            android:name=".notifications.DateReminderService"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+
         <activity
             android:name=".locationSelection.LocationSelectionListActivity"
             android:exported="false" />

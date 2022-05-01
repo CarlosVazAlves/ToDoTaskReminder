@@ -1,10 +1,13 @@
 package carlos.alves.todotaskreminder.editTasks
 
+import android.content.Context
+import android.icu.util.Calendar
 import androidx.lifecycle.ViewModel
 import carlos.alves.todotaskreminder.ToDoTaskReminderApp
 import carlos.alves.todotaskreminder.database.DateTimeEntity
 import carlos.alves.todotaskreminder.database.OnLocationEntity
 import carlos.alves.todotaskreminder.database.TaskEntity
+import carlos.alves.todotaskreminder.notifications.DateReminderService
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -22,10 +25,20 @@ class EditTaskViewModel : ViewModel() {
     private val taskRepository = ToDoTaskReminderApp.instance.taskRepository
     private val dateTimeRepository = ToDoTaskReminderApp.instance.dateTimeRepository
     private val onLocationRepository = ToDoTaskReminderApp.instance.onLocationRepository
+    private val dateReminderService = DateReminderService.instance
+    private lateinit var calendar: Calendar
 
     fun checkIfTaskNameAlreadyExists(): Boolean {
         if (initialName == task.name) return false
         return taskRepository.getTask(task.name) != null
+    }
+
+    fun dateTimeAlreadyPassed(): Boolean {
+        calendar = Calendar.getInstance()
+        val currentDate = calendar.timeInMillis
+        calendar.set(dateReminder!!.year, dateReminder!!.monthValue - 1, dateReminder!!.dayOfMonth, timeReminder!!.hour, timeReminder!!.minute, 0)
+        val alarmDate = calendar.timeInMillis
+        return currentDate >= alarmDate
     }
 
     fun loadTask(taskName: String) {
@@ -44,13 +57,20 @@ class EditTaskViewModel : ViewModel() {
         }
     }
 
-    fun editTask() {
+    fun editTask(context: Context) {
         taskRepository.updateTask(task)
 
         if (task.remindByDate) {
             updateDateReminder()
+
+            if (task.completed) {
+                dateReminderService.removeDateToRemind(context, task.id)
+            } else {
+                dateReminderService.setDateToRemind(context, task.id, task.name, calendar)
+            }
         } else {
             dateTimeRepository.deleteDateTime(task.id)
+            dateReminderService.removeDateToRemind(context, task.id)
         }
 
         if (task.remindByLocation) {

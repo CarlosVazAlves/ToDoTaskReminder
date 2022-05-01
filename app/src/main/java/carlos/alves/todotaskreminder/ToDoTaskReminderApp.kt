@@ -4,34 +4,31 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.Room
+import carlos.alves.todotaskreminder.database.DateTimeEntity
+import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.repository.*
 
 class ToDoTaskReminderApp : Application() {
 
     init {
         instance = this
+        DateReminderService()
     }
 
     companion object {
         lateinit var instance: ToDoTaskReminderApp
             private set
+        const val TASKS_CHANNEL_ID = "toDoTaskReminder.channel"
     }
 
-    val database by lazy { Room.databaseBuilder(
-            applicationContext,
-            ToDoTaskReminderDatabase::class.java,
-            "toDoTaskReminder_db"
-        )
+    val database by lazy { Room.databaseBuilder(applicationContext, ToDoTaskReminderDatabase::class.java, "toDoTaskReminder_db")
             .fallbackToDestructiveMigration()
             .build()
     }
-
-    private val TASKS_CHANNEL_ID = "toDoTaskReminder.channel"
-
-
 
     val taskRepository by lazy {
         TaskRepository(database)
@@ -56,8 +53,7 @@ class ToDoTaskReminderApp : Application() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun setupNotificationChannel() {
 
-        val notificationManager =
-            applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (notificationManager.getNotificationChannel(TASKS_CHANNEL_ID) == null) {
             val notificationChannel = NotificationChannel(
@@ -71,4 +67,21 @@ class ToDoTaskReminderApp : Application() {
         }
     }
 
+    fun renewDateReminders() {
+        val remindByDateTasks = taskRepository.getAllRemindByDateTasks().filter { !it.completed }
+        remindByDateTasks.forEach {
+            val dateTime = dateTimeRepository.getDateTime(it.id)
+            val calendar = Calendar.getInstance()
+            if (!dateTimeAlreadyPassed(calendar, dateTime)) {
+                DateReminderService.instance.setDateToRemind(applicationContext, it.id, it.name, calendar)
+            }
+        }
+    }
+
+    private fun dateTimeAlreadyPassed(calendar: Calendar, dateTime: DateTimeEntity): Boolean {
+        val currentDate = calendar.timeInMillis
+        calendar.set(dateTime.date.year, dateTime.date.monthValue - 1, dateTime.date.dayOfMonth, dateTime.time.hour, dateTime.time.minute, 0)
+        val alarmDate = calendar.timeInMillis
+        return currentDate >= alarmDate
+    }
 }

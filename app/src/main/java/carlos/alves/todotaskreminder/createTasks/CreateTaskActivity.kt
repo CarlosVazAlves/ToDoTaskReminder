@@ -13,7 +13,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.R
-import carlos.alves.todotaskreminder.adapters.AdapterConstants
+import carlos.alves.todotaskreminder.adapters.AdapterConstants.*
 import carlos.alves.todotaskreminder.databinding.ActivityCreateTaskBinding
 import carlos.alves.todotaskreminder.locationSelection.LocationSelectionListActivity
 import java.time.LocalDate
@@ -28,7 +28,7 @@ class CreateTaskActivity : AppCompatActivity() {
 
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK){
-            val newLocationsIds = it.data?.getIntArrayExtra(AdapterConstants.NEW_CHECKED_LOCATIONS.description)
+            val newLocationsIds = it.data?.getIntArrayExtra(NEW_CHECKED_LOCATIONS.description)
             storeNewLocationsIds(newLocationsIds!!)
         } //is attempting to register while current state is RESUMED. LifecycleOwners must call register before they are STARTED.
     }
@@ -41,7 +41,7 @@ class CreateTaskActivity : AppCompatActivity() {
 
         binding.createTaskCreateButton.setOnClickListener {
             if (!checkMissingDataOk()) return@setOnClickListener
-            viewModel.createTask()
+            viewModel.createTask(applicationContext)
             finish()
         }
 
@@ -55,7 +55,7 @@ class CreateTaskActivity : AppCompatActivity() {
 
         binding.createTaskChooseLocationsButton.setOnClickListener {
             val locationsListActivityIntent = Intent(this, LocationSelectionListActivity::class.java)
-            locationsListActivityIntent.putExtra(AdapterConstants.ALREADY_CHECKED_LOCATIONS.description, viewModel.locationsId.toIntArray())
+            locationsListActivityIntent.putExtra(ALREADY_CHECKED_LOCATIONS.description, viewModel.locationsId.toIntArray())
             getContent.launch(locationsListActivityIntent)
         }
 
@@ -86,12 +86,12 @@ class CreateTaskActivity : AppCompatActivity() {
         }
 
         binding.createTaskReminderDateEditText.setOnClickListener {
-            getCalender()
+            getCalendar()
         }
 
         binding.createTaskReminderDateEditText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                getCalender()
+                getCalendar()
             }
         }
 
@@ -130,12 +130,16 @@ class CreateTaskActivity : AppCompatActivity() {
             showMissingDataAlertDialog(R.string.date_missing)
             return false
         }
+        if (viewModel.remindByDate && viewModel.dateTimeAlreadyPassed()) {
+            showMissingDataAlertDialog(R.string.date_time_passed)
+            return false
+        }
         if (viewModel.remindByLocation) {
             if (viewModel.locationsId.isNullOrEmpty()) {
                 showMissingDataAlertDialog(R.string.no_location_selected)
                 return false
             }
-            if (viewModel.distanceReminder < 1) {
+            if (viewModel.distanceReminder <= 0.1) {
                 showMissingDataAlertDialog(R.string.invalid_distance)
                 return false
             }
@@ -150,7 +154,7 @@ class CreateTaskActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun getCalender() {
+    private fun getCalendar() {
         val calendar = Calendar.getInstance()
         val alreadySetDate = viewModel.dateReminder != null
 

@@ -1,10 +1,13 @@
 package carlos.alves.todotaskreminder.createTasks
 
+import android.content.Context
+import android.icu.util.Calendar
 import androidx.lifecycle.ViewModel
 import carlos.alves.todotaskreminder.ToDoTaskReminderApp
 import carlos.alves.todotaskreminder.database.DateTimeEntity
 import carlos.alves.todotaskreminder.database.OnLocationEntity
 import carlos.alves.todotaskreminder.database.TaskEntity
+import carlos.alves.todotaskreminder.notifications.DateReminderService
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -22,10 +25,12 @@ class CreateTaskViewModel : ViewModel() {
     private val taskRepository = ToDoTaskReminderApp.instance.taskRepository
     private val dateTimeRepository = ToDoTaskReminderApp.instance.dateTimeRepository
     private val onLocationRepository = ToDoTaskReminderApp.instance.onLocationRepository
+    private val dateReminderService = DateReminderService.instance
+    private lateinit var calendar: Calendar
 
     fun checkIfTaskNameAlreadyExists(): Boolean = taskRepository.getTask(name!!) != null
 
-    fun createTask() {
+    fun createTask(context: Context) {
         taskRepository.insertNewTask(TaskEntity(
             0,
             name!!,
@@ -43,6 +48,7 @@ class CreateTaskViewModel : ViewModel() {
                 dateReminder!!,
                 timeReminder!!)
             )
+            dateReminderService.setDateToRemind(context, taskId, name!!, calendar)
         }
 
         if (remindByLocation) {
@@ -54,5 +60,13 @@ class CreateTaskViewModel : ViewModel() {
                 )
             }
         }
+    }
+
+    fun dateTimeAlreadyPassed(): Boolean {
+        calendar = Calendar.getInstance()
+        val currentDate = calendar.timeInMillis
+        calendar.set(dateReminder!!.year, dateReminder!!.monthValue - 1, dateReminder!!.dayOfMonth, timeReminder!!.hour, timeReminder!!.minute, 0)
+        val alarmDate = calendar.timeInMillis
+        return currentDate >= alarmDate
     }
 }

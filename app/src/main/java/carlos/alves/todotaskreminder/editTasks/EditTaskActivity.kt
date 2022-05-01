@@ -13,7 +13,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.R
-import carlos.alves.todotaskreminder.adapters.AdapterConstants
+import carlos.alves.todotaskreminder.adapters.AdapterConstants.*
 import carlos.alves.todotaskreminder.databinding.ActivityEditTaskBinding
 import carlos.alves.todotaskreminder.locationSelection.LocationSelectionListActivity
 import java.time.LocalDate
@@ -27,7 +27,7 @@ class EditTaskActivity : AppCompatActivity() {
 
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK){
-            val newLocationsIds = it.data?.getIntArrayExtra(AdapterConstants.NEW_CHECKED_LOCATIONS.description)
+            val newLocationsIds = it.data?.getIntArrayExtra(NEW_CHECKED_LOCATIONS.description)
             storeNewLocationsIds(newLocationsIds!!)
         } //is attempting to register while current state is RESUMED. LifecycleOwners must call register before they are STARTED.
     }
@@ -36,14 +36,14 @@ class EditTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val chosenTaskName = intent.getStringExtra(AdapterConstants.CHOSEN_TASK.description)
+        val chosenTaskName = intent.getStringExtra(CHOSEN_TASK.description)
         viewModel.loadTask(chosenTaskName!!)
 
         binding.editTaskBackButton.setOnClickListener { finish() }
 
         binding.editTaskEditButton.setOnClickListener {
             if (!checkMissingDataOk()) return@setOnClickListener
-            viewModel.editTask()
+            viewModel.editTask(applicationContext)
             finish()
         }
 
@@ -58,8 +58,12 @@ class EditTaskActivity : AppCompatActivity() {
 
         binding.editTaskDateReminderCheckBox.isChecked = viewModel.task.remindByDate
         binding.editTaskReminderDateLayout.isVisible = viewModel.task.remindByDate
-        binding.editTaskReminderDateEditText.setText(viewModel.dateReminder.toString())
-        binding.editTaskReminderTimeEditText.setText(viewModel.timeReminder.toString())
+        if (viewModel.dateReminder != null) {
+            binding.editTaskReminderDateEditText.setText(viewModel.dateReminder.toString())
+        }
+        if (viewModel.timeReminder != null) {
+            binding.editTaskReminderTimeEditText.setText(viewModel.timeReminder.toString())
+        }
 
         binding.editTaskLocationReminderCheckBox.isChecked = viewModel.task.remindByLocation
         binding.editTaskReminderLocationLayout.isVisible = viewModel.task.remindByLocation
@@ -68,7 +72,7 @@ class EditTaskActivity : AppCompatActivity() {
 
         binding.editTaskChooseLocationsButton.setOnClickListener {
             val locationsListActivityIntent = Intent(this, LocationSelectionListActivity::class.java)
-            locationsListActivityIntent.putExtra(AdapterConstants.ALREADY_CHECKED_LOCATIONS.description, viewModel.locationsId.toIntArray())
+            locationsListActivityIntent.putExtra(ALREADY_CHECKED_LOCATIONS.description, viewModel.locationsId.toIntArray())
             getContent.launch(locationsListActivityIntent)
         }
 
@@ -144,12 +148,16 @@ class EditTaskActivity : AppCompatActivity() {
             showMissingDataAlertDialog(R.string.date_missing)
             return false
         }
+        if (viewModel.task.remindByDate && viewModel.dateTimeAlreadyPassed()) {
+            showMissingDataAlertDialog(R.string.date_time_passed)
+            return false
+        }
         if (viewModel.task.remindByLocation) {
             if (viewModel.locationsId.isNullOrEmpty()) {
                 showMissingDataAlertDialog(R.string.no_location_selected)
                 return false
             }
-            if (viewModel.distanceReminder < 1) {
+            if (viewModel.distanceReminder <= 0.1) {
                 showMissingDataAlertDialog(R.string.invalid_distance)
                 return false
             }
@@ -168,12 +176,9 @@ class EditTaskActivity : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         val alreadySetDate = viewModel.dateReminder != null
 
-        val currentYear = if (alreadySetDate) viewModel.dateReminder!!.year else calendar.get(
-            Calendar.YEAR)
-        val currentMonth = if (alreadySetDate) viewModel.dateReminder!!.month.value - 1 else calendar.get(
-            Calendar.MONTH)
-        val currentDay = if (alreadySetDate) viewModel.dateReminder!!.dayOfMonth else calendar.get(
-            Calendar.DAY_OF_MONTH)
+        val currentYear = if (alreadySetDate) viewModel.dateReminder!!.year else calendar.get(Calendar.YEAR)
+        val currentMonth = if (alreadySetDate) viewModel.dateReminder!!.month.value - 1 else calendar.get(Calendar.MONTH)
+        val currentDay = if (alreadySetDate) viewModel.dateReminder!!.dayOfMonth else calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(
             this, { _, year, month, dayOfMonth ->

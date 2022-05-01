@@ -24,4 +24,8 @@ class TaskRepository(database: ToDoTaskReminderDatabase) {
     fun getTaskId(taskName: String): Int = executor.submit(Callable { taskDatabaseDao.getTaskIdByName(taskName) }).get()
 
     fun getAllTaskNames(): ArrayList<String> = ArrayList(executor.submit(Callable { taskDatabaseDao.getAllTasksNames() }).get())
+
+    fun getAllRemindByDateTasks(): ArrayList<TaskEntity> = ArrayList(executor.submit(Callable { taskDatabaseDao.getAllRemindByDateTasks() }).get())
+
+    fun getAllRemindByLocationTasks(): ArrayList<TaskEntity> = ArrayList(executor.submit(Callable { taskDatabaseDao.getAllRemindByLocationTasks() }).get())
 }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityLocationDetailsBinding
+import carlos.alves.todotaskreminder.settings.LocationConstants.*
 
 class LocationDetailsActivity : AppCompatActivity() {
 
@@ -16,7 +17,7 @@ class LocationDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val locationId = intent.getIntExtra(LocationConstants.LOCATION_ID.description, 0)
+        val locationId = intent.getIntExtra(LOCATION_ID.description, 0)
         val location = viewModel.fetchLocation(locationId)
 
         binding.locationDetailsNameEditText.text = location.name
@@ -27,8 +28,8 @@ class LocationDetailsActivity : AppCompatActivity() {
 
         binding.locationDetailsMapButton.setOnClickListener {
             val mapsActivityIntent = Intent(this, MapsActivity::class.java)
-            mapsActivityIntent.putExtra(LocationConstants.COORDINATES.description, location.coordinates)
-            mapsActivityIntent.putExtra(LocationConstants.READ_ONLY.description, true)
+            mapsActivityIntent.putExtra(COORDINATES.description, location.coordinates)
+            mapsActivityIntent.putExtra(READ_ONLY.description, true)
             startActivity(mapsActivityIntent)
         }
     }

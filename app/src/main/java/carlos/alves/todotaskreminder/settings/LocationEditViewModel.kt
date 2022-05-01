@@ -1,6 +1,8 @@
 package carlos.alves.todotaskreminder.settings
 
 import androidx.lifecycle.ViewModel
+import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertLatLngToString
+import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.ToDoTaskReminderApp
 import carlos.alves.todotaskreminder.database.LocationEntity
 
@@ -38,7 +40,7 @@ class LocationEditViewModel : ViewModel() {
         existingLocation = locationRepository.getLocationById(locationId)
         newLocation.name = existingLocation.name
         newLocation.address = existingLocation.address
-        newLocation.latLng = CustomLocation.convertStringToLatLng(existingLocation.coordinates)
+        newLocation.latLng = convertStringToLatLng(existingLocation.coordinates)
         newGroupName = existingLocation.group
 
     }
@@ -49,14 +51,14 @@ class LocationEditViewModel : ViewModel() {
             newLocation.name!!,
             newLocation.address!!,
             newGroupName,
-            CustomLocation.convertLatLngToString(newLocation.latLng)!!
+            convertLatLngToString(newLocation.latLng)!!
         ))
     }
 
     fun editLocation() {
         existingLocation.name = newLocation.name!!
         existingLocation.address = newLocation.address!!
-        existingLocation.coordinates = CustomLocation.convertLatLngToString(newLocation.latLng)!!
+        existingLocation.coordinates = convertLatLngToString(newLocation.latLng)!!
         existingLocation.group = newGroupName
         locationRepository.updateLocation(existingLocation)
     }

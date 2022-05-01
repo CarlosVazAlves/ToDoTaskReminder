@@ -11,8 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import carlos.alves.todotaskreminder.BuildConfig
+import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertLatLngToString
+import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityMapsBinding
+import carlos.alves.todotaskreminder.settings.LocationConstants.*
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -48,7 +51,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val isReadOnly = intent.getBooleanExtra(LocationConstants.READ_ONLY.description, false)
+        val isReadOnly = intent.getBooleanExtra(READ_ONLY.description, false)
 
         binding.mapsSaveAndReturnButton.text = if (isReadOnly) resources.getString(R.string.back) else resources.getString(R.string.save_and_return)
 
@@ -113,14 +116,14 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
             else {
                 val returnData = Intent()
 
-                val coordinates = CustomLocation.convertLatLngToString(currentLocation.latLng)
+                val coordinates = convertLatLngToString(currentLocation.latLng)
                 if (coordinates != null) {
-                    returnData.putExtra(LocationConstants.COORDINATES.description, coordinates)
+                    returnData.putExtra(COORDINATES.description, coordinates)
                 }
 
                 val address = currentLocation.address
                 if (address != null) {
-                    returnData.putExtra(LocationConstants.ADDRESS.description, address)
+                    returnData.putExtra(ADDRESS.description, address)
                 }
 
                 /*val name = currentLocation.name
@@ -147,9 +150,9 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
         this.googleMap = googleMap
         this.googleMap.setOnMapClickListener(this)
 
-        val receivedCoordinates = intent.getStringExtra(LocationConstants.COORDINATES.description)
+        val receivedCoordinates = intent.getStringExtra(COORDINATES.description)
         if (receivedCoordinates != null) {
-            currentLocation.latLng = CustomLocation.convertStringToLatLng(receivedCoordinates)
+            currentLocation.latLng = convertStringToLatLng(receivedCoordinates)
             setCurrentPlaceFromLatLng(currentLocation.latLng!!)
         } else {
             getDeviceLocation()
@@ -178,10 +181,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
                 }
             }
         }*/
-
-        val locationResult = fusedLocationProviderClient.lastLocation
-
-        locationResult.addOnCompleteListener(this) { task ->
+            fusedLocationProviderClient.lastLocation.addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 setCurrentPlaceFromLocation(task.result)
             }

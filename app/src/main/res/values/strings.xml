@@ -67,4 +67,10 @@
     <string name="task_status_2dots">Task status:</string>
     <string name="complete">Complete</string>
     <string name="incomplete">Incomplete</string>
+    <string name="it_is_time_of_task">It\'s time of %1$s</string>
+    <string name="date_time_passed">That date / time already passed</string>
+    <string name="date_reminder">Date reminder</string>
+    <string name="location_reminder">Location reminder</string>
+    <string name="we_are_close_to_location">We are at less than %1$.1f Km of the location %2$s for the task %3$s. Let\'s go there?</string>
+    <string name="impossible_get_current_location">Impossible to get your current location</string>
 </resources>

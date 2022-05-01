@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import carlos.alves.todotaskreminder.R
-import carlos.alves.todotaskreminder.adapters.AdapterConstants
+import carlos.alves.todotaskreminder.adapters.AdapterConstants.*
 import carlos.alves.todotaskreminder.adapters.LocationSelectorAdapter
 import carlos.alves.todotaskreminder.databinding.ActivityLocationSelectionListBinding
 
@@ -26,7 +26,7 @@ class LocationSelectionListActivity : AppCompatActivity() {
         viewModel.setNoGroupStringResource(resources.getString(R.string.without_group))
         viewModel.fetchLocations()
 
-        val receivedLocationsIds = intent.getIntArrayExtra(AdapterConstants.ALREADY_CHECKED_LOCATIONS.description)
+        val receivedLocationsIds = intent.getIntArrayExtra(ALREADY_CHECKED_LOCATIONS.description)
         viewModel.populateSelectedLocationsIds(receivedLocationsIds)
 
         val recyclerAdapter = LocationSelectorAdapter(viewModel.generateAllLocationsAdapterObjectList())
@@ -44,7 +44,7 @@ class LocationSelectionListActivity : AppCompatActivity() {
                     .show()
             } else {
                 val returnData = Intent()
-                returnData.putExtra(AdapterConstants.NEW_CHECKED_LOCATIONS.description, selectedLocations)
+                returnData.putExtra(NEW_CHECKED_LOCATIONS.description, selectedLocations)
                 setResult(RESULT_OK, returnData)
                 finish()
             }

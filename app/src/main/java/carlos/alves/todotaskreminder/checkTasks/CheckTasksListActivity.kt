@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import carlos.alves.todotaskreminder.R
-import carlos.alves.todotaskreminder.adapters.AdapterConstants
+import carlos.alves.todotaskreminder.adapters.AdapterConstants.CHOSEN_TASK
 import carlos.alves.todotaskreminder.adapters.CheckTasksAdapter
 import carlos.alves.todotaskreminder.databinding.ActivityCheckTasksListBinding
 
@@ -29,7 +29,7 @@ class CheckTasksListActivity : AppCompatActivity() {
 
         recyclerAdapter.getChosenTask().observe(this) {
             val taskDetailsIntent = Intent(this, TaskDetailsActivity::class.java)
-            taskDetailsIntent.putExtra(AdapterConstants.CHOSEN_TASK.description, it)
+            taskDetailsIntent.putExtra(CHOSEN_TASK.description, it)
             startActivity(taskDetailsIntent)
         }
 

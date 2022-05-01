@@ -68,4 +68,10 @@
     <string name="task_status_2dots">Estado da tarefa:</string>
     <string name="complete">Concluída</string>
     <string name="incomplete">Não concluída</string>
+    <string name="it_is_time_of_task">Está na hora de %1$s</string>
+    <string name="date_time_passed">Essa data / hora já passou</string>
+    <string name="date_reminder">Lembrete de hora</string>
+    <string name="location_reminder">Lembrete de localização</string>
+    <string name="we_are_close_to_location">Estamos a menos de %1$.1f Km da localização %2$s para a tarefa %3$s. Vamos lá?</string>
+    <string name="impossible_get_current_location">Não foi possível aceder à tua localização actual</string>
 </resources>

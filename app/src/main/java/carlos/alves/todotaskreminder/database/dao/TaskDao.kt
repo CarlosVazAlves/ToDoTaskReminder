@@ -29,4 +29,10 @@ interface TaskDao {
 
     @Query("SELECT name FROM Task")
     fun getAllTasksNames() : List<String>
+
+    @Query("SELECT * FROM Task WHERE remindByDate = 1")
+    fun getAllRemindByDateTasks() : List<TaskEntity>
+
+    @Query("SELECT * FROM Task WHERE remindByLocation = 1")
+    fun getAllRemindByLocationTasks() : List<TaskEntity>
 }

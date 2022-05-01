@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.R
-import carlos.alves.todotaskreminder.adapters.AdapterConstants
+import carlos.alves.todotaskreminder.adapters.AdapterConstants.CHOSEN_TASK
 import carlos.alves.todotaskreminder.databinding.ActivityTaskDetailsBinding
 import java.time.format.DateTimeFormatter
 
@@ -22,7 +22,7 @@ class TaskDetailsActivity : AppCompatActivity() {
 
         binding.taskDetailsBackButton.setOnClickListener { finish() }
 
-        val chosenTaskName = intent.getStringExtra(AdapterConstants.CHOSEN_TASK.description)
+        val chosenTaskName = intent.getStringExtra(CHOSEN_TASK.description)
 
         val chosenTask = viewModel.fetchTask(chosenTaskName!!)
 

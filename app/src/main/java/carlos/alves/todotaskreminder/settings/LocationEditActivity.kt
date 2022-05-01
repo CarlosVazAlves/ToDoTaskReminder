@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
+import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityLocationEditBinding
+import carlos.alves.todotaskreminder.settings.LocationConstants.*
 
 
 class LocationEditActivity : AppCompatActivity() {
@@ -22,14 +24,14 @@ class LocationEditActivity : AppCompatActivity() {
 
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK){
-            val newCoordinates = it.data?.getStringExtra(LocationConstants.COORDINATES.description)
-            val newName = it.data?.getStringExtra(LocationConstants.NAME.description)
-            val newAddress = it.data?.getStringExtra(LocationConstants.ADDRESS.description)
+            val newCoordinates = it.data?.getStringExtra(COORDINATES.description)
+            val newName = it.data?.getStringExtra(NAME.description)
+            val newAddress = it.data?.getStringExtra(ADDRESS.description)
 
             binding.locationEditNameEditText.setText(newName)
             binding.locationEditAddressEditText.setText(newAddress)
 
-            viewModel.newLocation.latLng = CustomLocation.convertStringToLatLng(newCoordinates)
+            viewModel.newLocation.latLng = convertStringToLatLng(newCoordinates)
             viewModel.newLocation.name = newName
             viewModel.newLocation.address = newAddress
         } //is attempting to register while current state is RESUMED. LifecycleOwners must call register before they are STARTED.
@@ -39,15 +41,15 @@ class LocationEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val locationId = intent.getIntExtra(LocationConstants.LOCATION_ID.description, 0)
+        val locationId = intent.getIntExtra(LOCATION_ID.description, 0)
         isNewLocation = locationId < 1
 
         binding.locationEditMapButton.setOnClickListener {
             val mapsActivityIntent = Intent(this, MapsActivity::class.java)
             if (!isNewLocation) {
                 val coordinates = viewModel.existingLocation.coordinates
-                mapsActivityIntent.putExtra(LocationConstants.COORDINATES.description, coordinates)
-                mapsActivityIntent.putExtra(LocationConstants.READ_ONLY.description, false)
+                mapsActivityIntent.putExtra(COORDINATES.description, coordinates)
+                mapsActivityIntent.putExtra(READ_ONLY.description, false)
             }
             getContent.launch(mapsActivityIntent)
         }
@@ -120,22 +122,22 @@ class LocationEditActivity : AppCompatActivity() {
 
     private fun checkValidLocationData(): Boolean {
         if (viewModel.newLocation.name.isNullOrBlank()) {
-            showAlertDialog(LocationConstants.NAME)
+            showAlertDialog(NAME)
             return false
         }
 
         if (viewModel.locationNameExists(isNewLocation)) {
-            showAlertDialog(LocationConstants.NAME_ALREADY_EXISTS)
+            showAlertDialog(NAME_ALREADY_EXISTS)
             return false
         }
 
         if (viewModel.newLocation.address.isNullOrBlank()) {
-            showAlertDialog(LocationConstants.ADDRESS)
+            showAlertDialog(ADDRESS)
             return false
         }
 
         if (viewModel.newLocation.latLng == null) {
-            showAlertDialog(LocationConstants.COORDINATES)
+            showAlertDialog(COORDINATES)
             return false
         }
 
@@ -143,7 +145,7 @@ class LocationEditActivity : AppCompatActivity() {
             viewModel.newGroupName = null
         } else {
             if (impossibleToSaveGroup()) {
-                showAlertDialog(LocationConstants.GROUP)
+                showAlertDialog(GROUP)
                 return false
             }
         }
@@ -199,11 +201,11 @@ class LocationEditActivity : AppCompatActivity() {
 
     private fun getErrorMessage(fieldMissing: LocationConstants): Int {
         return when(fieldMissing) {
-            LocationConstants.NAME -> R.string.name_missing
-            LocationConstants.ADDRESS -> R.string.address_missing
-            LocationConstants.COORDINATES -> R.string.coordinates_missing
-            LocationConstants.GROUP -> R.string.group_missing
-            LocationConstants.NAME_ALREADY_EXISTS -> R.string.name_already_exists
+            NAME -> R.string.name_missing
+            ADDRESS -> R.string.address_missing
+            COORDINATES -> R.string.coordinates_missing
+            GROUP -> R.string.group_missing
+            NAME_ALREADY_EXISTS -> R.string.name_already_exists
             else -> {
                 R.string.unknown_error
             }

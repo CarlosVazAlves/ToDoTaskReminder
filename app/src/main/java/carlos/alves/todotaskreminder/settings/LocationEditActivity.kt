@@ -10,10 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
-import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertStringToLatLng
+import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityLocationEditBinding
 import carlos.alves.todotaskreminder.settings.LocationConstants.*
+import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 
 class LocationEditActivity : AppCompatActivity() {
@@ -21,6 +22,7 @@ class LocationEditActivity : AppCompatActivity() {
     private val binding: ActivityLocationEditBinding by lazy { ActivityLocationEditBinding.inflate(layoutInflater) }
     private val viewModel by lazy { ViewModelProvider(this).get(LocationEditViewModel::class.java) }
     private var isNewLocation: Boolean = true //Não pode usar lateinit em variaveis de tipo primitivo
+    private val permissions = PermissionsUtility.instance
 
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK){
@@ -45,13 +47,17 @@ class LocationEditActivity : AppCompatActivity() {
         isNewLocation = locationId < 1
 
         binding.locationEditMapButton.setOnClickListener {
-            val mapsActivityIntent = Intent(this, MapsActivity::class.java)
-            if (!isNewLocation) {
-                val coordinates = viewModel.existingLocation.coordinates
-                mapsActivityIntent.putExtra(COORDINATES.description, coordinates)
-                mapsActivityIntent.putExtra(READ_ONLY.description, false)
+            if (permissions.checkAllPermissionsOk()) {
+                val mapsActivityIntent = Intent(this, MapsActivity::class.java)
+                if (!isNewLocation) {
+                    val coordinates = viewModel.existingLocation.coordinates
+                    mapsActivityIntent.putExtra(COORDINATES.description, coordinates)
+                    mapsActivityIntent.putExtra(READ_ONLY.description, false)
+                }
+                getContent.launch(mapsActivityIntent)
+            } else {
+                showAlertDialog(PERMISSIONS)
             }
-            getContent.launch(mapsActivityIntent)
         }
 
         binding.locationEditBackButton.setOnClickListener { finish() }
@@ -206,6 +212,7 @@ class LocationEditActivity : AppCompatActivity() {
             COORDINATES -> R.string.coordinates_missing
             GROUP -> R.string.group_missing
             NAME_ALREADY_EXISTS -> R.string.name_already_exists
+            PERMISSIONS -> R.string.location_permissions_missing
             else -> {
                 R.string.unknown_error
             }

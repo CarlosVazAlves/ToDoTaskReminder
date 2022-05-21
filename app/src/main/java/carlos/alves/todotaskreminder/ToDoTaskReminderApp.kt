@@ -11,6 +11,7 @@ import androidx.room.Room
 import carlos.alves.todotaskreminder.database.DateTimeEntity
 import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.repository.*
+import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 class ToDoTaskReminderApp : Application() {
 
@@ -50,6 +51,11 @@ class ToDoTaskReminderApp : Application() {
         SettingsRepository(database)
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        PermissionsUtility(applicationContext)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun setupNotificationChannel() {
 
@@ -58,7 +64,7 @@ class ToDoTaskReminderApp : Application() {
         if (notificationManager.getNotificationChannel(TASKS_CHANNEL_ID) == null) {
             val notificationChannel = NotificationChannel(
                 TASKS_CHANNEL_ID,
-                "ToDo Task Reminder Channel",
+                "ToDo Task Reminder",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             notificationChannel.enableLights(true)

@@ -16,6 +16,7 @@ import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.adapters.AdapterConstants.*
 import carlos.alves.todotaskreminder.databinding.ActivityCreateTaskBinding
 import carlos.alves.todotaskreminder.locationSelection.LocationSelectionListActivity
+import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -25,6 +26,7 @@ class CreateTaskActivity : AppCompatActivity() {
 
     private val binding: ActivityCreateTaskBinding by lazy { ActivityCreateTaskBinding.inflate(layoutInflater) }
     private val viewModel by lazy { ViewModelProvider(this).get(CreateTaskViewModel::class.java) }
+    private val permissions = PermissionsUtility.instance
 
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK){
@@ -128,6 +130,10 @@ class CreateTaskActivity : AppCompatActivity() {
         }
         if (viewModel.remindByDate && (viewModel.dateReminder == null || viewModel.timeReminder == null)) {
             showMissingDataAlertDialog(R.string.date_missing)
+            return false
+        }
+        if (viewModel.remindByDate && !permissions.checkScheduleExactAlarmPermissionOk()) {
+            showMissingDataAlertDialog(R.string.alarm_permission_missing)
             return false
         }
         if (viewModel.remindByDate && viewModel.dateTimeAlreadyPassed()) {

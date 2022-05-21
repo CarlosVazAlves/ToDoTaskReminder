@@ -33,6 +33,8 @@ class EditTaskViewModel : ViewModel() {
         return taskRepository.getTask(task.name) != null
     }
 
+    fun isTaskCompleted(): Boolean = task.completed
+
     fun dateTimeAlreadyPassed(): Boolean {
         calendar = Calendar.getInstance()
         val currentDate = calendar.timeInMillis

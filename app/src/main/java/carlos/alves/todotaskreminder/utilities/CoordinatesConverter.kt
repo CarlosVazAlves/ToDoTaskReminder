@@ -1,4 +1,4 @@
-package carlos.alves.todotaskreminder
+package carlos.alves.todotaskreminder.utilities
 
 import com.google.android.gms.maps.model.LatLng
 

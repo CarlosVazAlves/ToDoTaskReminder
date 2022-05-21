@@ -11,13 +11,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import carlos.alves.todotaskreminder.BuildConfig
-import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertLatLngToString
-import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertStringToLatLng
+import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertLatLngToString
+import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityMapsBinding
 import carlos.alves.todotaskreminder.settings.LocationConstants.*
+import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -41,6 +43,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private val currentLocation = CustomLocation()
+    private val permissions = PermissionsUtility.instance
 
     private val placeFields = listOf(Place.Field.LAT_LNG, Place.Field.NAME, Place.Field.ADDRESS)
     private val geocoder by lazy { Geocoder(this@MapsActivity) }
@@ -164,7 +167,6 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
          * Get the best and most recent location of the device, which may be null in rare
          * cases when a location is not available.
          */
-        getLocationPermission()
 
         // Use the builder to create a FindCurrentPlaceRequest.
         /*val request = FindCurrentPlaceRequest.newInstance(placeFields)
@@ -181,22 +183,14 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
                 }
             }
         }*/
-            fusedLocationProviderClient.lastLocation.addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                setCurrentPlaceFromLocation(task.result)
-            }
-        }
-    }
 
-    private fun getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
-        if (ContextCompat.checkSelfPermission(this.applicationContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this.applicationContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 1)
+        if (permissions.checkLocationPermissionsOk()) {
+            val currentLocationTask = fusedLocationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
+            currentLocationTask.addOnCompleteListener {
+                if (it.isSuccessful && it.result != null) {
+                    setCurrentPlaceFromLocation(it.result)
+                }
+            }
         }
     }
 

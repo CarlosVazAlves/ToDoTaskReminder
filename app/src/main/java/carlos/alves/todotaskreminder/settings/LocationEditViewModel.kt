@@ -1,8 +1,8 @@
 package carlos.alves.todotaskreminder.settings
 
 import androidx.lifecycle.ViewModel
-import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertLatLngToString
-import carlos.alves.todotaskreminder.CoordinatesConverter.Companion.convertStringToLatLng
+import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertLatLngToString
+import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.ToDoTaskReminderApp
 import carlos.alves.todotaskreminder.database.LocationEntity
 

@@ -7,5 +7,6 @@ enum class LocationConstants(val description: String) {
     LOCATION_ID("LocationId"),
     GROUP("Group"),
     NAME_ALREADY_EXISTS("NameAlreadyExists"),
-    READ_ONLY("ReadOnly")
+    READ_ONLY("ReadOnly"),
+    PERMISSIONS("Permissions")
 }

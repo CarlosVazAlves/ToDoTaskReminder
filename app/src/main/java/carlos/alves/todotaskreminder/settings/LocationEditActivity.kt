@@ -194,7 +194,7 @@ class LocationEditActivity : AppCompatActivity() {
 
     private fun showAlertDialog(fieldMissing: LocationConstants) {
         AlertDialog.Builder(this)
-            .setTitle(R.string.data_error)
+            .setTitle(R.string.error)
             .setMessage(getErrorMessage(fieldMissing))
             .show()
     }

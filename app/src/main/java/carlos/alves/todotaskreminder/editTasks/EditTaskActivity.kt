@@ -153,7 +153,7 @@ class EditTaskActivity : AppCompatActivity() {
             return false
         }
         if (viewModel.task.remindByLocation) {
-            if (viewModel.locationsId.isNullOrEmpty()) {
+            if (viewModel.locationsId.isEmpty()) {
                 showMissingDataAlertDialog(R.string.no_location_selected)
                 return false
             }
@@ -167,7 +167,7 @@ class EditTaskActivity : AppCompatActivity() {
 
     private fun showMissingDataAlertDialog(messageId: Int) {
         AlertDialog.Builder(this)
-            .setTitle(R.string.data_error)
+            .setTitle(R.string.error)
             .setMessage(messageId)
             .show()
     }

@@ -68,7 +68,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun showMissingLocationAlertDialog() {
         AlertDialog.Builder(this)
-            .setTitle(R.string.data_error)
+            .setTitle(R.string.error)
             .setMessage(R.string.no_location_selected)
             .show()
     }

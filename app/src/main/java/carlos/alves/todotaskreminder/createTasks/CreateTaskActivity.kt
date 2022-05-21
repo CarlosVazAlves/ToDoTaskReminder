@@ -149,7 +149,7 @@ class CreateTaskActivity : AppCompatActivity() {
 
     private fun showMissingDataAlertDialog(messageId: Int) {
         AlertDialog.Builder(this)
-            .setTitle(R.string.data_error)
+            .setTitle(R.string.error)
             .setMessage(messageId)
             .show()
     }

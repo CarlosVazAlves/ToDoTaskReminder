@@ -52,7 +52,7 @@
     <string name="no_location_selected">No location selected</string>
     <string name="belongs_to_no_group">Does not belong to any group</string>
     <string name="name_already_exists">Name already exists</string>
-    <string name="data_error">Data error</string>
+    <string name="error">Error</string>
     <string name="choose_locations">Choose locations</string>
     <string name="description_missing">Description missing</string>
     <string name="date_missing">Date / Time missing</string>
@@ -73,4 +73,8 @@
     <string name="location_reminder">Location reminder</string>
     <string name="we_are_close_to_location">We are at less than %1$.1f Km of the location %2$s for the task %3$s. Let\'s go there?</string>
     <string name="impossible_get_current_location">Impossible to get your current location</string>
+    <string name="lets_go">Let\'s go!</string>
+    <string name="location_permissions_missing">You did not give all necessary permissions to use Google Maps</string>
+    <string name="alarm_permission_missing">Alarm permission missing</string>
+    <string name="missing_permissions_warning">Bear in mind that missing permissions will limit some functionalities</string>
 </resources>

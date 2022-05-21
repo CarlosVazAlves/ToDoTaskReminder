@@ -34,7 +34,7 @@ class DeleteTasksListActivity : AppCompatActivity() {
             val selectedTasks = recyclerAdapter.getChosenTasks()
             if (selectedTasks.all { !it.isChecked }) {
                 AlertDialog.Builder(this)
-                    .setTitle(R.string.data_error)
+                    .setTitle(R.string.error)
                     .setMessage(R.string.no_task_selected)
                     .show()
             } else {

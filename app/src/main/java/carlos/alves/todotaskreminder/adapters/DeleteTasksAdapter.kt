@@ -38,7 +38,7 @@ class DeleteTasksAdapter(private val tasksNamesList: ArrayList<TaskObject>) : Re
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateTasksNamesList(deletedTasks: ArrayList<TaskObject>) {
-        tasksNamesList.removeAll(deletedTasks)
+        tasksNamesList.removeAll(deletedTasks.toSet()) //improve performance
         notifyDataSetChanged()
     }
 }

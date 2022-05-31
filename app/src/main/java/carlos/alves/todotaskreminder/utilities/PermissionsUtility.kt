@@ -2,6 +2,7 @@ package carlos.alves.todotaskreminder.utilities
 
 import android.Manifest.*
 import android.app.Activity
+import android.app.PendingIntent
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.net.ConnectivityManager
@@ -23,6 +24,10 @@ class PermissionsUtility(context: Context) {
     }
 
     private val applicationContext = context
+
+    fun getPendingIntentMutabilityFlag(): Int {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else PendingIntent.FLAG_UPDATE_CURRENT
+    }
 
     fun checkAllPermissionsOk(): Boolean {
         return checkScheduleExactAlarmPermissionOk() && checkLocationPermissionsOk() && checkInternetPermission()

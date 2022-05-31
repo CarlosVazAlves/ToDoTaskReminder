@@ -8,7 +8,6 @@ import android.content.Intent
 import android.graphics.drawable.Icon
 import android.location.Location
 import android.net.Uri
-import android.os.Build
 import androidx.work.*
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.R
@@ -56,12 +55,22 @@ class LocationReminderService(private val context: Context, workerParams: Worker
         }
     }
 
+    override fun doWork(): Result {
+        val foregroundNotification = Notification.Builder(context, ToDoTaskReminderApp.TASKS_CHANNEL_ID)
+            .setSmallIcon(R.mipmap.task_icon)
+            .setContentTitle(context.getString(R.string.location_reminder))
+            .build()
+        setForegroundAsync(ForegroundInfo(-1, foregroundNotification))
+        getLocation()
+        return Result.success()
+    }
+
     private fun getNotificationBuilder(): Notification.Builder {
         return Notification.Builder(context, ToDoTaskReminderApp.TASKS_CHANNEL_ID)
             .setSmallIcon(R.mipmap.task_icon)
             .setContentTitle(context.getString(R.string.location_reminder))
             .setAutoCancel(true)
-            .setContentIntent(PendingIntent.getActivity(applicationContext, 0, Intent(), 0))
+            .setContentIntent(PendingIntent.getActivity(applicationContext, 0, Intent(), permissions.getPendingIntentMutabilityFlag()))
     }
 
     private fun getLocation() {
@@ -110,13 +119,12 @@ class LocationReminderService(private val context: Context, workerParams: Worker
 
         val editTaskIntent = Intent(context, EditTaskActivity::class.java).let {
             it.putExtra(AdapterConstants.CHOSEN_TASK.description, taskName)
-            PendingIntent.getActivity(context, taskId, it, if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getActivity(context, taskId, it, permissions.getPendingIntentMutabilityFlag())
         }
 
-        val coordinates = location.coordinates.replace(':', ',')
-        val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:${coordinates}?q=${location.address}")).let {
+        val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:${location.coordinates}?q=${location.address}")).let {
             it.setPackage("com.google.android.apps.maps")
-            PendingIntent.getActivity(context, taskId, it, if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getActivity(context, taskId, it, permissions.getPendingIntentMutabilityFlag())
         }
 
         val notification = getNotificationBuilder()
@@ -143,15 +151,5 @@ class LocationReminderService(private val context: Context, workerParams: Worker
         val c = 2 * asin(sqrt(a))
 
         return c * earthRadius
-    }
-
-    override fun doWork(): Result {
-        val foregroundNotification = Notification.Builder(context, ToDoTaskReminderApp.TASKS_CHANNEL_ID)
-            .setSmallIcon(R.mipmap.task_icon)
-            .setContentTitle(context.getString(R.string.location_reminder))
-            .build()
-        setForegroundAsync(ForegroundInfo(-1, foregroundNotification))
-        getLocation()
-        return Result.success()
     }
 }

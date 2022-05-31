@@ -17,7 +17,6 @@ class ToDoTaskReminderApp : Application() {
 
     init {
         instance = this
-        DateReminderService()
     }
 
     companion object {
@@ -54,6 +53,7 @@ class ToDoTaskReminderApp : Application() {
     override fun onCreate() {
         super.onCreate()
         PermissionsUtility(applicationContext)
+        DateReminderService()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

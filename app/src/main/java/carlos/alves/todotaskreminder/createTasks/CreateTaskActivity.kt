@@ -141,7 +141,7 @@ class CreateTaskActivity : AppCompatActivity() {
             return false
         }
         if (viewModel.remindByLocation) {
-            if (viewModel.locationsId.isNullOrEmpty()) {
+            if (viewModel.locationsId.isEmpty()) {
                 showMissingDataAlertDialog(R.string.no_location_selected)
                 return false
             }

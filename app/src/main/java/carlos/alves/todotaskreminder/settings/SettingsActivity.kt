@@ -38,7 +38,7 @@ class SettingsActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            viewModel.deleteLocation(selectedLocationId)
+            viewModel.deleteLocation(selectedLocationId) //validar se o local não está a ser utilizado por uma tarefa
             loadLocations()
         }
 

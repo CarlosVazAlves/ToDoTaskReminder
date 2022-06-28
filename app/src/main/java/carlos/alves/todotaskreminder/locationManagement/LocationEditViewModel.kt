@@ -1,4 +1,4 @@
-package carlos.alves.todotaskreminder.settings
+package carlos.alves.todotaskreminder.locationManagement
 
 import androidx.lifecycle.ViewModel
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertLatLngToString

@@ -8,6 +8,7 @@ import carlos.alves.todotaskreminder.createTasks.CreateTaskActivity
 import carlos.alves.todotaskreminder.databinding.ActivityMainMenuBinding
 import carlos.alves.todotaskreminder.deleteTasks.DeleteTasksListActivity
 import carlos.alves.todotaskreminder.editTasks.EditTasksListActivity
+import carlos.alves.todotaskreminder.locationManagement.LocationsManagementActivity
 import carlos.alves.todotaskreminder.settings.SettingsActivity
 
 class MainMenuActivity : AppCompatActivity() {
@@ -32,6 +33,10 @@ class MainMenuActivity : AppCompatActivity() {
 
         binding.mainMenuDeleteTasksButton.setOnClickListener {
             startActivity(Intent(this, DeleteTasksListActivity::class.java))
+        }
+
+        binding.mainMenuManageLocationsButton.setOnClickListener {
+            startActivity(Intent(this, LocationsManagementActivity::class.java))
         }
 
         binding.mainMenuSettingsButton.setOnClickListener {

@@ -1,4 +1,4 @@
-package carlos.alves.todotaskreminder.settings
+package carlos.alves.todotaskreminder.locationManagement
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityLocationEditBinding
-import carlos.alves.todotaskreminder.settings.LocationConstants.*
+import carlos.alves.todotaskreminder.locationManagement.LocationConstants.*
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 

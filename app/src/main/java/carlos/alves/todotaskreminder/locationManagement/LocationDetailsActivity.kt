@@ -1,4 +1,4 @@
-package carlos.alves.todotaskreminder.settings
+package carlos.alves.todotaskreminder.locationManagement
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityLocationDetailsBinding
-import carlos.alves.todotaskreminder.settings.LocationConstants.*
+import carlos.alves.todotaskreminder.locationManagement.LocationConstants.*
 
 class LocationDetailsActivity : AppCompatActivity() {
 

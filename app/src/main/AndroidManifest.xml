@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
@@ -18,20 +18,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoTaskReminder">
 
+
         <receiver
             android:name=".notifications.DateReminderService"
             android:enabled="true"
-            android:exported="false">
-        </receiver>
+            android:exported="false"></receiver>
 
+        <activity
+            android:name=".locationManagement.LocationsManagementActivity"
+            android:exported="false" />
         <activity
             android:name=".locationSelection.LocationSelectionListActivity"
             android:exported="false" />
         <activity
-            android:name=".settings.LocationEditActivity"
+            android:name=".locationManagement.LocationEditActivity"
             android:exported="false" />
         <activity
-            android:name=".settings.LocationDetailsActivity"
+            android:name=".locationManagement.LocationDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".editTasks.EditTasksListActivity"
@@ -52,7 +55,7 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".settings.MapsActivity"
+            android:name=".locationManagement.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity

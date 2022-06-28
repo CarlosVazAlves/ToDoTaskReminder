@@ -78,4 +78,5 @@
     <string name="location_permissions_missing">Não deste todas as permissões necessárias para utilizar o Google Maps</string>
     <string name="alarm_permission_missing">Falta a permissão para usar o alarme</string>
     <string name="missing_permissions_warning">Tem em mente que permissões em falta irão limitar algumas funcionalidades</string>
+    <string name="manage_locations">Gerir Localizações</string>
 </resources>

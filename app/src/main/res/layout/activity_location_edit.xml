@@ -5,7 +5,7 @@
     android:id="@+id/location_edit_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings.LocationEditActivity">
+    tools:context=".locationManagement.LocationEditActivity">
 
     <LinearLayout
         android:id="@+id/location_edit_name_Layout"

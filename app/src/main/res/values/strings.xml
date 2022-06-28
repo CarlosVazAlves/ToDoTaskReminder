@@ -77,4 +77,5 @@
     <string name="location_permissions_missing">You did not give all necessary permissions to use Google Maps</string>
     <string name="alarm_permission_missing">Alarm permission missing</string>
     <string name="missing_permissions_warning">Bear in mind that missing permissions will limit some functionalities</string>
+    <string name="manage_locations">Manage Locations</string>
 </resources>

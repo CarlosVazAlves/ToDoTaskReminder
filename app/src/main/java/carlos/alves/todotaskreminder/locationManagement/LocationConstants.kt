@@ -1,4 +1,4 @@
-package carlos.alves.todotaskreminder.settings
+package carlos.alves.todotaskreminder.locationManagement
 
 enum class LocationConstants(val description: String) {
     NAME("Name"),

@@ -1,21 +1,17 @@
-package carlos.alves.todotaskreminder.settings
+package carlos.alves.todotaskreminder.locationManagement
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import carlos.alves.todotaskreminder.BuildConfig
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertLatLngToString
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityMapsBinding
-import carlos.alves.todotaskreminder.settings.LocationConstants.*
+import carlos.alves.todotaskreminder.locationManagement.LocationConstants.*
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -129,10 +125,10 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
                     returnData.putExtra(ADDRESS.description, address)
                 }
 
-                /*val name = currentLocation.name
+                val name = currentLocation.name
                 if (name != null) {
-                    returnData.putExtra(IntentExtraConstants.NAME.description, name)
-                }*/
+                    returnData.putExtra(NAME.description, name)
+                }
 
                 setResult(RESULT_OK, returnData)
                 finish()

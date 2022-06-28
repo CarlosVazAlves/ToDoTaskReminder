@@ -1,4 +1,4 @@
-package carlos.alves.todotaskreminder.settings
+package carlos.alves.todotaskreminder.locationManagement
 
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker

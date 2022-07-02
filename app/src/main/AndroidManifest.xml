@@ -22,7 +22,12 @@
         <receiver
             android:name=".notifications.DateReminderService"
             android:enabled="true"
-            android:exported="false"></receiver>
+            android:exported="false" />
+
+        <receiver
+            android:name=".notifications.LocationReminderService"
+            android:enabled="true"
+            android:exported="false" />
 
         <activity
             android:name=".locationManagement.LocationsManagementActivity"

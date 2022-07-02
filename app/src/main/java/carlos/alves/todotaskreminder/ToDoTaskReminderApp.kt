@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.room.Room
 import carlos.alves.todotaskreminder.database.DateTimeEntity
 import carlos.alves.todotaskreminder.notifications.DateReminderService
+import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import carlos.alves.todotaskreminder.repository.*
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
@@ -54,6 +55,7 @@ class ToDoTaskReminderApp : Application() {
         super.onCreate()
         PermissionsUtility(applicationContext)
         DateReminderService()
+        LocationReminderService()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

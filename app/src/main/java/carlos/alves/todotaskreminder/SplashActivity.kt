@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 class SplashActivity : AppCompatActivity() {
@@ -17,7 +16,6 @@ class SplashActivity : AppCompatActivity() {
 
         ToDoTaskReminderApp.instance.setupNotificationChannel()
         ToDoTaskReminderApp.instance.renewDateReminders() // ao reinicar o telemóvel, os alarmes são perdidos
-        LocationReminderService.setLocationReminderService(applicationContext, 15) // Não pode ser menos de 15 minutos, o Android não deixa
 
         val permissions = PermissionsUtility.instance
         if (!permissions.checkAllPermissionsOk()) {

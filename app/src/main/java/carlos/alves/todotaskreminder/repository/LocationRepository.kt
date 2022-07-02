@@ -19,6 +19,8 @@ class LocationRepository(database: ToDoTaskReminderDatabase) {
 
     fun getLocationById(locationId: Int): LocationEntity = executor.submit(Callable { locationDatabaseDao.getLocationById(locationId) }).get()
 
+    fun getLocationByName(locationName: String): LocationEntity = executor.submit(Callable { locationDatabaseDao.getLocationByName(locationName) }).get()
+
     fun getLocationIdByName(locationName: String): Int = executor.submit(Callable { locationDatabaseDao.getLocationIdByName(locationName) }).get()
 
     fun getLocationsByGroup(group: String): List<LocationEntity> = executor.submit(Callable { locationDatabaseDao.getLocationsByGroup(group) }).get()

@@ -8,6 +8,7 @@ import carlos.alves.todotaskreminder.database.DateTimeEntity
 import carlos.alves.todotaskreminder.database.OnLocationEntity
 import carlos.alves.todotaskreminder.database.TaskEntity
 import carlos.alves.todotaskreminder.notifications.DateReminderService
+import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -25,7 +26,9 @@ class CreateTaskViewModel : ViewModel() {
     private val taskRepository = ToDoTaskReminderApp.instance.taskRepository
     private val dateTimeRepository = ToDoTaskReminderApp.instance.dateTimeRepository
     private val onLocationRepository = ToDoTaskReminderApp.instance.onLocationRepository
+    private val locationRepository = ToDoTaskReminderApp.instance.locationRepository
     private val dateReminderService = DateReminderService.instance
+    private val locationReminderService = LocationReminderService.instance
     private lateinit var calendar: Calendar
 
     fun checkIfTaskNameAlreadyExists(): Boolean = taskRepository.getTask(name!!) != null
@@ -58,6 +61,9 @@ class CreateTaskViewModel : ViewModel() {
                     it,
                     distanceReminder)
                 )
+                val location = locationRepository.getLocationById(it)
+                val geofenceId = "$taskId:${location.name}"
+                locationReminderService.addLocationToGeoFence(context, geofenceId, location, distanceReminder)
             }
         }
     }

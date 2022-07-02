@@ -8,6 +8,7 @@ import carlos.alves.todotaskreminder.database.DateTimeEntity
 import carlos.alves.todotaskreminder.database.OnLocationEntity
 import carlos.alves.todotaskreminder.database.TaskEntity
 import carlos.alves.todotaskreminder.notifications.DateReminderService
+import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -25,7 +26,9 @@ class EditTaskViewModel : ViewModel() {
     private val taskRepository = ToDoTaskReminderApp.instance.taskRepository
     private val dateTimeRepository = ToDoTaskReminderApp.instance.dateTimeRepository
     private val onLocationRepository = ToDoTaskReminderApp.instance.onLocationRepository
+    private val locationRepository = ToDoTaskReminderApp.instance.locationRepository
     private val dateReminderService = DateReminderService.instance
+    private val locationReminderService = LocationReminderService.instance
     private lateinit var calendar: Calendar
 
     fun checkIfTaskNameAlreadyExists(): Boolean {
@@ -61,24 +64,28 @@ class EditTaskViewModel : ViewModel() {
 
     fun editTask(context: Context) {
         taskRepository.updateTask(task)
+        val taskId = task.id
 
         if (task.remindByDate) {
             updateDateReminder()
 
             if (task.completed) {
-                dateReminderService.removeDateToRemind(context, task.id)
+                dateReminderService.removeDateToRemind(context, taskId)
             } else {
-                dateReminderService.setDateToRemind(context, task.id, task.name, calendar)
+                dateReminderService.setDateToRemind(context, taskId, task.name, calendar)
             }
         } else {
-            dateTimeRepository.deleteDateTime(task.id)
-            dateReminderService.removeDateToRemind(context, task.id)
+            dateTimeRepository.deleteDateTime(taskId)
+            dateReminderService.removeDateToRemind(context, taskId)
         }
 
         if (task.remindByLocation) {
-            updateLocationReminder()
+            updateLocationReminder(context)
         } else {
-            onLocationRepository.deleteOnLocationsByTaskId(task.id)
+            if (locationsId.isNotEmpty()) {
+                locationsId.forEach { removeFromGeoFence(context, taskId, it) }
+                onLocationRepository.deleteOnLocationsByTaskId(taskId)
+            }
         }
     }
 
@@ -92,38 +99,74 @@ class EditTaskViewModel : ViewModel() {
         }
     }
 
-    private fun updateLocationReminder() {
+    private fun updateLocationReminder(context: Context) {
+        val taskId = task.id
+
         if (taskLocationReminders != null) {
             val locationIdsPreSelected = taskLocationReminders!!.map { it.locationId }
             val locationIdsToAdd = locationsId.filter { !locationIdsPreSelected.contains(it) }
             val locationIdsToRemove = locationIdsPreSelected.filter { !locationsId.contains(it) }
-
-            locationIdsToRemove.forEach {
-                onLocationRepository.deleteOnLocationsByLocationId(it)
-            }
 
             taskLocationReminders!!.forEach {
                 it.distance = distanceReminder
                 onLocationRepository.updateOnLocation(it)
             }
 
+            if (locationIdsToAdd.isEmpty() && locationIdsToRemove.isEmpty()) {
+                if (task.completed) {
+                    locationsId.forEach { removeFromGeoFence(context, taskId, it) }
+                } else {
+                    locationIdsPreSelected.forEach { addToGeoFence(context, taskId, it) }
+                }
+                return
+            }
+
+            locationIdsToRemove.forEach {
+                onLocationRepository.deleteOnLocationsByLocationId(it)
+                if (!task.completed) {
+                    removeFromGeoFence(context, taskId, it)
+                }
+            }
+
             locationIdsToAdd.forEach {
                 onLocationRepository.insertOnLocation(
                     OnLocationEntity(
-                        task.id,
+                        taskId,
                         it,
                         distanceReminder)
                 )
+                if (!task.completed) {
+                    addToGeoFence(context, taskId, it)
+                }
+            }
+
+            if (task.completed) {
+                locationsId.forEach { removeFromGeoFence(context, taskId, it) }
             }
         } else {
             locationsId.forEach {
                 onLocationRepository.insertOnLocation(
                     OnLocationEntity(
-                        task.id,
+                        taskId,
                         it,
                         distanceReminder)
                 )
+                if (!task.completed) {
+                    addToGeoFence(context, taskId, it)
+                }
             }
         }
+    }
+
+    private fun addToGeoFence(context: Context, taskId: Int, locationId: Int) {
+        val location = locationRepository.getLocationById(locationId)
+        val geofenceId = "$taskId:${location.name}"
+        locationReminderService.addLocationToGeoFence(context, geofenceId, location, distanceReminder)
+    }
+
+    private fun removeFromGeoFence(context: Context, taskId: Int, locationId: Int) {
+        val location = locationRepository.getLocationById(locationId)
+        val geofenceId = "$taskId:${location.name}"
+        locationReminderService.removeLocationFromGeofence(context, geofenceId)
     }
 }

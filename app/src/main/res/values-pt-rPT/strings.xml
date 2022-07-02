@@ -73,10 +73,14 @@
     <string name="date_reminder">Lembrete de hora</string>
     <string name="location_reminder">Lembrete de localização</string>
     <string name="we_are_close_to_location">Estamos a menos de %1$.1f Km da localização %2$s para a tarefa %3$s. Vamos lá?</string>
-    <string name="impossible_get_current_location">Não foi possível aceder à tua localização actual</string>
+    <string name="impossible_get_current_location">Não foi possível aceder à tua localização actual. Erro %1$d</string>
     <string name="lets_go">Vamos!</string>
     <string name="location_permissions_missing">Não deste todas as permissões necessárias para utilizar o Google Maps</string>
     <string name="alarm_permission_missing">Falta a permissão para usar o alarme</string>
     <string name="missing_permissions_warning">Tem em mente que permissões em falta irão limitar algumas funcionalidades</string>
     <string name="manage_locations">Gerir Localizações</string>
+    <string name="added_geolocation">Adicionada a geolocalização %1$s</string>
+    <string name="impossible_to_add_geolocation">Impossível adicionar a geolocalização %1$s</string>
+    <string name="removed_geolocation">Removida a geolocalização %1$s</string>
+    <string name="impossible_to_remove_geolocation">Impossível remover a geolocalização %1$s</string>
 </resources>

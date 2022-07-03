@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".ToDoTaskReminderApp"
@@ -18,7 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoTaskReminder">
 
-
         <receiver
             android:name=".notifications.DateReminderService"
             android:enabled="true"
@@ -28,6 +28,15 @@
             android:name=".notifications.LocationReminderService"
             android:enabled="true"
             android:exported="false" />
+
+        <receiver
+            android:name=".notifications.RebootHandler"
+            android:directBootAware="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".locationManagement.LocationsManagementActivity"

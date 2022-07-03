@@ -15,7 +15,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         ToDoTaskReminderApp.instance.setupNotificationChannel()
-        ToDoTaskReminderApp.instance.renewDateReminders() // ao reinicar o telemóvel, os alarmes são perdidos
 
         val permissions = PermissionsUtility.instance
         if (!permissions.checkAllPermissionsOk()) {

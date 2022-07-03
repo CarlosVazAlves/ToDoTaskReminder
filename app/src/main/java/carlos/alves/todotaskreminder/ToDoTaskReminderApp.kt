@@ -4,11 +4,9 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.Room
-import carlos.alves.todotaskreminder.database.DateTimeEntity
 import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import carlos.alves.todotaskreminder.repository.*
@@ -73,23 +71,5 @@ class ToDoTaskReminderApp : Application() {
             notificationChannel.enableVibration(true)
             notificationManager.createNotificationChannel(notificationChannel)
         }
-    }
-
-    fun renewDateReminders() {
-        val remindByDateTasks = taskRepository.getAllRemindByDateTasks().filter { !it.completed }
-        remindByDateTasks.forEach {
-            val dateTime = dateTimeRepository.getDateTime(it.id)
-            val calendar = Calendar.getInstance()
-            if (!dateTimeAlreadyPassed(calendar, dateTime)) {
-                DateReminderService.instance.setDateToRemind(applicationContext, it.id, it.name, calendar)
-            }
-        }
-    }
-
-    private fun dateTimeAlreadyPassed(calendar: Calendar, dateTime: DateTimeEntity): Boolean {
-        val currentDate = calendar.timeInMillis
-        calendar.set(dateTime.date.year, dateTime.date.monthValue - 1, dateTime.date.dayOfMonth, dateTime.time.hour, dateTime.time.minute, 0)
-        val alarmDate = calendar.timeInMillis
-        return currentDate >= alarmDate
     }
 }

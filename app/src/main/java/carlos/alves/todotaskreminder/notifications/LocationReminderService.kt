@@ -98,8 +98,8 @@ class LocationReminderService : BroadcastReceiver() {
     }
 
     private fun checkGeofences(context: Context, geofences: List<Geofence>) {
-        val geofencesIds = geofences.map { it.requestId }
-        geofencesIds.forEach { fireNotification(context, it) }
+        val geofenceIds = geofences.map { it.requestId }
+        geofenceIds.forEach { fireNotification(context, it) }
     }
 
     private fun getNotificationBuilder(context: Context): Notification.Builder {

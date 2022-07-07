@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "d26723ecbed3ec7fcfe4003f2092689c",
+    "identityHash": "9a265f0fb60a26c2eedc64b77fa5ac25",
     "entities": [
       {
         "tableName": "Task",
@@ -63,6 +63,44 @@
           }
         ],
         "foreignKeys": []
+      },
+      {
+        "tableName": "OnlineTask",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`taskId` INTEGER NOT NULL, `onlineTaskId` INTEGER NOT NULL, PRIMARY KEY(`taskId`), FOREIGN KEY(`taskId`) REFERENCES `Task`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "taskId",
+            "columnName": "taskId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "onlineTaskId",
+            "columnName": "onlineTaskId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "taskId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "Task",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "taskId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       },
       {
         "tableName": "DateTime",
@@ -258,7 +296,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd26723ecbed3ec7fcfe4003f2092689c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9a265f0fb60a26c2eedc64b77fa5ac25')"
     ]
   }
 }

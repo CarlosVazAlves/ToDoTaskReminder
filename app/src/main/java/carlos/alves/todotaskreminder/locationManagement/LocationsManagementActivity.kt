@@ -5,9 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityLocationsManagementBinding
+import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 class LocationsManagementActivity : AppCompatActivity() {
 
@@ -18,10 +20,15 @@ class LocationsManagementActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val permissions = PermissionsUtility.instance
+        if (!permissions.checkLocationPermissionsOk()) {
+            permissions.askLocationPermission(this)
+        }
+
         binding.locationsManagementCheckLocationButton.setOnClickListener {
             val selectedLocationId = retrieveSelectedLocationId()
             if (selectedLocationId == 0) {
-                showMissingLocationAlertDialog()
+                showErrorAlertDialog(false)
                 return@setOnClickListener
             }
 
@@ -33,12 +40,17 @@ class LocationsManagementActivity : AppCompatActivity() {
         binding.locationsManagementDeleteLocationButton.setOnClickListener {
             val selectedLocationId = retrieveSelectedLocationId()
             if (selectedLocationId == 0) {
-                showMissingLocationAlertDialog()
+                showErrorAlertDialog(false)
                 return@setOnClickListener
             }
 
-            viewModel.deleteLocation(selectedLocationId) //validar se o local não está a ser utilizado por uma tarefa
-            loadLocations()
+            if (viewModel.checkIfLocationIsInUse(selectedLocationId)) {
+                showErrorAlertDialog(true)
+            } else {
+                viewModel.deleteLocation(selectedLocationId)
+                loadLocations()
+                Toast.makeText(this, getString(R.string.location_successfully_deleted), Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.locationsManagementCreateNewLocationButton.setOnClickListener {
@@ -48,13 +60,17 @@ class LocationsManagementActivity : AppCompatActivity() {
         binding.locationsManagementEditLocationButton.setOnClickListener {
             val selectedLocationId = retrieveSelectedLocationId()
             if (selectedLocationId == 0) {
-                showMissingLocationAlertDialog()
+                showErrorAlertDialog(false)
                 return@setOnClickListener
             }
 
-            val editLocationIntent = Intent(this, LocationEditActivity::class.java)
-            editLocationIntent.putExtra(LocationConstants.LOCATION_ID.description, selectedLocationId)
-            startActivity(editLocationIntent)
+            if (!permissions.checkInternetPermission()) {
+                permissions.askInternetPermission(this)
+            } else {
+                val editLocationIntent = Intent(this, LocationEditActivity::class.java)
+                editLocationIntent.putExtra(LocationConstants.LOCATION_ID.description, selectedLocationId)
+                startActivity(editLocationIntent)
+            }
         }
 
         binding.locationsManagementBackButton.setOnClickListener { finish() }
@@ -65,10 +81,23 @@ class LocationsManagementActivity : AppCompatActivity() {
         loadLocations()
     }
 
-    private fun showMissingLocationAlertDialog() {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (grantResults.any { it == -1 }) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.error)
+                .setMessage(R.string.location_permissions_missing)
+                .setOnDismissListener { finish() }
+                .show()
+        }
+    }
+
+    private fun showErrorAlertDialog(tryingToDeleteLocation: Boolean) {
+        val errorMessage = if (tryingToDeleteLocation) R.string.impossible_to_delete_location else R.string.no_location_selected
         AlertDialog.Builder(this)
             .setTitle(R.string.error)
-            .setMessage(R.string.no_location_selected)
+            .setMessage(errorMessage)
             .show()
     }
 

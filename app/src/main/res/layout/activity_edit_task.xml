@@ -193,20 +193,37 @@
         </LinearLayout>
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/edit_task_set_completed_CheckBox"
+    <LinearLayout
+        android:id="@+id/edit_task_upload_to_cloud_Layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:layout_weight="1"
-        android:button="@null"
-        android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
-        android:text="@string/mark_as_complete"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_task_reminder_date_Layout" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_task_reminder_date_Layout">
+
+        <CheckBox
+            android:id="@+id/edit_task_upload_to_cloud_CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+            android:text="@string/upload_to_cloud" />
+
+        <CheckBox
+            android:id="@+id/edit_task_set_completed_CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+            android:text="@string/mark_as_complete" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/edit_task_buttons_Layout"

@@ -10,6 +10,7 @@ import androidx.room.Room
 import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import carlos.alves.todotaskreminder.repository.*
+import carlos.alves.todotaskreminder.sharedTasks.SharedTasksServer
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 class ToDoTaskReminderApp : Application() {
@@ -33,6 +34,10 @@ class ToDoTaskReminderApp : Application() {
         TaskRepository(database)
     }
 
+    val onlineTaskRepository by lazy {
+        OnlineTaskRepository(database)
+    }
+
     val dateTimeRepository by lazy {
         DateTimeRepository(database)
     }
@@ -54,11 +59,10 @@ class ToDoTaskReminderApp : Application() {
         PermissionsUtility(applicationContext)
         DateReminderService()
         LocationReminderService()
+        SharedTasksServer()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun setupNotificationChannel() {
-
         val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (notificationManager.getNotificationChannel(TASKS_CHANNEL_ID) == null) {

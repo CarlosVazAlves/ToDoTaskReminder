@@ -32,7 +32,8 @@
                 android:id="@+id/locations_management_location_TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0"
+                android:lines="1"
                 android:text="@string/location_2dots" />
 
             <Spinner

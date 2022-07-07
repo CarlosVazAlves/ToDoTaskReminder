@@ -7,6 +7,8 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -40,6 +42,8 @@ class EditTaskActivity : AppCompatActivity() {
 
         val chosenTaskName = intent.getStringExtra(CHOSEN_TASK.description)
         viewModel.loadTask(chosenTaskName!!)
+
+        removeNotification()
 
         binding.editTaskBackButton.setOnClickListener { finish() }
 
@@ -82,11 +86,23 @@ class EditTaskActivity : AppCompatActivity() {
             binding.editTaskReminderLocationLayout.isVisible = isChecked
             binding.editTaskChooseLocationsButton.isVisible = isChecked
             viewModel.task.remindByLocation = isChecked
+
+            val permissions = PermissionsUtility.instance
+            if (!permissions.checkBackgroundLocationPermissionsOk()) {
+                permissions.askBackgroundLocationPermission(this)
+            }
         }
 
         binding.editTaskDateReminderCheckBox.setOnCheckedChangeListener { _, isChecked ->
             binding.editTaskReminderDateLayout.isVisible = isChecked
             viewModel.task.remindByDate = isChecked
+        }
+
+        binding.editTaskUploadToCloudCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.uploadToCloud = isChecked
+            if (isChecked) {
+                setupPasswordDialog()
+            }
         }
 
         binding.editTaskNameEditText.doAfterTextChanged {
@@ -123,7 +139,18 @@ class EditTaskActivity : AppCompatActivity() {
                 getClock()
             }
         }
+    }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (grantResults.any { it == -1 }) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.error)
+                .setMessage(R.string.missing_background_location_permission)
+                .setOnDismissListener { finish() }
+                .show()
+        }
     }
 
     private fun storeNewLocationsIds(newLocationsIds: IntArray) {
@@ -167,6 +194,10 @@ class EditTaskActivity : AppCompatActivity() {
                 showMissingDataAlertDialog(R.string.invalid_distance)
                 return false
             }
+        }
+        if (binding.editTaskUploadToCloudCheckBox.isChecked && viewModel.checkIfPasswordsNotOk()) {
+            showMissingDataAlertDialog(R.string.missing_password)
+            return false
         }
         return true
     }
@@ -212,5 +243,33 @@ class EditTaskActivity : AppCompatActivity() {
             currentHour, currentMinute, true
         )
         timePickerDialog.show()
+    }
+
+    private fun setupPasswordDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(R.string.enter_data)
+
+        val passwordLayout = layoutInflater.inflate(R.layout.password_layout, null)
+        alertDialogBuilder.setView(passwordLayout)
+        alertDialogBuilder.setCancelable(false)
+
+        alertDialogBuilder.setPositiveButton(R.string.next) { _, _ ->
+            viewModel.userPassword = (passwordLayout.findViewById<View?>(R.id.password_layout_user_password_EditText) as EditText).text.toString()
+            viewModel.adminPassword = (passwordLayout.findViewById<View?>(R.id.password_layout_admin_password_EditText) as EditText).text.toString()
+        }
+        alertDialogBuilder.create().show()
+    }
+
+    private fun removeNotification() {
+        val dateNotificationActive = intent.getBooleanExtra(ACTIVE_DATE_NOTIFICATION.description, false)
+        if (dateNotificationActive) {
+            viewModel.removeDateNotification(this)
+        }
+
+        val locationNotificationActive = intent.getBooleanExtra(ACTIVE_LOCATION_NOTIFICATION.description, false)
+        if (locationNotificationActive) {
+            val notificationId = intent.getIntExtra(NOTIFICATION_ID.description, 0)
+            viewModel.removeLocationNotification(this, notificationId)
+        }
     }
 }

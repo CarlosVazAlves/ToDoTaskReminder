@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "584739223988",
+    "project_id": "iron-decorator-343810",
+    "storage_bucket": "iron-decorator-343810.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584739223988:android:ac1e94edd8a617b0689ae1",
+        "android_client_info": {
+          "package_name": "carlos.alves.todotaskreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584739223988-oe49l1qpkm2tnqnl8jlhrlh6g5c99odj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKGuiTiODTvys5aWCbr6TZ4LdhKvQvcLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584739223988-oe49l1qpkm2tnqnl8jlhrlh6g5c99odj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

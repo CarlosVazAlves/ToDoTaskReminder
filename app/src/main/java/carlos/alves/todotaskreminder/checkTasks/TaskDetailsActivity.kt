@@ -23,8 +23,15 @@ class TaskDetailsActivity : AppCompatActivity() {
         binding.taskDetailsBackButton.setOnClickListener { finish() }
 
         val chosenTaskName = intent.getStringExtra(CHOSEN_TASK.description)
-
         val chosenTask = viewModel.fetchTask(chosenTaskName!!)
+        val onlineTaskId = viewModel.fetchOnlineTaskId()
+
+        if (onlineTaskId != null) {
+            binding.taskDetailsOnlineIdEditText.text = onlineTaskId.toString()
+            binding.taskDetailsOnlineIdLayout.isVisible = true
+        } else {
+            binding.taskDetailsOnlineIdLayout.isVisible = false
+        }
 
         binding.taskDetailsNameEditText.text = chosenTask.name
         binding.taskDetailsDescriptionEditText.text = chosenTask.description

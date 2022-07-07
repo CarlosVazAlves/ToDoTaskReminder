@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -46,6 +47,10 @@ android {
 dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     def room_version = "2.4.2"
+
+    implementation platform('com.google.firebase:firebase-bom:30.2.0')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
     
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.google.android.libraries.places:places:2.6.0'

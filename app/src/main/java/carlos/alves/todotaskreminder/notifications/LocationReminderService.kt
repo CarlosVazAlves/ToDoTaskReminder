@@ -123,6 +123,8 @@ class LocationReminderService : BroadcastReceiver() {
 
         val editTaskIntent = Intent(context, EditTaskActivity::class.java).let {
             it.putExtra(AdapterConstants.CHOSEN_TASK.description, taskName)
+            it.putExtra(AdapterConstants.ACTIVE_LOCATION_NOTIFICATION.description, true)
+            it.putExtra(AdapterConstants.NOTIFICATION_ID.description, notificationId)
             PendingIntent.getActivity(context, notificationId, it, permissions.getPendingIntentMutabilityFlag())
         }
 
@@ -150,5 +152,10 @@ class LocationReminderService : BroadcastReceiver() {
         notificationManager.notify(0, notification
             .setStyle(Notification.BigTextStyle().bigText(message))
             .build())
+    }
+
+    fun removeNotification(context: Context, notificationId: Int) {
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancel(notificationId)
     }
 }

@@ -21,8 +21,7 @@ class LocationEditActivity : AppCompatActivity() {
 
     private val binding: ActivityLocationEditBinding by lazy { ActivityLocationEditBinding.inflate(layoutInflater) }
     private val viewModel by lazy { ViewModelProvider(this).get(LocationEditViewModel::class.java) }
-    private var isNewLocation: Boolean = true //Não pode usar lateinit em variaveis de tipo primitivo
-    private val permissions = PermissionsUtility.instance
+    private var isNewLocation: Boolean = true
 
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK){
@@ -46,17 +45,13 @@ class LocationEditActivity : AppCompatActivity() {
         val locationId = intent.getIntExtra(LOCATION_ID.description, 0)
         isNewLocation = locationId < 1
 
+        val permissions = PermissionsUtility.instance
+
         binding.locationEditMapButton.setOnClickListener {
-            if (permissions.checkAllPermissionsOk()) {
-                val mapsActivityIntent = Intent(this, MapsActivity::class.java)
-                if (!isNewLocation) {
-                    val coordinates = viewModel.existingLocation.coordinates
-                    mapsActivityIntent.putExtra(COORDINATES.description, coordinates)
-                    mapsActivityIntent.putExtra(READ_ONLY.description, false)
-                }
-                getContent.launch(mapsActivityIntent)
+            if (!permissions.checkInternetPermission()) {
+                permissions.askInternetPermission(this)
             } else {
-                showAlertDialog(PERMISSIONS)
+                startGoogleMaps()
             }
         }
 
@@ -109,6 +104,16 @@ class LocationEditActivity : AppCompatActivity() {
 
         if (!isNewLocation && viewModel.existingLocation.group != null) {
             selectCurrentGroupToSpinner()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (grantResults.any { it == -1 }) {
+            showAlertDialog(PERMISSIONS)
+        } else {
+            startGoogleMaps()
         }
     }
 
@@ -224,5 +229,15 @@ class LocationEditActivity : AppCompatActivity() {
         binding.locationEditGroupRadioGroup.isVisible = switchButtonChecked
         binding.locationEditNewGroupLayout.isVisible = binding.locationEditNewGroupRadioButton.isChecked && switchButtonChecked
         binding.locationEditExistingGroupLayout.isVisible = binding.locationEditExistingGroupRadioButton.isChecked && switchButtonChecked
+    }
+
+    private fun startGoogleMaps() {
+        val mapsActivityIntent = Intent(this, MapsActivity::class.java)
+        if (!isNewLocation) {
+            val coordinates = viewModel.existingLocation.coordinates
+            mapsActivityIntent.putExtra(COORDINATES.description, coordinates)
+            mapsActivityIntent.putExtra(READ_ONLY.description, false)
+        }
+        getContent.launch(mapsActivityIntent)
     }
 }

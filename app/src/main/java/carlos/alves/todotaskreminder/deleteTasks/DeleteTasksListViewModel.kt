@@ -9,6 +9,7 @@ class DeleteTasksListViewModel : ViewModel()  {
     private val taskRepository = ToDoTaskReminderApp.instance.taskRepository
     private val dateTimeRepository = ToDoTaskReminderApp.instance.dateTimeRepository
     private val onLocationRepository = ToDoTaskReminderApp.instance.onLocationRepository
+    private val onlineTaskRepository = ToDoTaskReminderApp.instance.onlineTaskRepository
 
     private lateinit var tasksNames: ArrayList<String>
 
@@ -20,8 +21,9 @@ class DeleteTasksListViewModel : ViewModel()  {
 
     fun deleteTask(taskName: String) {
         val taskId = taskRepository.getTaskId(taskName)
-        dateTimeRepository.deleteDateTime(taskId)
         onLocationRepository.deleteOnLocationsByTaskId(taskId)
+        dateTimeRepository.deleteDateTime(taskId)
+        onlineTaskRepository.deleteOnlineTaskByTaskId(taskId)
         taskRepository.deleteTask(taskId)
     }
 }

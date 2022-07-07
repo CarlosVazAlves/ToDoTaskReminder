@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/input_name" />
+            android:hint="@string/enter_name" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/input_description" />
+            android:hint="@string/enter_description" />
     </LinearLayout>
 
     <LinearLayout
@@ -194,6 +194,21 @@
                 android:minHeight="48dp" />
         </LinearLayout>
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/create_task_upload_to_cloud_CheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+        android:text="@string/upload_to_cloud"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_task_reminder_date_Layout" />
 
     <LinearLayout
         android:id="@+id/create_task_buttons_Layout"

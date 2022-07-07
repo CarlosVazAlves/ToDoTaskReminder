@@ -7,6 +7,7 @@ class LocationsManagementViewModel : ViewModel() {
 
     private lateinit var locationsNames: ArrayList<String>
     private val locationRepository = ToDoTaskReminderApp.instance.locationRepository
+    private val onLocationRepository = ToDoTaskReminderApp.instance.onLocationRepository
 
     fun getLocationsNames(): List<String> {
         locationsNames = locationRepository.getLocationsNames()
@@ -19,5 +20,9 @@ class LocationsManagementViewModel : ViewModel() {
 
     fun deleteLocation(locationId: Int) {
         locationRepository.deleteLocation(locationId)
+    }
+
+    fun checkIfLocationIsInUse(locationId: Int): Boolean {
+        return onLocationRepository.getOnLocationsCountByLocationId(locationId) > 0
     }
 }

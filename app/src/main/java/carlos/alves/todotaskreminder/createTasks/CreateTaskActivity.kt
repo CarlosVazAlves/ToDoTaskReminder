@@ -7,6 +7,8 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -65,11 +67,23 @@ class CreateTaskActivity : AppCompatActivity() {
             binding.createTaskReminderLocationLayout.isVisible = isChecked
             binding.createTaskChooseLocationsButton.isVisible = isChecked
             viewModel.remindByLocation = isChecked
+
+            val permissions = PermissionsUtility.instance
+            if (!permissions.checkBackgroundLocationPermissionsOk()) {
+                permissions.askBackgroundLocationPermission(this)
+            }
         }
 
         binding.createTaskDateReminderCheckBox.setOnCheckedChangeListener { _, isChecked ->
             binding.createTaskReminderDateLayout.isVisible = isChecked
             viewModel.remindByDate = isChecked
+        }
+
+        binding.createTaskUploadToCloudCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.uploadToCloud = isChecked
+            if (isChecked) {
+                setupPasswordDialog()
+            }
         }
 
         binding.createTaskNameEditText.doAfterTextChanged {
@@ -107,6 +121,18 @@ class CreateTaskActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (grantResults.any { it == -1 }) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.error)
+                .setMessage(R.string.missing_background_location_permission)
+                .setOnDismissListener { finish() }
+                .show()
+        }
     }
 
     private fun storeNewLocationsIds(newLocationsIds: IntArray) {
@@ -150,6 +176,10 @@ class CreateTaskActivity : AppCompatActivity() {
                 return false
             }
         }
+        if (binding.createTaskUploadToCloudCheckBox.isChecked && viewModel.checkIfPasswordsNotOk()) {
+            showMissingDataAlertDialog(R.string.missing_password)
+            return false
+        }
         return true
     }
 
@@ -192,5 +222,20 @@ class CreateTaskActivity : AppCompatActivity() {
             currentHour, currentMinute, true
         )
         timePickerDialog.show()
+    }
+
+    private fun setupPasswordDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(R.string.enter_data)
+
+        val passwordLayout = layoutInflater.inflate(R.layout.password_layout, null)
+        alertDialogBuilder.setView(passwordLayout)
+        alertDialogBuilder.setCancelable(false)
+
+        alertDialogBuilder.setPositiveButton(R.string.next) { _, _ ->
+            viewModel.userPassword = (passwordLayout.findViewById<View?>(R.id.password_layout_user_password_EditText) as EditText).text.toString()
+            viewModel.adminPassword = (passwordLayout.findViewById<View?>(R.id.password_layout_admin_password_EditText) as EditText).text.toString()
+        }
+        alertDialogBuilder.create().show()
     }
 }

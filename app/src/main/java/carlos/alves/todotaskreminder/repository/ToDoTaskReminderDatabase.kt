@@ -7,10 +7,11 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 
-@Database(entities = [TaskEntity::class, DateTimeEntity::class, LocationEntity::class, OnLocationEntity::class, SettingsEntity::class], version = 1)
+@Database(entities = [TaskEntity::class, OnlineTaskEntity::class, DateTimeEntity::class, LocationEntity::class, OnLocationEntity::class, SettingsEntity::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class ToDoTaskReminderDatabase : RoomDatabase() {
     abstract fun taskDatabaseDao() : TaskDao
+    abstract fun onlineTaskDatabaseDao() : OnlineTaskDao
     abstract fun dateTimeDatabaseDao() : DateTimeDao
     abstract fun locationDatabaseDao() : LocationDao
     abstract fun onLocationDatabaseDao() : OnLocationDao

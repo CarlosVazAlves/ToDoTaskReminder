@@ -19,5 +19,7 @@ class OnLocationRepository(database: ToDoTaskReminderDatabase) {
 
     fun getOnLocations(taskId: Int): ArrayList<OnLocationEntity> = ArrayList(executor.submit(Callable { onLocationDatabaseDao.getOnLocationsByTaskId(taskId) }).get())
 
+    fun getOnLocationsCountByLocationId(locationId: Int): Int = executor.submit(Callable { onLocationDatabaseDao.getOnLocationsCountByLocationId(locationId) }).get()
+
     fun getOnLocations(taskId: Int, distance: Double): ArrayList<OnLocationEntity> = ArrayList(executor.submit(Callable { onLocationDatabaseDao.getOnLocationsByTaskIdAndDistance(taskId, distance) }).get())
 }

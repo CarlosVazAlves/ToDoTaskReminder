@@ -34,6 +34,7 @@ class DateReminderService : BroadcastReceiver() {
 
         val editTaskIntent = Intent(context, EditTaskActivity::class.java).let {
             it.putExtra(AdapterConstants.CHOSEN_TASK.description, intent.getStringExtra(TASK_NAME.description))
+            it.putExtra(AdapterConstants.ACTIVE_DATE_NOTIFICATION.description, true)
             PendingIntent.getActivity(context, taskId, it, permissions.getPendingIntentMutabilityFlag())
         }
 
@@ -74,5 +75,10 @@ class DateReminderService : BroadcastReceiver() {
             PendingIntent.getBroadcast(context, taskId, it, permissions.getPendingIntentMutabilityFlag()) //Android 12 exige flag
         }
         alarmManager.cancel(alarmIntent)
+    }
+
+    fun removeNotification(context: Context, taskId: Int) {
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancel(taskId)
     }
 }

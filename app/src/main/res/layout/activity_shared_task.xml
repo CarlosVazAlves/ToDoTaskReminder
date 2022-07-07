@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/task_details_constraint"
+    android:id="@+id/shared_task_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".checkTasks.TaskDetailsActivity">
+    tools:context=".sharedTasks.SharedTaskActivity">
 
     <LinearLayout
-        android:id="@+id/task_details_online_id_Layout"
+        android:id="@+id/shared_task_online_id_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/task_details_online_id_TextView"
+            android:id="@+id/shared_task_online_id_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -28,15 +28,15 @@
             android:text="@string/online_task_id_2dots" />
 
         <TextView
-            android:id="@+id/task_details_online_id_EditText"
+            android:id="@+id/shared_task_online_id_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1" />
     </LinearLayout>
-
+    
     <LinearLayout
-        android:id="@+id/task_details_name_Layout"
+        android:id="@+id/shared_task_name_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -45,26 +45,26 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_online_id_Layout">
-
+        app:layout_constraintTop_toBottomOf="@+id/shared_task_online_id_Layout">
+    
         <TextView
-            android:id="@+id/task_details_name_TextView"
+            android:id="@+id/shared_task_name_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:lines="1"
             android:text="@string/name_2dots" />
-
+    
         <TextView
-            android:id="@+id/task_details_name_EditText"
+            android:id="@+id/shared_task_name_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1" />
     </LinearLayout>
-
+    
     <LinearLayout
-        android:id="@+id/task_details_description_Layout"
+        android:id="@+id/shared_task_description_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -74,25 +74,25 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_name_Layout">
-
+        app:layout_constraintTop_toBottomOf="@+id/shared_task_name_Layout">
+    
         <TextView
-            android:id="@+id/task_details_description_TextView"
+            android:id="@+id/shared_task_description_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="@string/description_2dots" />
-
+    
         <TextView
-            android:id="@+id/task_details_description_EditText"
+            android:id="@+id/shared_task_description_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1" />
     </LinearLayout>
-
+    
     <LinearLayout
-        android:id="@+id/task_details_location_Layout"
+        android:id="@+id/shared_task_location_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -101,25 +101,25 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_description_Layout">
-
+        app:layout_constraintTop_toBottomOf="@+id/shared_task_description_Layout">
+    
         <TextView
-            android:id="@+id/task_details_location_TextView"
+            android:id="@+id/shared_task_location_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="@string/location_2dots" />
-
+    
         <TextView
-            android:id="@+id/task_details_location_EditText"
+            android:id="@+id/shared_task_location_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1" />
     </LinearLayout>
-
+    
     <LinearLayout
-        android:id="@+id/task_details_status_Layout"
+        android:id="@+id/shared_task_status_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -128,25 +128,25 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_location_Layout">
-
+        app:layout_constraintTop_toBottomOf="@+id/shared_task_location_Layout">
+    
         <TextView
-            android:id="@+id/task_details_status_TextView"
+            android:id="@+id/shared_task_status_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="@string/task_status_2dots" />
-
+    
         <TextView
-            android:id="@+id/task_details_status_EditText"
+            android:id="@+id/shared_task_status_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1" />
     </LinearLayout>
-
+    
     <TextView
-        android:id="@+id/task_details_distance_TextView"
+        android:id="@+id/shared_task_distance_TextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -155,10 +155,10 @@
         android:text="@string/distance_remind"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_status_Layout" />
-
+        app:layout_constraintTop_toBottomOf="@+id/shared_task_status_Layout" />
+    
     <LinearLayout
-        android:id="@+id/task_details_date_Layout"
+        android:id="@+id/shared_task_date_Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -167,22 +167,22 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_distance_TextView">
-
+        app:layout_constraintTop_toBottomOf="@+id/shared_task_distance_TextView">
+    
         <TextView
-            android:id="@+id/task_details_date_TextView"
+            android:id="@+id/shared_task_date_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/date_remind_2dots" />
-
+    
         <LinearLayout
-            android:id="@+id/task_details_date_format_Layout"
+            android:id="@+id/shared_task_date_format_Layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
+    
             <EditText
-                android:id="@+id/task_details_date_EditText"
+                android:id="@+id/shared_task_date_EditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -190,9 +190,9 @@
                 android:hint="@string/date"
                 android:inputType="date"
                 android:minHeight="48dp" />
-
+    
             <EditText
-                android:id="@+id/task_details_time_EditText"
+                android:id="@+id/shared_task_time_EditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -204,7 +204,31 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/task_details_back_button"
+        android:id="@+id/shared_task_delete_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/delete"
+        app:layout_constraintBottom_toTopOf="@+id/shared_task_store_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/shared_task_store_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/store"
+        app:layout_constraintBottom_toTopOf="@+id/shared_task_back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/shared_task_back_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

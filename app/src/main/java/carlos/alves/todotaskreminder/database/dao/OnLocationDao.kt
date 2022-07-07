@@ -21,6 +21,9 @@ interface OnLocationDao {
     @Query("SELECT * FROM OnLocation WHERE taskId = :taskId")
     fun getOnLocationsByTaskId(taskId: Int) : List<OnLocationEntity>
 
+    @Query("SELECT COUNT(locationId) FROM OnLocation WHERE locationId = :locationId")
+    fun getOnLocationsCountByLocationId(locationId: Int) : Int
+
     @Query("SELECT * FROM OnLocation WHERE taskId = :taskId AND distance <= :distance")
     fun getOnLocationsByTaskIdAndDistance(taskId: Int, distance: Double) : List<OnLocationEntity>
 }

@@ -29,10 +29,6 @@ class PermissionsUtility(context: Context) {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else PendingIntent.FLAG_UPDATE_CURRENT
     }
 
-    fun checkAllPermissionsOk(): Boolean {
-        return checkScheduleExactAlarmPermissionOk() && checkLocationPermissionsOk() && checkInternetPermission()
-    }
-
     fun checkScheduleExactAlarmPermissionOk(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             return checkScheduleExactAlarmOk()
@@ -42,8 +38,11 @@ class PermissionsUtility(context: Context) {
 
     fun checkLocationPermissionsOk(): Boolean {
         return ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_BACKGROUND_LOCATION) == PERMISSION_GRANTED
+                ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED
+    }
+
+    fun checkBackgroundLocationPermissionsOk(): Boolean {
+        return ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_BACKGROUND_LOCATION) == PERMISSION_GRANTED
     }
 
     fun checkInternetConnection(): Boolean {
@@ -55,16 +54,26 @@ class PermissionsUtility(context: Context) {
         return false
     }
 
-    fun askAllPermissions(activity: Activity) {
+    fun askLocationPermission(activity: Activity) {
         ActivityCompat.requestPermissions(activity, arrayOf(
-            permission.ACCESS_BACKGROUND_LOCATION,
             permission.ACCESS_FINE_LOCATION,
-            permission.ACCESS_COARSE_LOCATION,
-            permission.INTERNET),
-            1)
+            permission.ACCESS_COARSE_LOCATION),
+            PermissionsConstants.LOCATION_PERMISSION.ordinal)
     }
 
-    private fun checkInternetPermission(): Boolean {
+    fun askBackgroundLocationPermission(activity: Activity) {
+        ActivityCompat.requestPermissions(activity, arrayOf(
+            permission.ACCESS_BACKGROUND_LOCATION),
+            PermissionsConstants.BACKGROUND_LOCATION_PERMISSION.ordinal)
+    }
+
+    fun askInternetPermission(activity: Activity) {
+        ActivityCompat.requestPermissions(activity, arrayOf(
+            permission.INTERNET),
+            PermissionsConstants.INTERNET_PERMISSION.ordinal)
+    }
+
+    fun checkInternetPermission(): Boolean {
         return ContextCompat.checkSelfPermission(applicationContext, permission.INTERNET) == PERMISSION_GRANTED
     }
 

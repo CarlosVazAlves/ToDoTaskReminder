@@ -19,16 +19,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoTaskReminder">
 
+        <activity
+            android:name=".sharedTasks.SharedTaskActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".notifications.DateReminderService"
             android:enabled="true"
             android:exported="false" />
-
         <receiver
             android:name=".notifications.LocationReminderService"
             android:enabled="true"
             android:exported="false" />
-
         <receiver
             android:name=".notifications.RebootHandler"
             android:directBootAware="true"
@@ -53,17 +55,7 @@
         <activity
             android:name=".editTasks.EditTasksListActivity"
             android:exported="false" />
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
 
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with .
-        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />

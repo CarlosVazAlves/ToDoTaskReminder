@@ -10,7 +10,6 @@
     <string name="name_2dots">Name:</string>
     <string name="description_2dots">Description:</string>
     <string name="location_2dots">Location:</string>
-    <string name="where">Where</string>
     <string name="title_activity_maps">Maps</string>
     <string name="distance_remind">Remind when less than %1$.2f km far</string>
     <string name="date_remind_2dots">Remind in the following date:</string>
@@ -74,7 +73,7 @@
     <string name="we_are_close_to_location">We are at less than %1$.1f Km of the location %2$s for the task %3$s. Let\'s go there?</string>
     <string name="impossible_get_current_location">Impossible to get your current location. Error %1$d</string>
     <string name="lets_go">Let\'s go!</string>
-    <string name="location_permissions_missing">You did not give all necessary permissions to use Google Maps</string>
+    <string name="missing_google_maps_permissions">You did not give all necessary permissions to use Google Maps</string>
     <string name="alarm_permission_missing">Alarm permission missing</string>
     <string name="manage_locations">Manage Locations</string>
     <string name="added_geolocation">Added geolocation %1$s</string>
@@ -92,12 +91,9 @@
     <string name="store">Store</string>
     <string name="invalid_online_task_id">Invalid online task Id</string>
     <string name="invalid_password">Invalid password</string>
-    <string name="missing_location_permission">Without location permission, you can\'t use locations service</string>
-    <string name="missing_internet_permission">Without internet permission, you can\'t use Google Maps</string>
+    <string name="missing_internet_permission">Without internet permission, you can\'t use this feature</string>
     <string name="missing_background_location_permission">Without background location permission, you can\'t use locations reminder service</string>
-    <string name="impossible_to_store">Impossible to store. Already exists a %1$s with that name</string>
-    <string name="location">location</string>
-    <string name="task">task</string>
+    <string name="impossible_to_store_location">Impossible to store. Already exists a location with that name</string>
     <string name="shared_task_successfully_stored">Shared task successfully stored</string>
     <string name="shared_task_successfully_sent_to_cloud">Shared task successfully sent to cloud</string>
     <string name="shared_task_successfully_deleted_from_cloud">Shared task successfully deleted from cloud</string>
@@ -106,4 +102,7 @@
     <string name="no_online_task_id">You did not enter online task Id</string>
     <string name="no_password">You did not enter the password</string>
     <string name="name_loaded_from_maps">Name loaded from maps</string>
+    <string name="impossible_to_store_task">Impossible to store. Already exists a task with that name</string>
+    <string name="need_internet_connection">You need internet connection to access this feature</string>
+    <string name="missing_schedule_exact_alarm_permission">Without schedule exact alarm permission, you can\'t use date reminder service</string>
 </resources>

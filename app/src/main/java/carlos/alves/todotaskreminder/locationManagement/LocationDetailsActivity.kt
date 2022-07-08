@@ -8,12 +8,14 @@ import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityLocationDetailsBinding
 import carlos.alves.todotaskreminder.locationManagement.LocationConstants.*
+import carlos.alves.todotaskreminder.utilities.AlertDialogBuilder
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 class LocationDetailsActivity : AppCompatActivity() {
 
     private val binding: ActivityLocationDetailsBinding by lazy { ActivityLocationDetailsBinding.inflate(layoutInflater) }
     private val viewModel by lazy { ViewModelProvider(this).get(LocationDetailsViewModel::class.java) }
+    private val permissions = PermissionsUtility.instance
     private lateinit var coordinates: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,13 +32,11 @@ class LocationDetailsActivity : AppCompatActivity() {
 
         binding.locationBackButton.setOnClickListener { finish() }
 
-        val permissions = PermissionsUtility.instance
-
         binding.locationDetailsMapButton.setOnClickListener {
-            if (!permissions.checkInternetPermission()) {
-                permissions.askInternetPermission(this)
+            if (!permissions.checkLocationAndInternetPermissionsOk()) {
+                permissions.askLocationAndInternetPermission(this)
             } else {
-                startGoogleMaps()
+                checkInternetConnectionAndGo()
             }
         }
     }
@@ -47,11 +47,19 @@ class LocationDetailsActivity : AppCompatActivity() {
         if (grantResults.any { it == -1 }) {
             AlertDialog.Builder(this)
                 .setTitle(R.string.error)
-                .setMessage(R.string.missing_internet_permission)
+                .setMessage(R.string.missing_google_maps_permissions)
                 .setOnDismissListener { finish() }
                 .show()
         } else {
+            checkInternetConnectionAndGo()
+        }
+    }
+
+    private fun checkInternetConnectionAndGo() {
+        if (this.permissions.checkInternetConnectionOk()) {
             startGoogleMaps()
+        } else {
+            AlertDialogBuilder.generateErrorDialog(this, R.string.need_internet_connection)
         }
     }
 

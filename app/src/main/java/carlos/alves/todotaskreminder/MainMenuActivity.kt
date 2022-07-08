@@ -17,11 +17,14 @@ import carlos.alves.todotaskreminder.settings.SettingsActivity
 import carlos.alves.todotaskreminder.sharedTasks.SharedTaskActivity
 import carlos.alves.todotaskreminder.sharedTasks.SharedTaskConstants
 import carlos.alves.todotaskreminder.sharedTasks.SharedTasksServer
+import carlos.alves.todotaskreminder.utilities.AlertDialogBuilder
+import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 class MainMenuActivity : AppCompatActivity() {
 
     private val binding: ActivityMainMenuBinding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
     private val sharedTasksServer = SharedTasksServer.instance
+    private val permissions = PermissionsUtility.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +47,11 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         binding.mainMenuSharedTasksButton.setOnClickListener {
-            showLoginDialog()
+            if (!permissions.checkInternetPermissionOk()) {
+                permissions.askInternetPermission(this)
+            } else {
+                checkInternetConnectionAndGo()
+            }
         }
 
         binding.mainMenuManageLocationsButton.setOnClickListener {
@@ -57,6 +64,28 @@ class MainMenuActivity : AppCompatActivity() {
 
         binding.mainMenuExitButton.setOnClickListener {
             finishAffinity()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (grantResults.any { it == -1 }) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.error)
+                .setMessage(R.string.missing_internet_permission)
+                .setOnDismissListener { finish() }
+                .show()
+        } else {
+            checkInternetConnectionAndGo()
+        }
+    }
+
+    private fun checkInternetConnectionAndGo() {
+        if (this.permissions.checkInternetConnectionOk()) {
+            showLoginDialog()
+        } else {
+            AlertDialogBuilder.generateErrorDialog(this, R.string.need_internet_connection)
         }
     }
 
@@ -97,23 +126,16 @@ class MainMenuActivity : AppCompatActivity() {
                                     sharedTaskIntent.putExtra(SharedTaskConstants.ONLINE_TASK_ID.description, onlineTaskId)
                                     startActivity(sharedTaskIntent)
                                 } else {
-                                    showErrorAlertDialog(resources.getString(R.string.invalid_password))
+                                    AlertDialogBuilder.generateErrorDialog(this, R.string.invalid_password)
                                 }
                             }
                         )
                     } else {
-                        showErrorAlertDialog(resources.getString(R.string.invalid_online_task_id))
+                        AlertDialogBuilder.generateErrorDialog(this, R.string.invalid_online_task_id)
                     }
                 })
 
         }
         alertDialogBuilder.create().show()
-    }
-
-    private fun showErrorAlertDialog(errorMessage: String) {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.error)
-            .setMessage(errorMessage)
-            .show()
     }
 }

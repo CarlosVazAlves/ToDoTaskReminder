@@ -8,6 +8,8 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivitySharedTaskBinding
+import carlos.alves.todotaskreminder.utilities.AlertDialogBuilder
+import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 import java.time.format.DateTimeFormatter
 
 class SharedTaskActivity : AppCompatActivity() {
@@ -16,6 +18,7 @@ class SharedTaskActivity : AppCompatActivity() {
 
     private val binding: ActivitySharedTaskBinding by lazy { ActivitySharedTaskBinding.inflate(layoutInflater) }
     private val viewModel by lazy { ViewModelProvider(this).get(SharedTaskViewModel::class.java) }
+    private val permissions = PermissionsUtility.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +37,11 @@ class SharedTaskActivity : AppCompatActivity() {
             finish()
         }
         binding.sharedTaskStoreButton.setOnClickListener {
-            if (viewModel.checkIfTaskNameExists()) {
-                showErrorAlertDialog(getString(R.string.task))
-                return@setOnClickListener
+            if (!permissions.checkBackgroundLocationPermissionsOk()) {
+                permissions.askBackgroundLocationPermission(this)
+            } else {
+                storeTask()
             }
-            if (viewModel.checkIfLocationNameExists()) {
-                showErrorAlertDialog(getString(R.string.location))
-                return@setOnClickListener
-            }
-            viewModel.storeInLocalDataBase(this)
-            Toast.makeText(this, getString(R.string.shared_task_successfully_stored), Toast.LENGTH_SHORT).show()
         }
 
         binding.sharedTaskNameEditText.text = viewModel.name
@@ -75,6 +73,33 @@ class SharedTaskActivity : AppCompatActivity() {
         binding.sharedTaskDeleteButton.isVisible = isAdmin
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (grantResults.any { it == -1 }) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.error)
+                .setMessage(R.string.missing_background_location_permission)
+                .setOnDismissListener { finish() }
+                .show()
+        } else {
+            storeTask()
+        }
+    }
+
+    private fun storeTask() {
+        if (viewModel.checkIfTaskNameExists()) {
+            AlertDialogBuilder.generateErrorDialog(this, R.string.impossible_to_store_task)
+            return
+        }
+        if (viewModel.checkIfLocationNameExists()) {
+            AlertDialogBuilder.generateErrorDialog(this, R.string.impossible_to_store_location)
+            return
+        }
+        viewModel.storeInLocalDataBase(this)
+        Toast.makeText(this, getString(R.string.shared_task_successfully_stored), Toast.LENGTH_SHORT).show()
+    }
+
     private fun convertLocationsArrayToString(): String {
         val locations = viewModel.locations
         val locationsStringBuilder = StringBuilder()
@@ -83,12 +108,5 @@ class SharedTaskActivity : AppCompatActivity() {
             locationsStringBuilder.append(locationsSeparator)
         }
         return locationsStringBuilder.removeSuffix(locationsSeparator).toString()
-    }
-
-    private fun showErrorAlertDialog(problem: String) {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.error)
-            .setMessage(getString(R.string.impossible_to_store, problem))
-            .show()
     }
 }

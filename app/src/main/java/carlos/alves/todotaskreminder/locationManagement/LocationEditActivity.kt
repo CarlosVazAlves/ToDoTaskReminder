@@ -14,13 +14,14 @@ import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.co
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.databinding.ActivityLocationEditBinding
 import carlos.alves.todotaskreminder.locationManagement.LocationConstants.*
+import carlos.alves.todotaskreminder.utilities.AlertDialogBuilder
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
-
 
 class LocationEditActivity : AppCompatActivity() {
 
     private val binding: ActivityLocationEditBinding by lazy { ActivityLocationEditBinding.inflate(layoutInflater) }
     private val viewModel by lazy { ViewModelProvider(this).get(LocationEditViewModel::class.java) }
+    private val permissions = PermissionsUtility.instance
     private var isNewLocation: Boolean = true
 
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -45,13 +46,11 @@ class LocationEditActivity : AppCompatActivity() {
         val locationId = intent.getIntExtra(LOCATION_ID.description, 0)
         isNewLocation = locationId < 1
 
-        val permissions = PermissionsUtility.instance
-
         binding.locationEditMapButton.setOnClickListener {
-            if (!permissions.checkInternetPermission()) {
-                permissions.askInternetPermission(this)
+            if (!permissions.checkLocationAndInternetPermissionsOk()) {
+                permissions.askLocationAndInternetPermission(this)
             } else {
-                startGoogleMaps()
+                checkInternetConnectionAndGo()
             }
         }
 
@@ -111,9 +110,21 @@ class LocationEditActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (grantResults.any { it == -1 }) {
-            showAlertDialog(PERMISSIONS)
+            AlertDialog.Builder(this)
+                .setTitle(R.string.error)
+                .setMessage(R.string.missing_google_maps_permissions)
+                .setOnDismissListener { finish() }
+                .show()
         } else {
+            checkInternetConnectionAndGo()
+        }
+    }
+
+    private fun checkInternetConnectionAndGo() {
+        if (this.permissions.checkInternetConnectionOk()) {
             startGoogleMaps()
+        } else {
+            AlertDialogBuilder.generateErrorDialog(this, R.string.need_internet_connection)
         }
     }
 
@@ -133,22 +144,22 @@ class LocationEditActivity : AppCompatActivity() {
 
     private fun checkValidLocationData(): Boolean {
         if (viewModel.newLocation.name.isNullOrBlank()) {
-            showAlertDialog(NAME)
+            AlertDialogBuilder.generateErrorDialog(this, getErrorMessage(NAME))
             return false
         }
 
         if (viewModel.locationNameExists(isNewLocation)) {
-            showAlertDialog(NAME_ALREADY_EXISTS)
+            AlertDialogBuilder.generateErrorDialog(this, getErrorMessage(NAME_ALREADY_EXISTS))
             return false
         }
 
         if (viewModel.newLocation.address.isNullOrBlank()) {
-            showAlertDialog(ADDRESS)
+            AlertDialogBuilder.generateErrorDialog(this, getErrorMessage(ADDRESS))
             return false
         }
 
         if (viewModel.newLocation.latLng == null) {
-            showAlertDialog(COORDINATES)
+            AlertDialogBuilder.generateErrorDialog(this, getErrorMessage(COORDINATES))
             return false
         }
 
@@ -156,7 +167,7 @@ class LocationEditActivity : AppCompatActivity() {
             viewModel.newGroupName = null
         } else {
             if (impossibleToSaveGroup()) {
-                showAlertDialog(GROUP)
+                AlertDialogBuilder.generateErrorDialog(this, getErrorMessage(GROUP))
                 return false
             }
         }
@@ -203,13 +214,6 @@ class LocationEditActivity : AppCompatActivity() {
         binding.locationEditExistingGroupSpinner.adapter = groupsAdapter
     }
 
-    private fun showAlertDialog(fieldMissing: LocationConstants) {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.error)
-            .setMessage(getErrorMessage(fieldMissing))
-            .show()
-    }
-
     private fun getErrorMessage(fieldMissing: LocationConstants): Int {
         return when(fieldMissing) {
             NAME -> R.string.name_missing
@@ -217,7 +221,7 @@ class LocationEditActivity : AppCompatActivity() {
             COORDINATES -> R.string.coordinates_missing
             GROUP -> R.string.group_missing
             NAME_ALREADY_EXISTS -> R.string.name_already_exists
-            PERMISSIONS -> R.string.location_permissions_missing
+            PERMISSIONS -> R.string.missing_google_maps_permissions
             else -> {
                 R.string.unknown_error
             }

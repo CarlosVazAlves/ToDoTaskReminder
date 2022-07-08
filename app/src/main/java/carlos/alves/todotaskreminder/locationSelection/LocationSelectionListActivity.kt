@@ -1,6 +1,5 @@
 package carlos.alves.todotaskreminder.locationSelection
 
-import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +11,7 @@ import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.adapters.AdapterConstants.*
 import carlos.alves.todotaskreminder.adapters.LocationSelectorAdapter
 import carlos.alves.todotaskreminder.databinding.ActivityLocationSelectionListBinding
+import carlos.alves.todotaskreminder.utilities.AlertDialogBuilder
 
 class LocationSelectionListActivity : AppCompatActivity() {
 
@@ -38,10 +38,7 @@ class LocationSelectionListActivity : AppCompatActivity() {
             val selectedLocations = recyclerAdapter.getSelectedLocations()
 
             if (selectedLocations.isEmpty()) {
-                AlertDialog.Builder(this)
-                    .setTitle(R.string.error)
-                    .setMessage(R.string.no_location_selected)
-                    .show()
+                AlertDialogBuilder.generateErrorDialog(this, R.string.no_location_selected)
             } else {
                 val returnData = Intent()
                 returnData.putExtra(NEW_CHECKED_LOCATIONS.description, selectedLocations)

@@ -41,24 +41,45 @@ class PermissionsUtility(context: Context) {
                 ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED
     }
 
+    fun checkLocationAndInternetPermissionsOk(): Boolean {
+        return ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(applicationContext, permission.INTERNET) == PERMISSION_GRANTED
+    }
+
     fun checkBackgroundLocationPermissionsOk(): Boolean {
         return ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_BACKGROUND_LOCATION) == PERMISSION_GRANTED
     }
 
-    fun checkInternetConnection(): Boolean {
-        if (checkInternetPermission()) {
+    fun checkInternetConnectionOk(): Boolean {
+        if (checkInternetPermissionOk()) {
             val connectivityManager = getSystemService(applicationContext, ConnectivityManager::class.java)!!
-            val currentNetwork = connectivityManager.getActiveNetwork()
-            return currentNetwork != null
+            if (checkNetworkStatePermissionOk()) {
+                val currentNetwork = connectivityManager.getActiveNetwork()
+                return currentNetwork != null
+            }
         }
         return false
     }
 
-    fun askLocationPermission(activity: Activity) {
+    fun checkInternetPermissionOk(): Boolean {
+        return ContextCompat.checkSelfPermission(applicationContext, permission.INTERNET) == PERMISSION_GRANTED
+    }
+
+    fun askScheduleExactAlarmPermission(activity: Activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            ActivityCompat.requestPermissions(activity, arrayOf(
+                permission.SCHEDULE_EXACT_ALARM),
+                PermissionsConstants.SCHEDULE_EXACT_ALARM.ordinal)
+        }
+    }
+
+    fun askLocationAndInternetPermission(activity: Activity) {
         ActivityCompat.requestPermissions(activity, arrayOf(
             permission.ACCESS_FINE_LOCATION,
-            permission.ACCESS_COARSE_LOCATION),
-            PermissionsConstants.LOCATION_PERMISSION.ordinal)
+            permission.ACCESS_COARSE_LOCATION,
+            permission.INTERNET),
+            PermissionsConstants.LOCATION_AND_INTERNET_PERMISSION.ordinal)
     }
 
     fun askBackgroundLocationPermission(activity: Activity) {
@@ -73,12 +94,13 @@ class PermissionsUtility(context: Context) {
             PermissionsConstants.INTERNET_PERMISSION.ordinal)
     }
 
-    fun checkInternetPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(applicationContext, permission.INTERNET) == PERMISSION_GRANTED
-    }
-
     @RequiresApi(Build.VERSION_CODES.S)
     private fun checkScheduleExactAlarmOk(): Boolean {
         return ContextCompat.checkSelfPermission(applicationContext, permission.SCHEDULE_EXACT_ALARM) == PERMISSION_GRANTED
+    }
+
+    private fun checkNetworkStatePermissionOk(): Boolean {
+        return ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_NETWORK_STATE) == PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(applicationContext, permission.ACCESS_WIFI_STATE) == PERMISSION_GRANTED
     }
 }

@@ -18,11 +18,12 @@ import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.adapters.AdapterConstants.*
 import carlos.alves.todotaskreminder.databinding.ActivityCreateTaskBinding
 import carlos.alves.todotaskreminder.locationSelection.LocationSelectionListActivity
+import carlos.alves.todotaskreminder.utilities.AlertDialogBuilder
+import carlos.alves.todotaskreminder.utilities.PermissionsConstants
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-
 
 class CreateTaskActivity : AppCompatActivity() {
 
@@ -68,7 +69,6 @@ class CreateTaskActivity : AppCompatActivity() {
             binding.createTaskChooseLocationsButton.isVisible = isChecked
             viewModel.remindByLocation = isChecked
 
-            val permissions = PermissionsUtility.instance
             if (!permissions.checkBackgroundLocationPermissionsOk()) {
                 permissions.askBackgroundLocationPermission(this)
             }
@@ -77,6 +77,10 @@ class CreateTaskActivity : AppCompatActivity() {
         binding.createTaskDateReminderCheckBox.setOnCheckedChangeListener { _, isChecked ->
             binding.createTaskReminderDateLayout.isVisible = isChecked
             viewModel.remindByDate = isChecked
+
+            if (!permissions.checkScheduleExactAlarmPermissionOk()) {
+                permissions.askScheduleExactAlarmPermission(this)
+            }
         }
 
         binding.createTaskUploadToCloudCheckBox.setOnCheckedChangeListener { _, isChecked ->
@@ -126,10 +130,16 @@ class CreateTaskActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
+        val message: Int = when(requestCode) {
+            PermissionsConstants.BACKGROUND_LOCATION_PERMISSION.ordinal -> R.string.missing_background_location_permission
+            PermissionsConstants.SCHEDULE_EXACT_ALARM.ordinal -> R.string.missing_schedule_exact_alarm_permission
+            else -> {R.string.unknown_error}
+        }
+
         if (grantResults.any { it == -1 }) {
             AlertDialog.Builder(this)
                 .setTitle(R.string.error)
-                .setMessage(R.string.missing_background_location_permission)
+                .setMessage(message)
                 .setOnDismissListener { finish() }
                 .show()
         }
@@ -143,51 +153,48 @@ class CreateTaskActivity : AppCompatActivity() {
 
     private fun checkMissingDataOk(): Boolean {
         if (viewModel.name.isNullOrBlank()) {
-            showMissingDataAlertDialog(R.string.name_missing)
+            AlertDialogBuilder.generateErrorDialog(this, R.string.name_missing)
             return false
         }
         if (viewModel.checkIfTaskNameAlreadyExists()) {
-            showMissingDataAlertDialog(R.string.task_already_exists)
+            AlertDialogBuilder.generateErrorDialog(this, R.string.task_already_exists)
             return false
         }
         if (viewModel.description.isNullOrBlank()) {
-            showMissingDataAlertDialog(R.string.description_missing)
+            AlertDialogBuilder.generateErrorDialog(this, R.string.description_missing)
             return false
         }
         if (viewModel.remindByDate && (viewModel.dateReminder == null || viewModel.timeReminder == null)) {
-            showMissingDataAlertDialog(R.string.date_missing)
+            AlertDialogBuilder.generateErrorDialog(this, R.string.date_missing)
             return false
         }
         if (viewModel.remindByDate && !permissions.checkScheduleExactAlarmPermissionOk()) {
-            showMissingDataAlertDialog(R.string.alarm_permission_missing)
+            AlertDialogBuilder.generateErrorDialog(this, R.string.alarm_permission_missing)
             return false
         }
         if (viewModel.remindByDate && viewModel.dateTimeAlreadyPassed()) {
-            showMissingDataAlertDialog(R.string.date_time_passed)
+            AlertDialogBuilder.generateErrorDialog(this, R.string.date_time_passed)
             return false
         }
         if (viewModel.remindByLocation) {
+            if (!permissions.checkBackgroundLocationPermissionsOk()) {
+                AlertDialogBuilder.generateErrorDialog(this, R.string.missing_background_location_permission)
+                return false
+            }
             if (viewModel.locationsId.isEmpty()) {
-                showMissingDataAlertDialog(R.string.no_location_selected)
+                AlertDialogBuilder.generateErrorDialog(this, R.string.no_location_selected)
                 return false
             }
             if (viewModel.distanceReminder <= 0.1) {
-                showMissingDataAlertDialog(R.string.invalid_distance)
+                AlertDialogBuilder.generateErrorDialog(this, R.string.invalid_distance)
                 return false
             }
         }
         if (binding.createTaskUploadToCloudCheckBox.isChecked && viewModel.checkIfPasswordsNotOk()) {
-            showMissingDataAlertDialog(R.string.missing_password)
+            AlertDialogBuilder.generateErrorDialog(this, R.string.missing_password)
             return false
         }
         return true
-    }
-
-    private fun showMissingDataAlertDialog(messageId: Int) {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.error)
-            .setMessage(messageId)
-            .show()
     }
 
     private fun getCalendar() {

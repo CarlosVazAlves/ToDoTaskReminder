@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.adapters.DeleteTasksAdapter
 import carlos.alves.todotaskreminder.databinding.ActivityDeleteTasksListBinding
+import carlos.alves.todotaskreminder.utilities.AlertDialogBuilder
 
 class DeleteTasksListActivity : AppCompatActivity() {
 
@@ -33,10 +34,7 @@ class DeleteTasksListActivity : AppCompatActivity() {
         binding.deleteTasksListDeleteButton.setOnClickListener {
             val selectedTasks = recyclerAdapter.getChosenTasks()
             if (selectedTasks.all { !it.isChecked }) {
-                AlertDialog.Builder(this)
-                    .setTitle(R.string.error)
-                    .setMessage(R.string.no_task_selected)
-                    .show()
+                AlertDialogBuilder.generateErrorDialog(this, R.string.no_task_selected)
             } else {
                 AlertDialog.Builder(this)
                     .setTitle(R.string.confirmation)

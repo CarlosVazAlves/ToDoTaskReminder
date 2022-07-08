@@ -11,7 +11,6 @@
     <string name="name_2dots">Nome:</string>
     <string name="description_2dots">Descrição:</string>
     <string name="location_2dots">Local:</string>
-    <string name="where">Aonde</string>
     <string name="distance_remind">Relembrar quando estiver a menos de %1$.2f km</string>
     <string name="date_remind_2dots">Relembrar na seguinte data:</string>
     <string name="remind_by_location">Recordar por local</string>
@@ -75,7 +74,7 @@
     <string name="we_are_close_to_location">Estamos a menos de %1$.1f Km da localização %2$s para a tarefa %3$s. Vamos lá?</string>
     <string name="impossible_get_current_location">Não foi possível aceder à tua localização actual. Erro %1$d</string>
     <string name="lets_go">Vamos!</string>
-    <string name="location_permissions_missing">Não deste todas as permissões necessárias para utilizar o Google Maps</string>
+    <string name="missing_google_maps_permissions">Não deste todas as permissões necessárias para utilizar o Google Maps</string>
     <string name="alarm_permission_missing">Falta a permissão para usar o alarme</string>
     <string name="manage_locations">Gerir Localizações</string>
     <string name="added_geolocation">Adicionada a geolocalização %1$s</string>
@@ -93,12 +92,9 @@
     <string name="store">Guardar</string>
     <string name="invalid_online_task_id">Id de tarefa online inválido</string>
     <string name="invalid_password">Password inválida</string>
-    <string name="missing_location_permission">Sem permissão para localização, não é possível usar o serviço de localizações</string>
-    <string name="missing_internet_permission">Sem permissão para internet, não é possível usar o Google Maps</string>
+    <string name="missing_internet_permission">Sem permissão para internet, não é possível usar esta funcionalidade</string>
     <string name="missing_background_location_permission">Sem permissão para localização de background, não é possível usar o serviço para recordar a partir de localizações</string>
-    <string name="impossible_to_store">Impossível guardar. Já existe uma %1$s com esse nome</string>
-    <string name="location">localização</string>
-    <string name="task">tarefa</string>
+    <string name="impossible_to_store_location">Impossível guardar. Já existe uma localização com esse nome</string>
     <string name="shared_task_successfully_stored">Tarefa partilhada guardada com sucesso</string>
     <string name="shared_task_successfully_sent_to_cloud">Tarefa partilhada enviada para a cloud com sucesso</string>
     <string name="shared_task_successfully_deleted_from_cloud">Tarefa partilhada removida da cloud com sucesso</string>
@@ -107,4 +103,7 @@
     <string name="no_online_task_id">Não introduziste o Id da tarefa online</string>
     <string name="no_password">Não introduziste a password</string>
     <string name="name_loaded_from_maps">Nome carregado do Maps</string>
+    <string name="impossible_to_store_task">Impossível guardar. Já existe uma tarefa com esse nome</string>
+    <string name="need_internet_connection">É necessário uma ligação à internet para aceder a esta funcionalidade</string>
+    <string name="missing_schedule_exact_alarm_permission">Sem permissão para marcar alarmes exactos, não é possível usar o serviço para recordar a partir de datas</string>
 </resources>

@@ -44,7 +44,7 @@ class DeleteTasksListActivity : AppCompatActivity() {
                     .setCancelable(false)
                     .setPositiveButton(R.string.yes) { _, _ ->
                         val tasksChecked = ArrayList(selectedTasks.filter { it.isChecked })
-                        tasksChecked.forEach { viewModel.deleteTask(it.name) }
+                        tasksChecked.forEach { viewModel.deleteTask(this, it.name) }
                         recyclerAdapter.updateTasksNamesList(tasksChecked) }
                     .setNegativeButton(R.string.no, null)
                     .show()

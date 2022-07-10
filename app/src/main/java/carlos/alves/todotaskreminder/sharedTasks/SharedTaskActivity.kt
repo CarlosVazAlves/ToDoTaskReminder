@@ -90,6 +90,10 @@ class SharedTaskActivity : AppCompatActivity() {
     }
 
     private fun storeTask() {
+        if (viewModel.checkIfTaskAlreadyDownloaded()) {
+            AlertDialogBuilder.generateErrorDialog(this, R.string.online_task_already_stored)
+            return
+        }
         if (viewModel.checkIfTaskNameExists()) {
             AlertDialogBuilder.generateErrorDialog(this, R.string.impossible_to_store_task)
             return

@@ -113,4 +113,5 @@
     <string name="select_color">Escolher cor</string>
     <string name="change_buttons_color">Altera a cor dos butões</string>
     <string name="change_background_color">Altera a cor de fundo</string>
+    <string name="online_task_already_stored">Tarefa online já foi guardada</string>
 </resources>

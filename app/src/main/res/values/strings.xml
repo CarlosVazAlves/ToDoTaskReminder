@@ -112,4 +112,5 @@
     <string name="select_color">Select color</string>
     <string name="change_buttons_color">Change buttons color</string>
     <string name="change_background_color">Change background color</string>
+    <string name="online_task_already_stored">Online task already stored</string>
 </resources>

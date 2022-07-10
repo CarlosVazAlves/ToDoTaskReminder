@@ -9,6 +9,8 @@ import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import carlos.alves.todotaskreminder.utilities.JsonConverter
 import carlos.alves.todotaskreminder.settings.SettingsConstants.*
+import carlos.alves.todotaskreminder.utilities.CoordinatesConverter
+import carlos.alves.todotaskreminder.utilities.LocationUtility
 
 import java.time.LocalDate
 import java.time.LocalTime
@@ -66,20 +68,45 @@ class SharedTaskViewModel : ViewModel()  {
         }
     }
 
+    fun checkIfLocationNameExists(): Boolean {
+        val existingLocations = locationRepository.getLocations()
+        val existingLocationNames = existingLocations.map { it.name }
+        val locationNames = locations.map { it.name }
+        val potentialLocationNamesToRemove = mutableListOf<String>()
+
+        existingLocationNames.forEach {
+            if (locationNames.contains(it)) {
+                potentialLocationNamesToRemove.add(it)
+            }
+        }
+
+        val potentialLocationsToRemove = locations.filter { potentialLocationNamesToRemove.contains(it.name) }.toMutableList()
+        if (potentialLocationsToRemove.isEmpty()) {
+            return false
+        }
+        potentialLocationsToRemove.forEach { potentialLocationToRemove ->
+            val existingLocation = existingLocations.single { it.name == potentialLocationToRemove.name }
+            val existingLocationCoordinates = CoordinatesConverter.convertStringToLatLng(existingLocation.coordinates)!!
+            val potentialLocationToRemoveCoordinates = CoordinatesConverter.convertStringToLatLng(potentialLocationToRemove.coordinates)!!
+            val isToRemove = LocationUtility.isWithinDistance(existingLocationCoordinates, potentialLocationToRemoveCoordinates)
+
+            if (isToRemove) {
+                locations.remove(potentialLocationToRemove)
+                locations.add(existingLocation)
+                potentialLocationsToRemove.remove(potentialLocationToRemove)
+            }
+        }
+        return potentialLocationsToRemove.isNotEmpty()
+    }
+
+    fun checkIfTaskAlreadyDownloaded(): Boolean {
+        val existingOnlineTask = onlineTaskRepository.getOnlineTaskByOnlineTaskId(onlineTaskId.toInt())
+        return existingOnlineTask != null
+    }
+
     fun checkIfTaskNameExists(): Boolean {
         val existingTask = taskRepository.getTask(name)
         return existingTask != null
-    }
-
-    fun checkIfLocationNameExists(): Boolean {
-        val existingLocationNames = locationRepository.getLocationsNames()
-        val locationNames = locations.map { it.name }
-        existingLocationNames.forEach {
-            if (locationNames.contains(it)) {
-                return true
-            }
-        }
-        return false
     }
 
     fun storeInLocalDataBase(context: Context) {

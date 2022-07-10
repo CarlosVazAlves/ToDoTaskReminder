@@ -23,6 +23,8 @@ class LocationSelectionListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         viewModel.setNoGroupStringResource(resources.getString(R.string.without_group))
         viewModel.fetchLocations()
 
@@ -46,5 +48,10 @@ class LocationSelectionListActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.locationSelectionListConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        binding.locationSelectionListSaveAndReturnButton.setBackgroundColor(viewModel.fetchButtonsColor())
     }
 }

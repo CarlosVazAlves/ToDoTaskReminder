@@ -22,6 +22,8 @@ class DeleteTasksListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         viewModel.fetchTasksNames()
 
         val recyclerAdapter = DeleteTasksAdapter(viewModel.generateTaskObjectList())
@@ -48,5 +50,12 @@ class DeleteTasksListActivity : AppCompatActivity() {
                     .show()
             }
         }
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.deleteTasksListConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        val buttonsColor = viewModel.fetchButtonsColor()
+        binding.deleteTasksListDeleteButton.setBackgroundColor(buttonsColor)
+        binding.deleteTasksListCancelButton.setBackgroundColor(buttonsColor)
     }
 }

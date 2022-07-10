@@ -9,6 +9,7 @@ import carlos.alves.todotaskreminder.database.OnLocationEntity
 import carlos.alves.todotaskreminder.database.TaskEntity
 import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.notifications.LocationReminderService
+import carlos.alves.todotaskreminder.settings.SettingsConstants.*
 import carlos.alves.todotaskreminder.sharedTasks.SharedTaskInfo
 import carlos.alves.todotaskreminder.sharedTasks.SharedTasksServer
 import carlos.alves.todotaskreminder.utilities.DateTimeJson
@@ -34,10 +35,14 @@ class EditTaskViewModel : ViewModel() {
     private val dateTimeRepository = ToDoTaskReminderApp.instance.dateTimeRepository
     private val onLocationRepository = ToDoTaskReminderApp.instance.onLocationRepository
     private val locationRepository = ToDoTaskReminderApp.instance.locationRepository
+    private val settingsRepository = ToDoTaskReminderApp.instance.settingsRepository
     private val dateReminderService = DateReminderService.instance
     private val locationReminderService = LocationReminderService.instance
     private val sharedTasksServer = SharedTasksServer.instance
     private lateinit var calendar: Calendar
+
+    fun fetchButtonsColor(): Int = settingsRepository.getSetting(BUTTONS_COLOR.description).toInt()
+    fun fetchBackgroundColor(): Int = settingsRepository.getSetting(BACKGROUND_COLOR.description).toInt()
 
     fun checkIfTaskNameAlreadyExists(): Boolean {
         if (initialName == task.name) return false

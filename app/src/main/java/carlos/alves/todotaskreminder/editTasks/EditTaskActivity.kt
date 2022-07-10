@@ -42,6 +42,8 @@ class EditTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         val chosenTaskName = intent.getStringExtra(CHOSEN_TASK.description)
         viewModel.loadTask(chosenTaskName!!)
 
@@ -280,5 +282,13 @@ class EditTaskActivity : AppCompatActivity() {
             val notificationId = intent.getIntExtra(NOTIFICATION_ID.description, 0)
             viewModel.removeLocationNotification(this, notificationId)
         }
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.editTaskConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        val buttonsColor = viewModel.fetchButtonsColor()
+        binding.editTaskEditButton.setBackgroundColor(buttonsColor)
+        binding.editTaskBackButton.setBackgroundColor(buttonsColor)
+        binding.editTaskChooseLocationsButton.setBackgroundColor(buttonsColor)
     }
 }

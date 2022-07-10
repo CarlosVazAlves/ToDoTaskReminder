@@ -42,6 +42,8 @@ class CreateTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         binding.createTaskBackButton.setOnClickListener { finish() }
 
         binding.createTaskCreateButton.setOnClickListener {
@@ -244,5 +246,13 @@ class CreateTaskActivity : AppCompatActivity() {
             viewModel.adminPassword = (passwordLayout.findViewById<View?>(R.id.password_layout_admin_password_EditText) as EditText).text.toString()
         }
         alertDialogBuilder.create().show()
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.createTaskConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        val buttonsColor = viewModel.fetchButtonsColor()
+        binding.createTaskCreateButton.setBackgroundColor(buttonsColor)
+        binding.createTaskBackButton.setBackgroundColor(buttonsColor)
+        binding.createTaskChooseLocationsButton.setBackgroundColor(buttonsColor)
     }
 }

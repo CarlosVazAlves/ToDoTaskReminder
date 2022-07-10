@@ -18,7 +18,9 @@
         android:roundIcon="@mipmap/task_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoTaskReminder">
-
+        <activity
+            android:name=".settings.ColorActivity"
+            android:exported="false" />
         <activity
             android:name=".sharedTasks.SharedTaskActivity"
             android:exported="false" />

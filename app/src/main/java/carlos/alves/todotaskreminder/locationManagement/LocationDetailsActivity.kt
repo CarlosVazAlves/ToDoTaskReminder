@@ -22,6 +22,8 @@ class LocationDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         val locationId = intent.getIntExtra(LOCATION_ID.description, 0)
         val location = viewModel.fetchLocation(locationId)
         coordinates = location.coordinates
@@ -68,5 +70,12 @@ class LocationDetailsActivity : AppCompatActivity() {
         mapsActivityIntent.putExtra(COORDINATES.description, coordinates)
         mapsActivityIntent.putExtra(READ_ONLY.description, true)
         startActivity(mapsActivityIntent)
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.locationDetailsConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        val buttonsColor = viewModel.fetchButtonsColor()
+        binding.locationBackButton.setBackgroundColor(buttonsColor)
+        binding.locationDetailsMapButton.setBackgroundColor(buttonsColor)
     }
 }

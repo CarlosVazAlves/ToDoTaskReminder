@@ -22,6 +22,8 @@ class CheckTasksListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         val recyclerAdapter = CheckTasksAdapter(viewModel.fetchTasksNames())
         recyclerView.adapter = recyclerAdapter
         recyclerView.layoutManager = LinearLayoutManager(this) // https://lev-sharone.medium.com/implement-android-recyclerview-list-of-checkboxes-with-select-all-option-double-tier-77acc4b4d41
@@ -34,5 +36,10 @@ class CheckTasksListActivity : AppCompatActivity() {
         }
 
         binding.checkTasksListBackButton.setOnClickListener { finish() }
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.checkTasksListConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        binding.checkTasksListBackButton.setBackgroundColor(viewModel.fetchButtonsColor())
     }
 }

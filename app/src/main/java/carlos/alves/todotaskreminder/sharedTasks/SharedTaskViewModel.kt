@@ -8,6 +8,7 @@ import carlos.alves.todotaskreminder.database.*
 import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import carlos.alves.todotaskreminder.utilities.JsonConverter
+import carlos.alves.todotaskreminder.settings.SettingsConstants.*
 
 import java.time.LocalDate
 import java.time.LocalTime
@@ -32,9 +33,13 @@ class SharedTaskViewModel : ViewModel()  {
     private val onLocationRepository = ToDoTaskReminderApp.instance.onLocationRepository
     private val locationRepository = ToDoTaskReminderApp.instance.locationRepository
     private val onlineTaskRepository = ToDoTaskReminderApp.instance.onlineTaskRepository
+    private val settingsRepository = ToDoTaskReminderApp.instance.settingsRepository
     private val sharedTasksServer = SharedTasksServer.instance
     private val dateReminderService = DateReminderService.instance
     private val locationReminderService = LocationReminderService.instance
+
+    fun fetchButtonsColor(): Int = settingsRepository.getSetting(BUTTONS_COLOR.description).toInt()
+    fun fetchBackgroundColor(): Int = settingsRepository.getSetting(BACKGROUND_COLOR.description).toInt()
 
     fun populateFields() {
         val sharedTask = JsonConverter.convertJsonTaskToTask(sharedTaskInfo.task)

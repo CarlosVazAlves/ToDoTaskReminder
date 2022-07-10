@@ -105,4 +105,11 @@
     <string name="impossible_to_store_task">Impossible to store. Already exists a task with that name</string>
     <string name="need_internet_connection">You need internet connection to access this feature</string>
     <string name="missing_schedule_exact_alarm_permission">Without schedule exact alarm permission, you can\'t use date reminder service</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+    <string name="color_value_range">Value should be within 0 and 255</string>
+    <string name="select_color">Select color</string>
+    <string name="change_buttons_color">Change buttons color</string>
+    <string name="change_background_color">Change background color</string>
 </resources>

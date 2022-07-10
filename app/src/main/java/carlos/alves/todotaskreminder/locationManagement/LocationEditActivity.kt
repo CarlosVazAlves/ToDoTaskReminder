@@ -43,6 +43,8 @@ class LocationEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         val locationId = intent.getIntExtra(LOCATION_ID.description, 0)
         isNewLocation = locationId < 1
 
@@ -243,5 +245,13 @@ class LocationEditActivity : AppCompatActivity() {
             mapsActivityIntent.putExtra(READ_ONLY.description, false)
         }
         getContent.launch(mapsActivityIntent)
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.locationEditConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        val buttonsColor = viewModel.fetchButtonsColor()
+        binding.locationEditEditCreateButton.setBackgroundColor(buttonsColor)
+        binding.locationEditMapButton.setBackgroundColor(buttonsColor)
+        binding.locationEditBackButton.setBackgroundColor(buttonsColor)
     }
 }

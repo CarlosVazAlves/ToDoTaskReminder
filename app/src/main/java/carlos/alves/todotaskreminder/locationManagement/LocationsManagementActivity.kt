@@ -19,6 +19,8 @@ class LocationsManagementActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         binding.locationsManagementCheckLocationButton.setOnClickListener {
             val selectedLocationId = retrieveSelectedLocationId()
             if (selectedLocationId == 0) {
@@ -81,5 +83,15 @@ class LocationsManagementActivity : AppCompatActivity() {
     private fun retrieveSelectedLocationId(): Int {
         val selectedLocation = binding.locationsManagementLocationsSpinner.selectedItem as String? ?: return 0
         return viewModel.getLocationId(selectedLocation)
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.locationsManagementConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        val buttonsColor = viewModel.fetchButtonsColor()
+        binding.locationsManagementEditLocationButton.setBackgroundColor(buttonsColor)
+        binding.locationsManagementCheckLocationButton.setBackgroundColor(buttonsColor)
+        binding.locationsManagementBackButton.setBackgroundColor(buttonsColor)
+        binding.locationsManagementDeleteLocationButton.setBackgroundColor(buttonsColor)
+        binding.locationsManagementCreateNewLocationButton.setBackgroundColor(buttonsColor)
     }
 }

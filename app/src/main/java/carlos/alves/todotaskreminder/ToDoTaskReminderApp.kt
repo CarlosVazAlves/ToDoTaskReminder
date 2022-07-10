@@ -4,10 +4,13 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.Color
 import androidx.room.Room
+import carlos.alves.todotaskreminder.database.SettingsEntity
 import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import carlos.alves.todotaskreminder.repository.*
+import carlos.alves.todotaskreminder.settings.SettingsConstants.*
 import carlos.alves.todotaskreminder.sharedTasks.SharedTasksServer
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
@@ -58,6 +61,7 @@ class ToDoTaskReminderApp : Application() {
         DateReminderService()
         LocationReminderService()
         SharedTasksServer()
+        firstSettingsSetup()
     }
 
     fun setupNotificationChannel() {
@@ -72,6 +76,13 @@ class ToDoTaskReminderApp : Application() {
             notificationChannel.enableLights(true)
             notificationChannel.enableVibration(true)
             notificationManager.createNotificationChannel(notificationChannel)
+        }
+    }
+
+    private fun firstSettingsSetup() {
+        if (settingsRepository.getAllSettings().isEmpty()) {
+            settingsRepository.insertSetting(SettingsEntity(BUTTONS_COLOR.description, Color.rgb(64, 101, 150).toString()))
+            settingsRepository.insertSetting(SettingsEntity(BACKGROUND_COLOR.description, Color.rgb(0, 204, 102).toString()))
         }
     }
 }

@@ -20,6 +20,8 @@ class TaskDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         binding.taskDetailsBackButton.setOnClickListener { finish() }
 
         val chosenTaskName = intent.getStringExtra(CHOSEN_TASK.description)
@@ -67,5 +69,10 @@ class TaskDetailsActivity : AppCompatActivity() {
             locationsStringBuilder.append(locationsSeparator)
         }
         return locationsStringBuilder.removeSuffix(locationsSeparator).toString()
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.taskDetailsConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        binding.taskDetailsBackButton.setBackgroundColor(viewModel.fetchButtonsColor())
     }
 }

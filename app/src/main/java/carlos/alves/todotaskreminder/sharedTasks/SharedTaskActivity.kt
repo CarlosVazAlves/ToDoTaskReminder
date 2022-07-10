@@ -24,6 +24,8 @@ class SharedTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setButtonsAndBackgroundColor()
+
         val isAdmin = intent.getBooleanExtra(SharedTaskConstants.IS_ADMIN.description, false)
 
         viewModel.sharedTaskInfo = intent.getParcelableExtra(SharedTaskConstants.SHARED_TASK_INFO.description)!!
@@ -108,5 +110,13 @@ class SharedTaskActivity : AppCompatActivity() {
             locationsStringBuilder.append(locationsSeparator)
         }
         return locationsStringBuilder.removeSuffix(locationsSeparator).toString()
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        binding.sharedTaskConstraint.setBackgroundColor(viewModel.fetchBackgroundColor())
+        val buttonsColor = viewModel.fetchButtonsColor()
+        binding.sharedTaskStoreButton.setBackgroundColor(buttonsColor)
+        binding.sharedTaskBackButton.setBackgroundColor(buttonsColor)
+        binding.sharedTaskDeleteButton.setBackgroundColor(buttonsColor)
     }
 }

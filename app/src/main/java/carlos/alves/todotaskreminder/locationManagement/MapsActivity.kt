@@ -10,8 +10,10 @@ import carlos.alves.todotaskreminder.BuildConfig
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertLatLngToString
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertStringToLatLng
 import carlos.alves.todotaskreminder.R
+import carlos.alves.todotaskreminder.ToDoTaskReminderApp
 import carlos.alves.todotaskreminder.databinding.ActivityMapsBinding
 import carlos.alves.todotaskreminder.locationManagement.LocationConstants.*
+import carlos.alves.todotaskreminder.settings.SettingsConstants
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -55,6 +57,9 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
         val isReadOnly = intent.getBooleanExtra(READ_ONLY.description, false)
 
         binding.mapsSaveAndReturnButton.text = if (isReadOnly) resources.getString(R.string.back) else resources.getString(R.string.save_and_return)
+        binding.mapsSaveAndReturnButton.setBackgroundColor(
+            ToDoTaskReminderApp.instance.settingsRepository.getSetting(
+            SettingsConstants.BUTTONS_COLOR.description).toInt())
 
         Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(this)

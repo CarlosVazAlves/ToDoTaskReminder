@@ -14,6 +14,7 @@ import carlos.alves.todotaskreminder.deleteTasks.DeleteTasksListActivity
 import carlos.alves.todotaskreminder.editTasks.EditTasksListActivity
 import carlos.alves.todotaskreminder.locationManagement.LocationsManagementActivity
 import carlos.alves.todotaskreminder.settings.SettingsActivity
+import carlos.alves.todotaskreminder.settings.SettingsConstants
 import carlos.alves.todotaskreminder.sharedTasks.SharedTaskActivity
 import carlos.alves.todotaskreminder.sharedTasks.SharedTaskConstants
 import carlos.alves.todotaskreminder.sharedTasks.SharedTasksServer
@@ -25,10 +26,13 @@ class MainMenuActivity : AppCompatActivity() {
     private val binding: ActivityMainMenuBinding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
     private val sharedTasksServer = SharedTasksServer.instance
     private val permissions = PermissionsUtility.instance
+    private val settingsRepository = ToDoTaskReminderApp.instance.settingsRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        setButtonsAndBackgroundColor()
 
         binding.mainMenuCheckTasksButton.setOnClickListener {
             startActivity(Intent(this, CheckTasksListActivity::class.java))
@@ -65,6 +69,11 @@ class MainMenuActivity : AppCompatActivity() {
         binding.mainMenuExitButton.setOnClickListener {
             finishAffinity()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setButtonsAndBackgroundColor()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -137,5 +146,20 @@ class MainMenuActivity : AppCompatActivity() {
 
         }
         alertDialogBuilder.create().show()
+    }
+
+    private fun setButtonsAndBackgroundColor() {
+        val backgroundColor = settingsRepository.getSetting(SettingsConstants.BACKGROUND_COLOR.description).toInt()
+        val buttonsColor = settingsRepository.getSetting(SettingsConstants.BUTTONS_COLOR.description).toInt()
+
+        binding.mainMenuConstraint.setBackgroundColor(backgroundColor)
+        binding.mainMenuCheckTasksButton.setBackgroundColor(buttonsColor)
+        binding.mainMenuCreateNewTaskButton.setBackgroundColor(buttonsColor)
+        binding.mainMenuEditTaskButton.setBackgroundColor(buttonsColor)
+        binding.mainMenuDeleteTasksButton.setBackgroundColor(buttonsColor)
+        binding.mainMenuSharedTasksButton.setBackgroundColor(buttonsColor)
+        binding.mainMenuManageLocationsButton.setBackgroundColor(buttonsColor)
+        binding.mainMenuSettingsButton.setBackgroundColor(buttonsColor)
+        binding.mainMenuExitButton.setBackgroundColor(buttonsColor)
     }
 }

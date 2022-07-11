@@ -51,43 +51,19 @@ class CreateTaskViewModel : ViewModel() {
     }
 
     fun createTask(context: Context) {
-        taskRepository.insertNewTask(TaskEntity(
-            0,
-            name!!,
-            description!!,
-            false,
-            remindByLocation,
-            remindByDate)
-        )
-
+        storeTask()
         val taskId = taskRepository.getTaskId(name!!)
 
         if (remindByDate) {
-            dateTimeRepository.insertDateTime(DateTimeEntity(
-                taskId,
-                dateReminder!!,
-                timeReminder!!)
-            )
-            dateReminderService.setDateToRemind(context, taskId, name!!, calendar)
+            storeDateTime(context, taskId)
         }
 
         if (remindByLocation) {
-            locationsId.forEach {
-                onLocationRepository.insertOnLocation(OnLocationEntity(
-                    taskId,
-                    it,
-                    distanceReminder)
-                )
-
-                val location = locationRepository.getLocationById(it)
-                val geofenceId = "$taskId:${location.name}"
-                locationReminderService.addLocationToGeoFence(context, geofenceId, location, distanceReminder)
-            }
+            storeLocations(context, taskId)
         }
 
         if (uploadToCloud) {
-            val sharedTaskInfo = generateSharedTaskInfo(taskId)
-            sharedTasksServer.storeSharedTaskOnCloud(context, taskId, sharedTaskInfo)
+            storeTaskInCloud(context, taskId)
         }
     }
 
@@ -97,6 +73,45 @@ class CreateTaskViewModel : ViewModel() {
         calendar.set(dateReminder!!.year, dateReminder!!.monthValue - 1, dateReminder!!.dayOfMonth, timeReminder!!.hour, timeReminder!!.minute, 0)
         val alarmDate = calendar.timeInMillis
         return currentDate >= alarmDate
+    }
+
+    private fun storeTask() {
+        taskRepository.insertNewTask(TaskEntity(
+            0,
+            name!!,
+            description!!,
+            false,
+            remindByLocation,
+            remindByDate)
+        )
+    }
+
+    private fun storeTaskInCloud(context: Context, taskId: Int) {
+        val sharedTaskInfo = generateSharedTaskInfo(taskId)
+        sharedTasksServer.storeSharedTaskOnCloud(context, taskId, sharedTaskInfo)
+    }
+
+    private fun storeDateTime(context: Context, taskId: Int) {
+        dateTimeRepository.insertDateTime(DateTimeEntity(
+            taskId,
+            dateReminder!!,
+            timeReminder!!)
+        )
+        dateReminderService.setDateToRemind(context, taskId, name!!, calendar)
+    }
+
+    private fun storeLocations(context: Context, taskId: Int) {
+        locationsId.forEach {
+            onLocationRepository.insertOnLocation(OnLocationEntity(
+                taskId,
+                it,
+                distanceReminder)
+            )
+
+            val location = locationRepository.getLocationById(it)
+            val geofenceId = "$taskId:${location.name}"
+            locationReminderService.addLocationToGeoFence(context, geofenceId, location, distanceReminder)
+        }
     }
 
     private fun generateSharedTaskInfo(taskId: Int): SharedTaskInfo {

@@ -126,7 +126,6 @@ class CreateTaskActivity : AppCompatActivity() {
                 getClock()
             }
         }
-
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/color_constraint"
+    android:id="@+id/color_Constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".settings.ColorActivity">
@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/color_circle" />
+        app:srcCompat="@drawable/color_circle"
+        android:contentDescription="@string/color_palette" />
 
     <LinearLayout
         android:id="@+id/color_rgb_Layout"
@@ -52,8 +53,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="0"
                 android:ems="3"
-                android:inputType="number"
-                android:text="0" />
+                android:hint="@string/color_code_max_value"
+                android:minHeight="48dp"
+                android:importantForAutofill="no"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -83,8 +86,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="0"
                 android:ems="3"
-                android:inputType="number"
-                android:text="0" />
+                android:hint="@string/color_code_max_value"
+                android:minHeight="48dp"
+                android:importantForAutofill="no"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -114,8 +119,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="0"
                 android:ems="3"
-                android:inputType="number"
-                android:text="0" />
+                android:hint="@string/color_code_max_value"
+                android:minHeight="48dp"
+                android:importantForAutofill="no"
+                android:inputType="number" />
         </LinearLayout>
 
     </LinearLayout>
@@ -132,7 +139,7 @@
         app:layout_constraintTop_toBottomOf="@+id/color_rgb_Layout" />
 
     <Button
-        android:id="@+id/color_back_button"
+        android:id="@+id/color_back_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

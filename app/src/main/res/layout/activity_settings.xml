@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/settings_constraint"
+    android:id="@+id/settings_Constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".settings.SettingsActivity">
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/change_buttons_color"
+        android:text="@string/change_colors"
         android:textSize="20sp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/settings_buttons_color_change_button"
+        android:id="@+id/settings_buttons_color_change_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/settings_change_color_TextView" />
 
     <Button
-        android:id="@+id/settings_background_color_change_button"
+        android:id="@+id/settings_background_color_change_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -41,7 +41,7 @@
         android:text="@string/change_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_buttons_color_change_button" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_buttons_color_change_Button" />
 
     <LinearLayout
         android:id="@+id/settings_buttons_Layout"
@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/settings_back_button"
+            android:id="@+id/settings_back_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -64,7 +64,7 @@
             android:text="@string/back" />
 
         <Button
-            android:id="@+id/settings_store_button"
+            android:id="@+id/settings_store_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

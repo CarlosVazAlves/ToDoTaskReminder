@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_menu_constraint"
+    android:id="@+id/main_menu_Constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainMenuActivity">
 
     <Button
-        android:id="@+id/main_menu_check_tasks_button"
+        android:id="@+id/main_menu_check_tasks_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/main_menu_create_new_task_button"
+        android:id="@+id/main_menu_create_new_task_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -29,10 +29,10 @@
         android:text="@string/create_new_task"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_menu_check_tasks_button" />
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_check_tasks_Button" />
 
     <Button
-        android:id="@+id/main_menu_edit_task_button"
+        android:id="@+id/main_menu_edit_task_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -41,10 +41,10 @@
         android:text="@string/edit_task"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_menu_create_new_task_button" />
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_create_new_task_Button" />
 
     <Button
-        android:id="@+id/main_menu_delete_tasks_button"
+        android:id="@+id/main_menu_delete_tasks_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -53,10 +53,10 @@
         android:text="@string/delete_tasks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_menu_edit_task_button" />
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_edit_task_Button" />
 
     <Button
-        android:id="@+id/main_menu_shared_tasks_button"
+        android:id="@+id/main_menu_shared_tasks_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -65,10 +65,10 @@
         android:text="@string/shared_tasks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_menu_delete_tasks_button" />
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_delete_tasks_Button" />
 
     <Button
-        android:id="@+id/main_menu_manage_locations_button"
+        android:id="@+id/main_menu_manage_locations_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -77,10 +77,10 @@
         android:text="@string/manage_locations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_menu_shared_tasks_button" />
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_shared_tasks_Button" />
 
     <Button
-        android:id="@+id/main_menu_settings_button"
+        android:id="@+id/main_menu_settings_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -89,10 +89,10 @@
         android:text="@string/settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_menu_manage_locations_button" />
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_manage_locations_Button" />
 
     <Button
-        android:id="@+id/main_menu_exit_button"
+        android:id="@+id/main_menu_exit_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

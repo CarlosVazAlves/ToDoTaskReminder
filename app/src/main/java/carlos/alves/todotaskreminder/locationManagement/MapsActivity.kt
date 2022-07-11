@@ -31,7 +31,6 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 
-
 class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapReadyCallback {
 
     private val zoom = 15F

@@ -24,7 +24,7 @@ class EditTasksListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setButtonsAndBackgroundColor()
-        val taskNames = viewModel.fetchTasksNames()
+        val taskNames = viewModel.fetchTaskNames()
         binding.editTasksListNoTasksTextView.isVisible = taskNames.isEmpty()
 
         val recyclerAdapter = CheckTasksAdapter(taskNames)

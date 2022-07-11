@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 import java.time.LocalDate
 import java.time.LocalTime
 
-
 @Entity(tableName = "DateTime", foreignKeys = [ForeignKey(entity = TaskEntity::class,
     parentColumns = arrayOf("id"),
     childColumns = arrayOf("taskId"),

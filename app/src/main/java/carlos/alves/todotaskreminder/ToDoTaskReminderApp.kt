@@ -31,29 +31,12 @@ class ToDoTaskReminderApp : Application() {
             .build()
     }
 
-    val taskRepository by lazy {
-        TaskRepository(database)
-    }
-
-    val onlineTaskRepository by lazy {
-        OnlineTaskRepository(database)
-    }
-
-    val dateTimeRepository by lazy {
-        DateTimeRepository(database)
-    }
-
-    val locationRepository by lazy {
-        LocationRepository(database)
-    }
-
-    val onLocationRepository by lazy {
-        OnLocationRepository(database)
-    }
-
-    val settingsRepository by lazy {
-        SettingsRepository(database)
-    }
+    val taskRepository by lazy { TaskRepository(database) }
+    val onlineTaskRepository by lazy { OnlineTaskRepository(database) }
+    val dateTimeRepository by lazy { DateTimeRepository(database) }
+    val locationRepository by lazy { LocationRepository(database) }
+    val onLocationRepository by lazy { OnLocationRepository(database) }
+    val settingsRepository by lazy { SettingsRepository(database) }
 
     override fun onCreate() {
         super.onCreate()

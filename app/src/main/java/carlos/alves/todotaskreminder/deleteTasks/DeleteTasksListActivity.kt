@@ -25,7 +25,7 @@ class DeleteTasksListActivity : AppCompatActivity() {
 
         setButtonsAndBackgroundColor()
 
-        viewModel.fetchTasksNames()
+        viewModel.fetchTaskNames()
         val taskObjects = viewModel.generateTaskObjectList()
         binding.deleteTasksListNoTasksTextView.isVisible = taskObjects.isEmpty()
 
@@ -37,21 +37,25 @@ class DeleteTasksListActivity : AppCompatActivity() {
         binding.deleteTasksListCancelButton.setOnClickListener { finish() }
 
         binding.deleteTasksListDeleteButton.setOnClickListener {
-            val selectedTasks = recyclerAdapter.getChosenTasks()
-            if (selectedTasks.all { !it.isChecked }) {
-                AlertDialogBuilder.generateErrorDialog(this, R.string.no_task_selected)
-            } else {
-                AlertDialog.Builder(this)
-                    .setTitle(R.string.confirmation)
-                    .setMessage(R.string.are_you_sure_want_delete)
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.yes) { _, _ ->
-                        val tasksChecked = ArrayList(selectedTasks.filter { it.isChecked })
-                        tasksChecked.forEach { viewModel.deleteTask(this, it.name) }
-                        recyclerAdapter.updateTasksNamesList(tasksChecked) }
-                    .setNegativeButton(R.string.no, null)
-                    .show()
-            }
+            alertDialogDeleteConfirmation(recyclerAdapter)
+        }
+    }
+
+    private fun alertDialogDeleteConfirmation(recyclerAdapter: DeleteTasksAdapter) {
+        val selectedTasks = recyclerAdapter.getChosenTasks()
+        if (selectedTasks.all { !it.isChecked }) {
+            AlertDialogBuilder.generateErrorDialog(this, R.string.no_task_selected)
+        } else {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.confirmation)
+                .setMessage(R.string.are_you_sure_want_delete)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes) { _, _ ->
+                    val tasksChecked = ArrayList(selectedTasks.filter { it.isChecked })
+                    tasksChecked.forEach { viewModel.deleteTask(this, it.name) }
+                    recyclerAdapter.updateTasksNamesList(tasksChecked) }
+                .setNegativeButton(R.string.no, null)
+                .show()
         }
     }
 

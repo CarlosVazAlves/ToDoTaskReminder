@@ -32,7 +32,7 @@ class LocationSelectionListViewModel : ViewModel() {
         removeNullElementsFromGroups()
     }
 
-    fun populateSelectedLocationsIds(selectedLocationsIds: IntArray?) {
+    fun populateSelectedLocationIds(selectedLocationsIds: IntArray?) {
         if (selectedLocationsIds != null) {
             for (selectedLocationId: Int in selectedLocationsIds) {
                 this.selectedLocationsIds.add(selectedLocationId)

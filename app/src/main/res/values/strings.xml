@@ -115,4 +115,10 @@
     <string name="online_task_already_stored">Online task already stored</string>
     <string name="there_are_no_tasks">There are no tasks</string>
     <string name="there_are_no_locations">There are no locations</string>
+    <string name="color_palette">Color palette</string>
+    <string name="color_code_max_value" translatable="false">255</string>
+    <string name="distance_suggestion" translatable="false">1.2</string>
+    <string name="change_colors">Change colors</string>
+    <string name="enter_password">Enter password</string>
+    <string name="enter_online_task_id">Enter online task Id</string>
 </resources>

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/shared_task_constraint"
+    android:id="@+id/shared_task_Constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".sharedTasks.SharedTaskActivity">
@@ -204,31 +204,31 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/shared_task_delete_button"
+        android:id="@+id/shared_task_delete_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:text="@string/delete"
-        app:layout_constraintBottom_toTopOf="@+id/shared_task_store_button"
+        app:layout_constraintBottom_toTopOf="@+id/shared_task_store_Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/shared_task_store_button"
+        android:id="@+id/shared_task_store_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:text="@string/store"
-        app:layout_constraintBottom_toTopOf="@+id/shared_task_back_button"
+        app:layout_constraintBottom_toTopOf="@+id/shared_task_back_Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/shared_task_back_button"
+        android:id="@+id/shared_task_back_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

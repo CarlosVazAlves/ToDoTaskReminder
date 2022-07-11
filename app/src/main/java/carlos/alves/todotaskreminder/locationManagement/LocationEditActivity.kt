@@ -69,6 +69,7 @@ class LocationEditActivity : AppCompatActivity() {
             } else {
                 viewModel.editLocation()
             }
+
             finish()
         }
 

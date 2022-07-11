@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/edit_task_constraint"
+    android:id="@+id/edit_task_Constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".editTasks.EditTaskActivity">
@@ -31,6 +31,8 @@
             android:id="@+id/edit_task_name_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="text"
+            android:minHeight="48dp"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -58,6 +60,8 @@
             android:id="@+id/edit_task_description_EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="text"
+            android:minHeight="48dp"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -131,7 +135,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edit_task_reminder_distance_editTextNumberDecimal"
+                android:id="@+id/edit_task_reminder_distance_EditTextNumberDecimal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -238,7 +242,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/edit_task_back_button"
+            android:id="@+id/edit_task_back_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -246,7 +250,7 @@
             android:text="@string/back" />
 
         <Button
-            android:id="@+id/edit_task_edit_button"
+            android:id="@+id/edit_task_edit_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

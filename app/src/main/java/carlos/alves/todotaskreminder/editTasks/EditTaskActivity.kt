@@ -68,6 +68,7 @@ class EditTaskActivity : AppCompatActivity() {
 
         binding.editTaskDateReminderCheckBox.isChecked = viewModel.task.remindByDate
         binding.editTaskReminderDateLayout.isVisible = viewModel.task.remindByDate
+
         if (viewModel.dateReminder != null) {
             binding.editTaskReminderDateEditText.setText(viewModel.dateReminder.toString())
         }
@@ -129,12 +130,12 @@ class EditTaskActivity : AppCompatActivity() {
         }
 
         binding.editTaskReminderDateEditText.setOnClickListener {
-            getCalender()
+            getCalendar()
         }
 
         binding.editTaskReminderDateEditText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                getCalender()
+                getCalendar()
             }
         }
 
@@ -220,7 +221,7 @@ class EditTaskActivity : AppCompatActivity() {
         return true
     }
 
-    private fun getCalender() {
+    private fun getCalendar() {
         val calendar = Calendar.getInstance()
         val alreadySetDate = viewModel.dateReminder != null
 
@@ -236,6 +237,7 @@ class EditTaskActivity : AppCompatActivity() {
                 binding.editTaskReminderDateEditText.setText(dateFormatter.format(date)) },
             currentYear, currentMonth, currentDay
         )
+
         datePickerDialog.show()
     }
 
@@ -253,6 +255,7 @@ class EditTaskActivity : AppCompatActivity() {
             binding.editTaskReminderTimeEditText.setText(viewModel.timeReminder.toString())},
             currentHour, currentMinute, true
         )
+
         timePickerDialog.show()
     }
 

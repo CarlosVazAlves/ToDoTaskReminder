@@ -30,7 +30,7 @@ class LocationSelectionListActivity : AppCompatActivity() {
         viewModel.fetchLocations()
 
         val receivedLocationsIds = intent.getIntArrayExtra(ALREADY_CHECKED_LOCATIONS.description)
-        viewModel.populateSelectedLocationsIds(receivedLocationsIds)
+        viewModel.populateSelectedLocationIds(receivedLocationsIds)
 
         val locationAdapterObjects = viewModel.generateAllLocationsAdapterObjectList()
         binding.locationSelectionListNoTasksTextView.isVisible = locationAdapterObjects.isEmpty()

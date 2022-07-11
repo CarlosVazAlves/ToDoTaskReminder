@@ -14,7 +14,7 @@ class LocationsManagementViewModel : ViewModel() {
     fun fetchButtonsColor(): Int = settingsRepository.getSetting(BUTTONS_COLOR.description).toInt()
     fun fetchBackgroundColor(): Int = settingsRepository.getSetting(BACKGROUND_COLOR.description).toInt()
 
-    fun getLocationsNames(): List<String> {
+    fun getLocationNames(): List<String> {
         locationsNames = locationRepository.getLocationsNames()
         return locationsNames
     }

@@ -17,16 +17,16 @@ class DeleteTasksListViewModel : ViewModel()  {
     private val locationRepository = ToDoTaskReminderApp.instance.locationRepository
     private val locationReminderService = LocationReminderService.instance
 
-    private lateinit var tasksNames: ArrayList<String>
+    private lateinit var taskNames: ArrayList<String>
 
     fun fetchButtonsColor(): Int = settingsRepository.getSetting(BUTTONS_COLOR.description).toInt()
     fun fetchBackgroundColor(): Int = settingsRepository.getSetting(BACKGROUND_COLOR.description).toInt()
 
-    fun fetchTasksNames() {
-        tasksNames = taskRepository.getAllTaskNames()
+    fun fetchTaskNames() {
+        taskNames = taskRepository.getAllTaskNames()
     }
 
-    fun generateTaskObjectList() = ArrayList(tasksNames.map { TaskObject(it) })
+    fun generateTaskObjectList() = ArrayList(taskNames.map { TaskObject(it) })
 
     fun deleteTask(context: Context, taskName: String) {
         val taskId = taskRepository.getTaskId(taskName)

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/location_edit_constraint"
+    android:id="@+id/location_edit_Constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".locationManagement.LocationEditActivity">
@@ -33,6 +33,7 @@
             android:layout_weight="1"
             android:gravity="start"
             android:layout_marginStart="4dp"
+            android:inputType="text"
             android:hint="@string/name_loaded_from_maps"
             android:minHeight="48dp" />
     </LinearLayout>
@@ -64,6 +65,7 @@
             android:layout_weight="1"
             android:gravity="start"
             android:layout_marginStart="4dp"
+            android:inputType="text"
             android:hint="@string/address_loaded_from_maps"
             android:minHeight="48dp" />
     </LinearLayout>
@@ -143,6 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
+            android:inputType="text"
             android:hint="@string/input_group"
             android:minHeight="48dp" />
 
@@ -165,6 +168,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
+            android:layout_gravity="center"
             android:text="@string/group_2dots" />
 
         <Spinner
@@ -202,7 +206,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/location_edit_back_button"
+            android:id="@+id/location_edit_back_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -210,7 +214,7 @@
             android:text="@string/back" />
 
         <Button
-            android:id="@+id/location_edit_edit_create_button"
+            android:id="@+id/location_edit_edit_create_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

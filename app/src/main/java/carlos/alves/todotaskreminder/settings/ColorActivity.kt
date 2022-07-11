@@ -33,7 +33,6 @@ class ColorActivity : AppCompatActivity() {
 
         if (color != -1) {
             binding.colorView.setBackgroundColor(color)
-
             binding.colorRedEditText.setText(Color.red(color).toString())
             binding.colorGreenEditText.setText(Color.green(color).toString())
             binding.colorBlueEditText.setText(Color.blue(color).toString())

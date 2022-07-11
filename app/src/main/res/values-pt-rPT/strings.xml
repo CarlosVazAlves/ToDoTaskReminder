@@ -116,4 +116,8 @@
     <string name="online_task_already_stored">Tarefa online já foi guardada</string>
     <string name="there_are_no_tasks">Não existem tarefas</string>
     <string name="there_are_no_locations">Não existem localizações</string>
+    <string name="color_palette">Palete de cores</string>
+    <string name="change_colors">Altera as cores</string>
+    <string name="enter_password">Introduzir password</string>
+    <string name="enter_online_task_id">Introduzir Id da tarefa online</string>
 </resources>

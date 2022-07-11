@@ -13,7 +13,7 @@ class EditTaskListViewModel : ViewModel() {
     fun fetchButtonsColor(): Int = settingsRepository.getSetting(BUTTONS_COLOR.description).toInt()
     fun fetchBackgroundColor(): Int = settingsRepository.getSetting(BACKGROUND_COLOR.description).toInt()
 
-    fun fetchTasksNames(): ArrayList<String> {
+    fun fetchTaskNames(): ArrayList<String> {
         tasksNames = taskRepository.getAllTaskNames()
         return tasksNames
     }

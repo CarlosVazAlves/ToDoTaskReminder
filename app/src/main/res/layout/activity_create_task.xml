@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/create_task_constraint"
+    android:id="@+id/create_task_Constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".createTasks.CreateTaskActivity">
@@ -32,6 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="text"
+            android:minHeight="48dp"
             android:hint="@string/enter_name" />
     </LinearLayout>
 
@@ -60,7 +62,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/enter_description" />
+            android:inputType="text"
+            android:hint="@string/enter_description"
+            android:minHeight="48dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -133,12 +137,12 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/create_task_reminder_distance_editTextNumberDecimal"
+                android:id="@+id/create_task_reminder_distance_EditTextNumberDecimal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:ems="3"
-                android:hint="5"
+                android:hint="@string/distance_suggestion"
                 android:inputType="numberDecimal"
                 android:minHeight="48dp" />
 
@@ -223,7 +227,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/create_task_back_button"
+            android:id="@+id/create_task_back_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -231,7 +235,7 @@
             android:text="@string/back" />
 
         <Button
-            android:id="@+id/create_task_create_button"
+            android:id="@+id/create_task_create_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

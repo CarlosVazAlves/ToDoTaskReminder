@@ -87,7 +87,7 @@ class LocationsManagementActivity : AppCompatActivity() {
     }
 
     private fun loadLocations() {
-        val locationsNames = viewModel.getLocationsNames()
+        val locationsNames = viewModel.getLocationNames()
         val locationsAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locationsNames)
         locationsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.locationsManagementLocationsSpinner.adapter = locationsAdapter

@@ -120,32 +120,37 @@ class MainMenuActivity : AppCompatActivity() {
                 return@setPositiveButton
             }
 
-            sharedTasksServer.checkIfOnlineTaskIdExists(onlineTaskId,
-                onSuccess = { onlineTaskIdExists ->
-                    if (onlineTaskIdExists) {
-                        sharedTasksServer.getSharedTaskFromCloud(onlineTaskId,
-                            onSuccess = { sharedOnlineTask ->
-                                val passwordHash = sharedTasksServer.generateHash(password)
-                                val isAdmin = passwordHash == sharedOnlineTask.adminPassword
-
-                                if (passwordHash == sharedOnlineTask.userPassword || isAdmin) {
-                                    val sharedTaskIntent = Intent(this, SharedTaskActivity::class.java)
-                                    sharedTaskIntent.putExtra(SharedTaskConstants.IS_ADMIN.description, isAdmin)
-                                    sharedTaskIntent.putExtra(SharedTaskConstants.SHARED_TASK_INFO.description, sharedOnlineTask)
-                                    sharedTaskIntent.putExtra(SharedTaskConstants.ONLINE_TASK_ID.description, onlineTaskId)
-                                    startActivity(sharedTaskIntent)
-                                } else {
-                                    AlertDialogBuilder.generateErrorDialog(this, R.string.invalid_password)
-                                }
-                            }
-                        )
-                    } else {
-                        AlertDialogBuilder.generateErrorDialog(this, R.string.invalid_online_task_id)
-                    }
-                }
-            )
+            validateLoginDataAndProceed(onlineTaskId, password)
         }
+
         alertDialogBuilder.create().show()
+    }
+
+    private fun validateLoginDataAndProceed(onlineTaskId: String, password: String) {
+        sharedTasksServer.checkIfOnlineTaskIdExists(onlineTaskId,
+            onSuccess = { onlineTaskIdExists ->
+                if (onlineTaskIdExists) {
+                    sharedTasksServer.getSharedTaskFromCloud(onlineTaskId,
+                        onSuccess = { sharedOnlineTask ->
+                            val passwordHash = sharedTasksServer.generateHash(password)
+                            val isAdmin = passwordHash == sharedOnlineTask.adminPassword
+
+                            if (passwordHash == sharedOnlineTask.userPassword || isAdmin) {
+                                val sharedTaskIntent = Intent(this, SharedTaskActivity::class.java)
+                                sharedTaskIntent.putExtra(SharedTaskConstants.IS_ADMIN.description, isAdmin)
+                                sharedTaskIntent.putExtra(SharedTaskConstants.SHARED_TASK_INFO.description, sharedOnlineTask)
+                                sharedTaskIntent.putExtra(SharedTaskConstants.ONLINE_TASK_ID.description, onlineTaskId)
+                                startActivity(sharedTaskIntent)
+                            } else {
+                                AlertDialogBuilder.generateErrorDialog(this, R.string.invalid_password)
+                            }
+                        }
+                    )
+                } else {
+                    AlertDialogBuilder.generateErrorDialog(this, R.string.invalid_online_task_id)
+                }
+            }
+        )
     }
 
     private fun setButtonsAndBackgroundColor() {

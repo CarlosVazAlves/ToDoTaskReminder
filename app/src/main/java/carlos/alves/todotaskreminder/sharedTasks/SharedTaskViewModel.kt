@@ -28,7 +28,7 @@ class SharedTaskViewModel : ViewModel()  {
     var dateReminder: LocalDate? = null
     var timeReminder: LocalTime? = null
     val locations = mutableListOf<LocationEntity>()
-    val onLocations = mutableListOf<OnLocationEntity>()
+    private val onLocations = mutableListOf<OnLocationEntity>()
 
     private val taskRepository = ToDoTaskReminderApp.instance.taskRepository
     private val dateTimeRepository = ToDoTaskReminderApp.instance.dateTimeRepository
@@ -52,19 +52,11 @@ class SharedTaskViewModel : ViewModel()  {
         completed = sharedTask.completed
 
         if (remindByDate) {
-            val sharedDateTime = JsonConverter.convertJsonDateTimeToDateTime(sharedTaskInfo.dateTime!!).convertToDateTimeEntity()
-            dateReminder = sharedDateTime.date
-            timeReminder = sharedDateTime.time
+            populateDateTime()
         }
 
         if (remindByLocation) {
-            val sharedLocations = sharedTaskInfo.locations?.map { JsonConverter.convertJsonLocationToLocation(it) }!!
-            sharedLocations.forEach { locations.add(it) }
-
-            val sharedOnLocations = sharedTaskInfo.onLocations?.map { JsonConverter.convertJsonOnLocationToOnLocation(it) }!!
-            sharedOnLocations.forEach { onLocations.add(it) }
-
-            distanceReminder = onLocations.first().distance
+            populateLocations()
         }
     }
 
@@ -84,6 +76,7 @@ class SharedTaskViewModel : ViewModel()  {
         if (potentialLocationsToRemove.isEmpty()) {
             return false
         }
+
         potentialLocationsToRemove.forEach { potentialLocationToRemove ->
             val existingLocation = existingLocations.single { it.name == potentialLocationToRemove.name }
             val existingLocationCoordinates = CoordinatesConverter.convertStringToLatLng(existingLocation.coordinates)!!
@@ -96,6 +89,7 @@ class SharedTaskViewModel : ViewModel()  {
                 potentialLocationsToRemove.remove(potentialLocationToRemove)
             }
         }
+
         return potentialLocationsToRemove.isNotEmpty()
     }
 
@@ -117,7 +111,8 @@ class SharedTaskViewModel : ViewModel()  {
                 description,
                 completed,
                 remindByLocation,
-                remindByDate)
+                remindByDate
+            )
         )
 
         val taskId = taskRepository.getTaskId(name)
@@ -125,55 +120,79 @@ class SharedTaskViewModel : ViewModel()  {
         onlineTaskRepository.insertOnlineTask(OnlineTaskEntity(taskId, onlineTaskId.toInt()))
 
         if (remindByDate) {
-            dateTimeRepository.insertDateTime(
-                DateTimeEntity(
-                    taskId,
-                    dateReminder!!,
-                    timeReminder!!)
-            )
-            if (!completed) {
-                val calendar = Calendar.getInstance()
-                calendar.set(dateReminder!!.year, dateReminder!!.monthValue - 1, dateReminder!!.dayOfMonth, timeReminder!!.hour, timeReminder!!.minute, 0)
-                dateReminderService.setDateToRemind(context, taskId, name, calendar)
-            }
-
+            storeDateTimeInLocalDataBase(context, taskId)
         }
 
         if (remindByLocation) {
-            storeLocations()
-            val newLocationNames = locations.map { it.name }
-            val newLocationIds = mutableListOf<Int>()
-            newLocationNames.forEach {
-                newLocationIds.add(locationRepository.getLocationIdByName(it))
-            }
-
-            newLocationIds.forEach {
-                onLocationRepository.insertOnLocation(OnLocationEntity(
-                    taskId,
-                    it,
-                    distanceReminder)
-                )
-
-                val location = locationRepository.getLocationById(it)
-                val geofenceId = "$taskId:${location.name}"
-                locationReminderService.addLocationToGeoFence(context, geofenceId, location, distanceReminder)
-            }
+            storeLocationsInLocalDataBase(context, taskId)
         }
     }
 
-    fun deleteOnlineTask() {
-        sharedTasksServer.deleteOnlineTaskFromCloud(onlineTaskId)
+    fun deleteOnlineTask() = sharedTasksServer.deleteOnlineTaskFromCloud(onlineTaskId)
+
+    private fun populateDateTime() {
+        val sharedDateTime = JsonConverter.convertJsonDateTimeToDateTime(sharedTaskInfo.dateTime!!).convertToDateTimeEntity()
+        dateReminder = sharedDateTime.date
+        timeReminder = sharedDateTime.time
+    }
+
+    private fun populateLocations() {
+        val sharedLocations = sharedTaskInfo.locations?.map { JsonConverter.convertJsonLocationToLocation(it) }!!
+        sharedLocations.forEach { locations.add(it) }
+
+        val sharedOnLocations = sharedTaskInfo.onLocations?.map { JsonConverter.convertJsonOnLocationToOnLocation(it) }!!
+        sharedOnLocations.forEach { onLocations.add(it) }
+
+        distanceReminder = onLocations.first().distance
+    }
+
+    private fun storeDateTimeInLocalDataBase(context: Context, taskId: Int) {
+        dateTimeRepository.insertDateTime(
+            DateTimeEntity(
+                taskId,
+                dateReminder!!,
+                timeReminder!!)
+        )
+
+        if (!completed) {
+            val calendar = Calendar.getInstance()
+            calendar.set(dateReminder!!.year, dateReminder!!.monthValue - 1, dateReminder!!.dayOfMonth, timeReminder!!.hour, timeReminder!!.minute, 0)
+            dateReminderService.setDateToRemind(context, taskId, name, calendar)
+        }
+    }
+
+    private fun storeLocationsInLocalDataBase(context: Context, taskId: Int) {
+        storeLocations()
+        val newLocationNames = locations.map { it.name }
+        val newLocationIds = mutableListOf<Int>()
+        newLocationNames.forEach {
+            newLocationIds.add(locationRepository.getLocationIdByName(it))
+        }
+
+        newLocationIds.forEach {
+            onLocationRepository.insertOnLocation(OnLocationEntity(
+                taskId,
+                it,
+                distanceReminder)
+            )
+
+            val location = locationRepository.getLocationById(it)
+            val geofenceId = "$taskId:${location.name}"
+            locationReminderService.addLocationToGeoFence(context, geofenceId, location, distanceReminder)
+        }
     }
 
     private fun storeLocations() {
         locations.forEach {
-            locationRepository.insertLocation(LocationEntity(
-                0,
-                it.name,
-                it.address,
-                it.group,
-                it.coordinates
-            ))
+            locationRepository.insertLocation(
+                LocationEntity(
+                    0,
+                    it.name,
+                    it.address,
+                    it.group,
+                    it.coordinates
+                )
+            )
         }
     }
 }

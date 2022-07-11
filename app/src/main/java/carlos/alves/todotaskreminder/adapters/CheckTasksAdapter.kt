@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 
-
 class CheckTasksAdapter(private val tasksNamesList: ArrayList<String>) : RecyclerView.Adapter<CheckTasksAdapter.ItemViewHolder>() {
 
     private var chosenTask: MutableLiveData<String> = MutableLiveData()

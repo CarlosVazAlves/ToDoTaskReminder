@@ -40,6 +40,7 @@ class LocationSelectorAdapter(private val locationsNamesList: ArrayList<Location
                     }
                 }
             }
+
             if (currentLocationAdapterObject is LocationObject) {
                 val groupIndex = locationsNamesList.indexOfFirst { it.name == currentLocationAdapterObject.belongsToGroup }
                 val groupName = locationsNamesList[groupIndex].name
@@ -55,6 +56,7 @@ class LocationSelectorAdapter(private val locationsNamesList: ArrayList<Location
                         locationsNamesList[groupIndex].isChecked = allLocationsFromGroupSelected
                     }
                 }
+
                 notifyItemChanged(groupIndex)
             }
         }

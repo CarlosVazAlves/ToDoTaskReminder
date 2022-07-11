@@ -6,7 +6,6 @@ import carlos.alves.todotaskreminder.database.dao.*
 import java.time.LocalDate
 import java.time.LocalTime
 
-
 @Database(entities = [TaskEntity::class, OnlineTaskEntity::class, DateTimeEntity::class, LocationEntity::class, OnLocationEntity::class, SettingsEntity::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class ToDoTaskReminderDatabase : RoomDatabase() {
@@ -29,7 +28,6 @@ class Converters {
     fun fromDate(date: LocalDate): String {
         return date.toString()
     }
-
 
     @TypeConverter
     fun toTime(timeString: String): LocalTime {

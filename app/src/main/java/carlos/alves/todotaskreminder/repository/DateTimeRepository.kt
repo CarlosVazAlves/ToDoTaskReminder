@@ -2,11 +2,9 @@ package carlos.alves.todotaskreminder.repository
 
 import carlos.alves.todotaskreminder.database.DateTimeEntity
 import java.util.concurrent.Callable
-import java.util.concurrent.Executors
 
-class DateTimeRepository(database: ToDoTaskReminderDatabase) {
+class DateTimeRepository(database: ToDoTaskReminderDatabase) : Repository() {
 
-    private val executor = Executors.newSingleThreadExecutor()
     private val dateTimeDatabaseDao = database.dateTimeDatabaseDao()
 
     fun insertDateTime(dateTime: DateTimeEntity) { executor.submit { dateTimeDatabaseDao.insertDateTime(dateTime) } }

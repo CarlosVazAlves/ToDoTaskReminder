@@ -2,11 +2,9 @@ package carlos.alves.todotaskreminder.repository
 
 import carlos.alves.todotaskreminder.database.OnlineTaskEntity
 import java.util.concurrent.Callable
-import java.util.concurrent.Executors
 
-class OnlineTaskRepository(database: ToDoTaskReminderDatabase) {
+class OnlineTaskRepository(database: ToDoTaskReminderDatabase): Repository() {
 
-    private val executor = Executors.newSingleThreadExecutor()
     private val onlineTaskDatabaseDao = database.onlineTaskDatabaseDao()
 
     fun insertOnlineTask(onlineTask: OnlineTaskEntity) { executor.submit { onlineTaskDatabaseDao.insertOnlineTask(onlineTask) } }

@@ -2,11 +2,9 @@ package carlos.alves.todotaskreminder.repository
 
 import carlos.alves.todotaskreminder.database.SettingsEntity
 import java.util.concurrent.Callable
-import java.util.concurrent.Executors
 
-class SettingsRepository(database: ToDoTaskReminderDatabase) {
+class SettingsRepository(database: ToDoTaskReminderDatabase): Repository() {
 
-    private val executor = Executors.newSingleThreadExecutor()
     private val settingsDatabaseDao = database.settingsDatabaseDao()
 
     fun insertSetting(setting: SettingsEntity) { executor.submit { settingsDatabaseDao.insertSetting(setting) } }

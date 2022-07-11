@@ -2,11 +2,9 @@ package carlos.alves.todotaskreminder.repository
 
 import carlos.alves.todotaskreminder.database.TaskEntity
 import java.util.concurrent.Callable
-import java.util.concurrent.Executors
 
-class TaskRepository(database: ToDoTaskReminderDatabase) {
+class TaskRepository(database: ToDoTaskReminderDatabase): Repository() {
 
-    private val executor = Executors.newSingleThreadExecutor()
     private val taskDatabaseDao = database.taskDatabaseDao()
 
     fun insertNewTask(task: TaskEntity) { executor.submit { taskDatabaseDao.insertTask(task) } }

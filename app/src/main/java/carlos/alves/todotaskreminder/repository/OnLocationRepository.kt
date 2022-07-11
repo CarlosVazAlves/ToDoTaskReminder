@@ -2,11 +2,9 @@ package carlos.alves.todotaskreminder.repository
 
 import carlos.alves.todotaskreminder.database.OnLocationEntity
 import java.util.concurrent.Callable
-import java.util.concurrent.Executors
 
-class OnLocationRepository(database: ToDoTaskReminderDatabase) {
+class OnLocationRepository(database: ToDoTaskReminderDatabase): Repository() {
 
-    private val executor = Executors.newSingleThreadExecutor()
     private val onLocationDatabaseDao = database.onLocationDatabaseDao()
 
     fun insertOnLocation(onLocation: OnLocationEntity) { executor.submit { onLocationDatabaseDao.insertOnLocation(onLocation) } }

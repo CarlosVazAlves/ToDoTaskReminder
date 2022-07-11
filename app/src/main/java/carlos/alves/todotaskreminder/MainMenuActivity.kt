@@ -142,8 +142,8 @@ class MainMenuActivity : AppCompatActivity() {
                     } else {
                         AlertDialogBuilder.generateErrorDialog(this, R.string.invalid_online_task_id)
                     }
-                })
-
+                }
+            )
         }
         alertDialogBuilder.create().show()
     }

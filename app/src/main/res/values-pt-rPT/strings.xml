@@ -96,7 +96,7 @@
     <string name="missing_background_location_permission">Sem permissão para localização de background, não é possível usar o serviço para recordar a partir de localizações</string>
     <string name="impossible_to_store_location">Impossível guardar. Já existe uma localização com esse nome</string>
     <string name="shared_task_successfully_stored">Tarefa partilhada guardada com sucesso</string>
-    <string name="shared_task_successfully_sent_to_cloud">Tarefa partilhada enviada para a cloud com sucesso</string>
+    <string name="shared_task_successfully_sent_to_cloud">Tarefa partilhada enviada para a cloud com sucesso com o Id online %1$s</string>
     <string name="shared_task_successfully_deleted_from_cloud">Tarefa partilhada removida da cloud com sucesso</string>
     <string name="impossible_to_delete_location">Impossível apagar a localização, está a ser usada por uma tarefa</string>
     <string name="location_successfully_deleted">Localização apagada com sucesso</string>
@@ -114,4 +114,6 @@
     <string name="change_buttons_color">Altera a cor dos butões</string>
     <string name="change_background_color">Altera a cor de fundo</string>
     <string name="online_task_already_stored">Tarefa online já foi guardada</string>
+    <string name="there_are_no_tasks">Não existem tarefas</string>
+    <string name="there_are_no_locations">Não existem localizações</string>
 </resources>

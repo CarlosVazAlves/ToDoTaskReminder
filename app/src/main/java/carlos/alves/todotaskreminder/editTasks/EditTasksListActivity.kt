@@ -3,6 +3,7 @@ package carlos.alves.todotaskreminder.editTasks
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,8 +24,10 @@ class EditTasksListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setButtonsAndBackgroundColor()
+        val taskNames = viewModel.fetchTasksNames()
+        binding.editTasksListNoTasksTextView.isVisible = taskNames.isEmpty()
 
-        val recyclerAdapter = CheckTasksAdapter(viewModel.fetchTasksNames())
+        val recyclerAdapter = CheckTasksAdapter(taskNames)
         recyclerView.adapter = recyclerAdapter
         recyclerView.layoutManager = LinearLayoutManager(this) // https://lev-sharone.medium.com/implement-android-recyclerview-list-of-checkboxes-with-select-all-option-double-tier-77acc4b4d41
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))

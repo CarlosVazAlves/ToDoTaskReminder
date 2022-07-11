@@ -38,13 +38,14 @@ class SharedTasksServer {
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 val existingOnlineTask = onlineTaskRepository.getOnlineTaskByTaskId(taskId)
+                                val onlineTaskIdInt = onlineTaskId.toInt()
                                 if (existingOnlineTask == null) {
-                                    onlineTaskRepository.insertOnlineTask(OnlineTaskEntity(taskId, onlineTaskId.toInt()))
+                                    onlineTaskRepository.insertOnlineTask(OnlineTaskEntity(taskId, onlineTaskIdInt))
                                 } else {
-                                    existingOnlineTask.onlineTaskId = onlineTaskId.toInt()
+                                    existingOnlineTask.onlineTaskId = onlineTaskIdInt
                                     onlineTaskRepository.updateOnlineTask(existingOnlineTask)
                                 }
-                                Toast.makeText(context, context.getString(R.string.shared_task_successfully_sent_to_cloud), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, context.getString(R.string.shared_task_successfully_sent_to_cloud, onlineTaskId), Toast.LENGTH_LONG).show()
                             }
                         }
                 } else {

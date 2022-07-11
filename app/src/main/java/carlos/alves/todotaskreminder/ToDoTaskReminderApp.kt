@@ -82,7 +82,7 @@ class ToDoTaskReminderApp : Application() {
     private fun firstSettingsSetup() {
         if (settingsRepository.getAllSettings().isEmpty()) {
             settingsRepository.insertSetting(SettingsEntity(BUTTONS_COLOR.description, Color.rgb(64, 101, 150).toString()))
-            settingsRepository.insertSetting(SettingsEntity(BACKGROUND_COLOR.description, Color.rgb(0, 204, 102).toString()))
+            settingsRepository.insertSetting(SettingsEntity(BACKGROUND_COLOR.description, Color.rgb(255, 255, 255).toString()))
         }
     }
 }

@@ -3,6 +3,7 @@ package carlos.alves.todotaskreminder.deleteTasks
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,8 +26,10 @@ class DeleteTasksListActivity : AppCompatActivity() {
         setButtonsAndBackgroundColor()
 
         viewModel.fetchTasksNames()
+        val taskObjects = viewModel.generateTaskObjectList()
+        binding.deleteTasksListNoTasksTextView.isVisible = taskObjects.isEmpty()
 
-        val recyclerAdapter = DeleteTasksAdapter(viewModel.generateTaskObjectList())
+        val recyclerAdapter = DeleteTasksAdapter(taskObjects)
         recyclerView.adapter = recyclerAdapter
         recyclerView.layoutManager = LinearLayoutManager(this) // https://lev-sharone.medium.com/implement-android-recyclerview-list-of-checkboxes-with-select-all-option-double-tier-77acc4b4d41
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))

@@ -1,5 +1,6 @@
 package carlos.alves.todotaskreminder.locationManagement
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -43,9 +44,7 @@ class LocationsManagementActivity : AppCompatActivity() {
             if (viewModel.checkIfLocationIsInUse(selectedLocationId)) {
                 AlertDialogBuilder.generateErrorDialog(this, R.string.impossible_to_delete_location)
             } else {
-                viewModel.deleteLocation(selectedLocationId)
-                loadLocations()
-                Toast.makeText(this, getString(R.string.location_successfully_deleted), Toast.LENGTH_SHORT).show()
+                confirmDeleteLocation(selectedLocationId)
             }
         }
 
@@ -71,6 +70,20 @@ class LocationsManagementActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         loadLocations()
+    }
+
+    private fun confirmDeleteLocation(selectedLocationId: Int) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.confirmation)
+            .setMessage(R.string.are_you_sure_want_delete)
+            .setCancelable(false)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                viewModel.deleteLocation(selectedLocationId)
+                loadLocations()
+                Toast.makeText(this, getString(R.string.location_successfully_deleted), Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(R.string.no, null)
+            .show()
     }
 
     private fun loadLocations() {

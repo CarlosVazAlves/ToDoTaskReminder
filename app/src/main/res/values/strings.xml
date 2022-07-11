@@ -95,7 +95,7 @@
     <string name="missing_background_location_permission">Without background location permission, you can\'t use locations reminder service</string>
     <string name="impossible_to_store_location">Impossible to store. Already exists a location with that name</string>
     <string name="shared_task_successfully_stored">Shared task successfully stored</string>
-    <string name="shared_task_successfully_sent_to_cloud">Shared task successfully sent to cloud</string>
+    <string name="shared_task_successfully_sent_to_cloud">Shared task successfully sent to cloud with online Id %1$s</string>
     <string name="shared_task_successfully_deleted_from_cloud">Shared task successfully deleted from cloud</string>
     <string name="impossible_to_delete_location">Impossible to delete location, it\'s being used by a task</string>
     <string name="location_successfully_deleted">Location successfully deleted</string>
@@ -113,4 +113,6 @@
     <string name="change_buttons_color">Change buttons color</string>
     <string name="change_background_color">Change background color</string>
     <string name="online_task_already_stored">Online task already stored</string>
+    <string name="there_are_no_tasks">There are no tasks</string>
+    <string name="there_are_no_locations">There are no locations</string>
 </resources>

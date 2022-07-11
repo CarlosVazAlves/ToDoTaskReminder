@@ -48,6 +48,8 @@ class SettingsActivity : AppCompatActivity() {
         val colorIntent = Intent(this, ColorActivity::class.java)
         colorIntent.putExtra(PARAMETER.description, parameter)
         colorIntent.putExtra(COLOR.description, getColorFromParameter(parameter))
+        colorIntent.putExtra(BACKGROUND_COLOR.description, viewModel.backgroundColor)
+        colorIntent.putExtra(BUTTONS_COLOR.description, viewModel.buttonsColor)
         getContent.launch(colorIntent)
     }
 

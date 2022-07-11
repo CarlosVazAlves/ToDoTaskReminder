@@ -28,6 +28,9 @@ class ColorActivity : AppCompatActivity() {
         val parameter = intent.getStringExtra(PARAMETER.description)
         val color = intent.getIntExtra(COLOR.description, -1)
 
+        binding.colorConstraint.setBackgroundColor(intent.getIntExtra(BACKGROUND_COLOR.description, -1))
+        binding.colorBackButton.setBackgroundColor(intent.getIntExtra(BUTTONS_COLOR.description, -1))
+
         if (color != -1) {
             binding.colorView.setBackgroundColor(color)
 

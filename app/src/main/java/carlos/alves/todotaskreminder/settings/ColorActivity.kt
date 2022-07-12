@@ -26,12 +26,12 @@ class ColorActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val parameter = intent.getStringExtra(PARAMETER.description)
-        val color = intent.getIntExtra(COLOR.description, -1)
+        val color = intent.getIntExtra(COLOR.description, Integer.MAX_VALUE)
 
-        binding.colorConstraint.setBackgroundColor(intent.getIntExtra(BACKGROUND_COLOR.description, -1))
-        binding.colorBackButton.setBackgroundColor(intent.getIntExtra(BUTTONS_COLOR.description, -1))
+        binding.colorConstraint.setBackgroundColor(intent.getIntExtra(BACKGROUND_COLOR.description, Integer.MAX_VALUE))
+        binding.colorBackButton.setBackgroundColor(intent.getIntExtra(BUTTONS_COLOR.description, Integer.MAX_VALUE))
 
-        if (color != -1) {
+        if (color != Integer.MAX_VALUE) {
             binding.colorView.setBackgroundColor(color)
             binding.colorRedEditText.setText(Color.red(color).toString())
             binding.colorGreenEditText.setText(Color.green(color).toString())

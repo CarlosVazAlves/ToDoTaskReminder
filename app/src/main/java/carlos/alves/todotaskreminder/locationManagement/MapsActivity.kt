@@ -6,6 +6,7 @@ import android.location.Location
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import carlos.alves.todotaskreminder.BuildConfig
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertLatLngToString
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter.Companion.convertStringToLatLng
@@ -49,6 +50,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)

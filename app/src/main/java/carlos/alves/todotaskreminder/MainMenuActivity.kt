@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import carlos.alves.todotaskreminder.checkTasks.CheckTasksListActivity
 import carlos.alves.todotaskreminder.createTasks.CreateTaskActivity
 import carlos.alves.todotaskreminder.databinding.ActivityMainMenuBinding
@@ -31,6 +32,7 @@ class MainMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         setButtonsAndBackgroundColor()
 

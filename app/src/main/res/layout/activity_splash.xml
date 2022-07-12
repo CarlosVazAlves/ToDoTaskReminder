@@ -5,6 +5,7 @@
     android:id="@+id/splash_Constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".SplashActivity">
 
     <ImageView
@@ -30,6 +31,7 @@
         android:lines="2"
         android:text="@string/app_name"
         android:textAlignment="center"
+        android:textColor="@color/blue_todo"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

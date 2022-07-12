@@ -7,8 +7,8 @@ import carlos.alves.todotaskreminder.settings.SettingsConstants.*
 
 class SettingsViewModel : ViewModel() {
 
-    var buttonsColor: Int = -1
-    var backgroundColor: Int = -1
+    var buttonsColor: Int = Integer.MAX_VALUE
+    var backgroundColor: Int = Integer.MAX_VALUE
     private val settingsRepository = ToDoTaskReminderApp.instance.settingsRepository
 
     fun fetchColorsFromDb() {

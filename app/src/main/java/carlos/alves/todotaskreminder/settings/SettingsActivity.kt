@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import carlos.alves.todotaskreminder.databinding.ActivitySettingsBinding
 import carlos.alves.todotaskreminder.settings.SettingsConstants.*
@@ -17,9 +18,9 @@ class SettingsActivity : AppCompatActivity() {
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK){
             val parameter = it.data?.getStringExtra(PARAMETER.description)
-            val color = it.data?.getIntExtra(COLOR.description, -1)
+            val color = it.data?.getIntExtra(COLOR.description, Integer.MAX_VALUE)
 
-            if (color != -1) {
+            if (color != Integer.MAX_VALUE) {
                 saveColorFromParameter(parameter!!, color!!)
                 setButtonsAndBackgroundColor()
             }
@@ -29,6 +30,7 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         viewModel.fetchColorsFromDb()
 
@@ -57,7 +59,7 @@ class SettingsActivity : AppCompatActivity() {
         return when(parameter) {
             BUTTONS_COLOR.description -> viewModel.buttonsColor
             BACKGROUND_COLOR.description -> viewModel.backgroundColor
-            else -> -1
+            else -> Integer.MAX_VALUE
         }
     }
 

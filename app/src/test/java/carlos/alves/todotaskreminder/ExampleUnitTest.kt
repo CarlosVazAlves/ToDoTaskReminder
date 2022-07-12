@@ -1,4 +1,4 @@
-package carlos.alves.taskmanager
+package carlos.alves.todotaskreminder
 
 import org.junit.Test
 

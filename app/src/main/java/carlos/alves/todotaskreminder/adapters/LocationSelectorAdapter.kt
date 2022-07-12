@@ -9,7 +9,7 @@ import carlos.alves.todotaskreminder.R
 
 class LocationSelectorAdapter(private val locationsNamesList: ArrayList<LocationAdapterObject>) : RecyclerView.Adapter<LocationSelectorAdapter.ItemViewHolder>() {
 
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) { //https://developer.android.com/guide/topics/ui/layout/recyclerview
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val checkBox: CheckBox = itemView.findViewById(R.id.row_Checkbox)
     }
 

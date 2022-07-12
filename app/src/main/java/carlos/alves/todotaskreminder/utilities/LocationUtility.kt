@@ -25,7 +25,7 @@ class LocationUtility {
             val longitudeDifference = locationLongitude - currentLongitude
 
             val a = (sin(latitudeDifference / 2).pow(2.0) + (cos(currentLatitude) * cos(locationLatitude) *
-                    sin(longitudeDifference / 2).pow(2.0))) // Haversine formula
+                    sin(longitudeDifference / 2).pow(2.0)))
             val c = 2 * asin(sqrt(a))
 
             return c * earthRadius

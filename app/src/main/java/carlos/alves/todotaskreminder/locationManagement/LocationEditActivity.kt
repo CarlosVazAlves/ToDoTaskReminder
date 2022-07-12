@@ -37,7 +37,7 @@ class LocationEditActivity : AppCompatActivity() {
             viewModel.newLocation.latLng = convertStringToLatLng(newCoordinates)
             viewModel.newLocation.name = newName
             viewModel.newLocation.address = newAddress
-        } //is attempting to register while current state is RESUMED. LifecycleOwners must call register before they are STARTED.
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

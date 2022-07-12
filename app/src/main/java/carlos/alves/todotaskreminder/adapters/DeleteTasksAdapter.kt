@@ -10,7 +10,7 @@ import carlos.alves.todotaskreminder.R
 
 class DeleteTasksAdapter(private val tasksNamesList: ArrayList<TaskObject>) : RecyclerView.Adapter<DeleteTasksAdapter.ItemViewHolder>()  {
 
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) { //https://developer.android.com/guide/topics/ui/layout/recyclerview
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val checkBox: CheckBox = itemView.findViewById(R.id.row_Checkbox)
     }
 
@@ -38,7 +38,7 @@ class DeleteTasksAdapter(private val tasksNamesList: ArrayList<TaskObject>) : Re
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateTasksNamesList(deletedTasks: ArrayList<TaskObject>) {
-        tasksNamesList.removeAll(deletedTasks.toSet()) //improve performance
+        tasksNamesList.removeAll(deletedTasks.toSet())
         notifyDataSetChanged()
     }
 }

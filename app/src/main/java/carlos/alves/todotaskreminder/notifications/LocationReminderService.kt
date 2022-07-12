@@ -65,7 +65,7 @@ class LocationReminderService : BroadcastReceiver() {
         }.build()
 
         val locationIntent = Intent(context, LocationReminderService::class.java).let {
-            PendingIntent.getBroadcast(context, locationToAdd.id, it, permissions.getPendingIntentMutabilityFlag()) //Android 12 exige flag
+            PendingIntent.getBroadcast(context, locationToAdd.id, it, permissions.getPendingIntentMutabilityFlag())
         }
 
         val geofencingClient = LocationServices.getGeofencingClient(context)

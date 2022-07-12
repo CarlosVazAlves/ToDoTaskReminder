@@ -36,7 +36,7 @@ class EditTaskActivity : AppCompatActivity() {
         if(it.resultCode == Activity.RESULT_OK){
             val newLocationsIds = it.data?.getIntArrayExtra(NEW_CHECKED_LOCATIONS.description)
             storeNewLocationsIds(newLocationsIds!!)
-        } //is attempting to register while current state is RESUMED. LifecycleOwners must call register before they are STARTED.
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -233,7 +233,7 @@ class EditTaskActivity : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this, { _, year, month, dayOfMonth ->
-                val date = LocalDate.of(year, month + 1, dayOfMonth) //month index começa no 0
+                val date = LocalDate.of(year, month + 1, dayOfMonth)
                 val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
                 viewModel.dateReminder = date
                 binding.editTaskReminderDateEditText.setText(dateFormatter.format(date)) },

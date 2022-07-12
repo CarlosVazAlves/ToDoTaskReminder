@@ -32,7 +32,7 @@ class CheckTasksListActivity : AppCompatActivity() {
 
         val recyclerAdapter = CheckTasksAdapter(taskNames)
         recyclerView.adapter = recyclerAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this) // https://lev-sharone.medium.com/implement-android-recyclerview-list-of-checkboxes-with-select-all-option-double-tier-77acc4b4d41
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         recyclerAdapter.getChosenTask().observe(this) {

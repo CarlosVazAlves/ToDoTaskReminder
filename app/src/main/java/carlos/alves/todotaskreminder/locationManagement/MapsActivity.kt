@@ -154,7 +154,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener, OnMapRea
         currentCustomLocation.marker?.remove()
         currentCustomLocation.latLng = currentCoordinates
         currentCustomLocation.address = geocoder.getFromLocation(currentCoordinates.latitude, currentCoordinates.longitude, 1)[0].getAddressLine(0)
-        currentCustomLocation.marker = googleMap.addMarker(MarkerOptions().position(currentCoordinates).title(currentCustomLocation.address))!! // ele prefere o currentCoordinates porque tem a certeza que não foi mudado
+        currentCustomLocation.marker = googleMap.addMarker(MarkerOptions().position(currentCoordinates).title(currentCustomLocation.address))!!
         moveCameraToCurrentPlace()
     }
 

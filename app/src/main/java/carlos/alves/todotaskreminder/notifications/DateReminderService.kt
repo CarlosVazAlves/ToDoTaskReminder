@@ -58,10 +58,10 @@ class DateReminderService : BroadcastReceiver() {
             val alarmIntent = Intent(context, DateReminderService::class.java).let {
                 it.putExtra(TASK_NAME.description, taskName)
                 it.putExtra(TASK_ID.description, taskId)
-                PendingIntent.getBroadcast(context, taskId, it, permissions.getPendingIntentMutabilityFlag()) //Android 12 exige flag
+                PendingIntent.getBroadcast(context, taskId, it, permissions.getPendingIntentMutabilityFlag())
             }
 
-            alarmManager.setExactAndAllowWhileIdle( //Alarme inexacto não toca a horas certas
+            alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
                 alarmIntent
@@ -72,7 +72,7 @@ class DateReminderService : BroadcastReceiver() {
     fun removeDateToRemind(context: Context, taskId: Int) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val alarmIntent = Intent(context, DateReminderService::class.java).let {
-            PendingIntent.getBroadcast(context, taskId, it, permissions.getPendingIntentMutabilityFlag()) //Android 12 exige flag
+            PendingIntent.getBroadcast(context, taskId, it, permissions.getPendingIntentMutabilityFlag())
         }
         alarmManager.cancel(alarmIntent)
     }

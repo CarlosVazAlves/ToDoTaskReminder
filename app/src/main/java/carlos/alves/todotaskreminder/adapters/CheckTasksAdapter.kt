@@ -11,7 +11,7 @@ class CheckTasksAdapter(private val tasksNamesList: ArrayList<String>) : Recycle
 
     private var chosenTask: MutableLiveData<String> = MutableLiveData()
 
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) { //https://developer.android.com/guide/topics/ui/layout/recyclerview
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val task: TextView = itemView.findViewById(android.R.id.text1)
     }
 

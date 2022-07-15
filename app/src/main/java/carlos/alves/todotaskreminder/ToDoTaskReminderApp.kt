@@ -11,7 +11,7 @@ import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import carlos.alves.todotaskreminder.repository.*
 import carlos.alves.todotaskreminder.settings.SettingsConstants.*
-import carlos.alves.todotaskreminder.sharedTasks.SharedTasksServer
+import carlos.alves.todotaskreminder.repository.SharedTasksRepository
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 class ToDoTaskReminderApp : Application() {
@@ -43,7 +43,7 @@ class ToDoTaskReminderApp : Application() {
         PermissionsUtility(applicationContext)
         DateReminderService()
         LocationReminderService()
-        SharedTasksServer()
+        SharedTasksRepository()
         firstSettingsSetup()
     }
 

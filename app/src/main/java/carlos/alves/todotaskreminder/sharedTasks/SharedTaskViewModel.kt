@@ -7,6 +7,7 @@ import carlos.alves.todotaskreminder.ToDoTaskReminderApp
 import carlos.alves.todotaskreminder.database.*
 import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.notifications.LocationReminderService
+import carlos.alves.todotaskreminder.repository.SharedTasksRepository
 import carlos.alves.todotaskreminder.utilities.JsonConverter
 import carlos.alves.todotaskreminder.settings.SettingsConstants.*
 import carlos.alves.todotaskreminder.utilities.CoordinatesConverter
@@ -36,7 +37,7 @@ class SharedTaskViewModel : ViewModel()  {
     private val locationRepository = ToDoTaskReminderApp.instance.locationRepository
     private val onlineTaskRepository = ToDoTaskReminderApp.instance.onlineTaskRepository
     private val settingsRepository = ToDoTaskReminderApp.instance.settingsRepository
-    private val sharedTasksServer = SharedTasksServer.instance
+    private val sharedTasksRepository = SharedTasksRepository.instance
     private val dateReminderService = DateReminderService.instance
     private val locationReminderService = LocationReminderService.instance
 
@@ -128,7 +129,7 @@ class SharedTaskViewModel : ViewModel()  {
         }
     }
 
-    fun deleteOnlineTask() = sharedTasksServer.deleteOnlineTaskFromCloud(onlineTaskId)
+    fun deleteOnlineTask() = sharedTasksRepository.deleteOnlineTaskFromCloud(onlineTaskId)
 
     private fun populateDateTime() {
         val sharedDateTime = JsonConverter.convertJsonDateTimeToDateTime(sharedTaskInfo.dateTime!!).convertToDateTimeEntity()

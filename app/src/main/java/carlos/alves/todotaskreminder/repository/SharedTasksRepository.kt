@@ -1,17 +1,18 @@
-package carlos.alves.todotaskreminder.sharedTasks
+package carlos.alves.todotaskreminder.repository
 
 import android.content.Context
 import android.widget.Toast
 import carlos.alves.todotaskreminder.R
 import carlos.alves.todotaskreminder.ToDoTaskReminderApp
 import carlos.alves.todotaskreminder.database.OnlineTaskEntity
+import carlos.alves.todotaskreminder.sharedTasks.SharedTaskInfo
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.random.Random
 import java.security.MessageDigest
 
-class SharedTasksServer {
+class SharedTasksRepository {
 
     private val serversCollection = Firebase.firestore.collection("SharedTasksServer")
     private val onlineTaskRepository = ToDoTaskReminderApp.instance.onlineTaskRepository
@@ -21,7 +22,7 @@ class SharedTasksServer {
     }
 
     companion object {
-        lateinit var instance: SharedTasksServer
+        lateinit var instance: SharedTasksRepository
             private set
     }
 

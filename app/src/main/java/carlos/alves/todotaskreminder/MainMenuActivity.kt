@@ -18,14 +18,14 @@ import carlos.alves.todotaskreminder.settings.SettingsActivity
 import carlos.alves.todotaskreminder.settings.SettingsConstants
 import carlos.alves.todotaskreminder.sharedTasks.SharedTaskActivity
 import carlos.alves.todotaskreminder.sharedTasks.SharedTaskConstants
-import carlos.alves.todotaskreminder.sharedTasks.SharedTasksServer
+import carlos.alves.todotaskreminder.repository.SharedTasksRepository
 import carlos.alves.todotaskreminder.utilities.AlertDialogBuilder
 import carlos.alves.todotaskreminder.utilities.PermissionsUtility
 
 class MainMenuActivity : AppCompatActivity() {
 
     private val binding: ActivityMainMenuBinding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
-    private val sharedTasksServer = SharedTasksServer.instance
+    private val sharedTasksRepository = SharedTasksRepository.instance
     private val permissions = PermissionsUtility.instance
     private val settingsRepository = ToDoTaskReminderApp.instance.settingsRepository
 
@@ -129,12 +129,12 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     private fun validateLoginDataAndProceed(onlineTaskId: String, password: String) {
-        sharedTasksServer.checkIfOnlineTaskIdExists(onlineTaskId,
+        sharedTasksRepository.checkIfOnlineTaskIdExists(onlineTaskId,
             onSuccess = { onlineTaskIdExists ->
                 if (onlineTaskIdExists) {
-                    sharedTasksServer.getSharedTaskFromCloud(onlineTaskId,
+                    sharedTasksRepository.getSharedTaskFromCloud(onlineTaskId,
                         onSuccess = { sharedOnlineTask ->
-                            val passwordHash = sharedTasksServer.generateHash(password)
+                            val passwordHash = sharedTasksRepository.generateHash(password)
                             val isAdmin = passwordHash == sharedOnlineTask.adminPassword
 
                             if (passwordHash == sharedOnlineTask.userPassword || isAdmin) {

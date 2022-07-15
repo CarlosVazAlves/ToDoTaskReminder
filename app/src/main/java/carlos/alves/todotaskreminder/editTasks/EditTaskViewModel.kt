@@ -11,7 +11,7 @@ import carlos.alves.todotaskreminder.notifications.DateReminderService
 import carlos.alves.todotaskreminder.notifications.LocationReminderService
 import carlos.alves.todotaskreminder.settings.SettingsConstants.*
 import carlos.alves.todotaskreminder.sharedTasks.SharedTaskInfo
-import carlos.alves.todotaskreminder.sharedTasks.SharedTasksServer
+import carlos.alves.todotaskreminder.repository.SharedTasksRepository
 import carlos.alves.todotaskreminder.utilities.DateTimeJson
 import carlos.alves.todotaskreminder.utilities.JsonConverter
 import java.time.LocalDate
@@ -38,7 +38,7 @@ class EditTaskViewModel : ViewModel() {
     private val settingsRepository = ToDoTaskReminderApp.instance.settingsRepository
     private val dateReminderService = DateReminderService.instance
     private val locationReminderService = LocationReminderService.instance
-    private val sharedTasksServer = SharedTasksServer.instance
+    private val sharedTasksRepository = SharedTasksRepository.instance
     private lateinit var calendar: Calendar
 
     fun fetchButtonsColor(): Int = settingsRepository.getSetting(BUTTONS_COLOR.description).toInt()
@@ -115,7 +115,7 @@ class EditTaskViewModel : ViewModel() {
 
         if (uploadToCloud) {
             val sharedTaskInfo = generateSharedTaskInfo(taskId)
-            sharedTasksServer.storeSharedTaskOnCloud(context, taskId, sharedTaskInfo)
+            sharedTasksRepository.storeSharedTaskOnCloud(context, taskId, sharedTaskInfo)
         }
     }
 

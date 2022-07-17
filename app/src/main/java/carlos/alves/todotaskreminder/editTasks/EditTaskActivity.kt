@@ -126,7 +126,7 @@ class EditTaskActivity : AppCompatActivity() {
 
         binding.editTaskReminderDistanceEditTextNumberDecimal.doAfterTextChanged {
             val numberString = it?.toString()
-            if (!numberString.isNullOrBlank()) {
+            if (!numberString.isNullOrBlank() && numberString != ".") {
                 viewModel.distanceReminder = numberString.toDouble()
             }
         }
